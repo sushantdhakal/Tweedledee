@@ -1,0 +1,35 @@
+ <div class="loginBox" id="login-holder" class="container" align="center">
+        <div id="loginbox" style="margin: 50px; width: 300px;" align="left">
+            <div id="innerLogin">
+                <form name="loginForm" role="form" autocomplete="off">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input ng-model="loginAttempt.username" id="username" class="form-control" type="text"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input ng-model="loginAttempt.password" id="password" class="form-control" type="password"/>
+                    </div>
+                    <p class="errorMessage">{{error}}</p>
+
+                    <input type="submit" ng-click="doLogin()" class="btn btn-primary" value="Login"/>
+                    &nbsp;&nbsp;&nbsp;
+                    <a href="#/newAccount" class="newAccount" ng-controller="loginController" ng-click="createNewAccount()">Create New Account</a>
+                </form>
+            </div>
+
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="footer panel-footer">
+        <div class="container">
+            <p align="center">
+                Version: 1.0
+            </p>
+        </div>
+    </div>
+

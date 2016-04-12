@@ -1,0 +1,14 @@
+*.iml
+*ipr
+*iws
+.idea/
+.git/
+.gradle/
+/build/
+/target/
+/classes/
+/gradle/
+/out/
+.asscache
+grails-app/assets/bower/
+node_modules/

@@ -1,0 +1,10 @@
+.mainBodyDiv{
+    margin-top: 100px;
+    margin-left: 18%;
+    width: 60%;
+    padding: 10px;
+}
+.errorMessage{
+    font-family: Calibri;
+    color: red;
+}
