@@ -3,8 +3,7 @@ package tweedledee
 import grails.test.mixin.TestFor
 import grails.test.mixin.TestMixin
 import grails.test.mixin.domain.DomainClassUnitTestMixin
-import spock.lang.Specification
-import spock.lang.Unroll
+import spock.lang.*
 
 @Unroll
 @TestFor(Account)
