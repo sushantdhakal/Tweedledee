@@ -1,38 +1,4 @@
-<p>
-    Welcome {{currentUserLoggedIn}}
-</p>
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">
-                    Edit Profile
-                </a>
-            </li>
-            <li>
-                <a href="#/profile">Profile</a>
-            </li>
-            <li>
-                <a href="#/feed">Messages</a>
-            </li>
-            <li ng-controller="followerController">
-                <a href="#/followers">Followers [{{numberOfFollowers}}]</a>
-            </li>
-            <li ng-controller="followingController">
-                <a href="#/following">Followees [{{numberOfFollowing}}]</a>
-            </li>
-            <li>
-                <a href="#/mayKnow">People You May Know</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
-            <li>
-                <a href="#/logout">Logout</a>
-            </li>
-        </ul>
-    </div>
-    <!-- /#sidebar-wrapper -->
+<div ng-include src="'/app/common.html'"></div>
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
