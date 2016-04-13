@@ -34,9 +34,10 @@
 <div id="page-content-wrapper">
     <div class="container-fluid">
         <div class="row">
-            <div class="action_buttons_header" style="text-align: right;">
-                <input type="submit" ng-click="doFollow()" class="btn btn-info" value="Follow"/>
-                </div>
+            <div ng-controller="accountController" class="action_buttons_header" style="text-align: right;">
+                <input type="submit" ng-if="!iAmFollowing" ng-click="doFollow()" class="btn btn-info" value="Follow"/>
+            <div ng-if="iAmFollowing">I am already following {{followingUser}}</div>
+            </div>
             <div class="col-lg-12">
                 <h1>Profile</h1>
 
