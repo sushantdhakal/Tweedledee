@@ -28,6 +28,18 @@ angular.module('app')
             templateUrl: '/app/mayKnow.html',
             controller: 'mayKnowController'
         })
+        .when('/account/:param', {
+          templateUrl: '/app/accountDetail.html',
+          controller: 'accountController'
+        })
+        .when('/followers',{
+            templateUrl: '/app/follower.html',
+            controller: 'followerController'
+        })
+        .when('/following',{
+            templateUrl: '/app/following.html',
+            controller: 'followingController'
+        })
       .otherwise({
         redirectTo: '/feed'
       })

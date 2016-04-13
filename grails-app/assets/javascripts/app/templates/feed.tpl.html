@@ -15,11 +15,11 @@
             <li>
                 <a href="#/feed">Messages</a>
             </li>
-            <li>
-                <a href="#">Followers</a>
+            <li ng-controller="followerController">
+                <a href="#/followers">Followers [{{numberOfFollowers}}]</a>
             </li>
-            <li>
-                <a href="#">Followees</a>
+            <li ng-controller="followingController">
+                <a href="#/following">Followees [{{numberOfFollowing}}]</a>
             </li>
             <li>
                 <a href="#/mayKnow">People You May Know</a>
