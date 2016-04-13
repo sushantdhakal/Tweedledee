@@ -16,9 +16,9 @@ class LoginPageFunctionalSpec extends GebSpec {
 
 	def 'Invalid login is rejected with an error message'(){
 		when:
-		go '/login'
+		go '/#/login'
 
 		then:
-		waitFor(25){ $("#usernameFld") }
+		waitFor("quick"){ $("#username") }
 	}
 }
