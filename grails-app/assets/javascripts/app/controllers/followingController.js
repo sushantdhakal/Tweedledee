@@ -15,6 +15,7 @@ angular.module('app').controller('followingController', function ($resource, $sc
 
         tempFollowingList = response.data.following;
         for (var i = 0; i < tempFollowingList.length; i++) {
+
             var temp = [];
             temp.push({'name': tempFollowingList[i].name, 'handle': tempFollowingList[i].handle, 'email': tempFollowingList[i].handle});
             $scope.userFollowing.push(temp);
