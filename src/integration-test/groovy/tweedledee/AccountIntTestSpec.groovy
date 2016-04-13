@@ -3,7 +3,7 @@ package tweedledee
 import grails.test.mixin.integration.Integration
 import grails.transaction.Rollback
 import spock.lang.Specification
-import spock.lang.Ignore
+import spock.lang.*
 
 @Ignore
 @Integration

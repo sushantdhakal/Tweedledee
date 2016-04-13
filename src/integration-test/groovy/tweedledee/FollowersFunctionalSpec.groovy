@@ -5,10 +5,7 @@ import grails.converters.JSON
 import grails.test.mixin.integration.Integration
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
-import spock.lang.Shared
-import spock.lang.Stepwise
-import spock.lang.Unroll
-import spock.lang.Ignore
+import spock.lang.*
 
 @Ignore
 @Unroll

@@ -11,3 +11,4 @@
 .asscache
 grails-app/assets/bower/
 node_modules/
+.DS_STORE
