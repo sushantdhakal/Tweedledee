@@ -1,8 +1,16 @@
+body {
+    padding-top: 70px;
+    border:1px solid black;
+    height:600px;
+}
 .mainBodyDiv{
     margin-top: 100px;
     margin-left: 18%;
     width: 60%;
     padding: 10px;
+    border: solid red 5px;
+    overflow: scroll;
+    height: 70%;
 }
 .errorMessage{
     font-family: Calibri;

@@ -31,24 +31,26 @@
 </div>
 <!-- /#sidebar-wrapper -->
 
-<!-- Page Content -->
 <div id="page-content-wrapper">
     <div class="container-fluid">
         <div class="row">
+            <div class="action_buttons_header" style="text-align: right;">
+                <input type="submit" ng-click="doFollow()" class="btn btn-info" value="Follow"/>
+                </div>
             <div class="col-lg-12">
                 <h1>Profile</h1>
 
 
                 <p>
-                    Name: {{nameForUser}}
+                    Name: {{nameForUser1}}
                 </p>
-                <p>Email: {{emailAddressForUser}}</p>
+                <p>Email: {{emailAddressForUser1}}</p>
 
 
                 <p>Followers:
                 <table>
 
-                    <tr ng-repeat="follower in followersForUser">
+                    <tr ng-repeat="follower in followersForUser1">
                         <td><a ng-href="#/account/{{follower}}">{{follower}}</a></td>
                     </tr>
                 </table>
@@ -58,10 +60,26 @@
                 <p>Following: </p>
                 <table>
 
-                    <tr ng-repeat="following in followingForUser">
+                    <tr ng-repeat="following in followingForUser1">
                         <td><a ng-href="#/account/{{following}}">{{following}}</a></td>
+
                     </tr>
                 </table>
+
+                <p>Messages: </p>
+
+                <div ng-repeat="usermsg in userMessagesPosted">
+                    <p> {{usermsg.messageDetail}} </p>
+                    <p>Message posted on: {{usermsg.messageCreatedDate}}</p>
+
+                </div>
+
+
+
+
+
+
+
 
 
 
@@ -69,4 +87,3 @@
         </div>
     </div>
 </div>
-<!-- /#page-content-wrapper -->
