@@ -52,6 +52,7 @@ body {
     background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
     color:white;
     opacity:0.95;
+    box-shadow: inset 0px 0px 0px;
 }
 
 .navbar-nav{
@@ -59,6 +60,7 @@ body {
     margin-left: 85px;
     color:white;
     opacity:0.95;
+    box-shadow: inset 0px 0px 0px;
 }
 
 .navbar-nav li {
