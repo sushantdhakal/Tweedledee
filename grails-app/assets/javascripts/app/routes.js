@@ -41,7 +41,7 @@ angular.module('app')
             controller: 'followingController'
         })
       .otherwise({
-        redirectTo: '/feed'
+        redirectTo: '/profile'
       })
   })
     

@@ -2,6 +2,7 @@ package tweedledee
 
 import geb.spock.GebSpec
 import grails.test.mixin.integration.Integration
+import spock.lang.*
 
 @Integration
 class UserDetailFunctionalSpec extends GebSpec {
@@ -9,23 +10,37 @@ class UserDetailFunctionalSpec extends GebSpec {
 	@Shared
 	def user
 
-	def setUp(){
+
+	def setup(){
 		user=[handle:'admin',name:'admin',password:'12345678pP',email:'admin@admin.com']
-	}
-	// Requirment: U1
-	def 'User''s detail page will display the user''s name as well as a scrollable list of that user''s postings'(){
-		when:
 		go '/#/login'
 		waitFor("quick"){ 
-			$("#username").value("admin")
-			$("#password").value("12345678pP")
+			$("#username").value(user.name)
+			$("#password").value(user.password)
 			$("#submitBtn").click();
 		}
+	}
+
+	// Requirment: U1.1
+	/*def 'User detail page will display the current user name'(){
+		when:
+		user
 
 		then:
 		waitFor(){
-			currentUrl.contains "profile"
-			$("#profileName",text:contains())
+			$("#profileName").text().contains(user.name)
+		}
+	}*/
+	// Requirment: U1.2
+	def 'User detail page will contain a list of message for the current user'(){
+		when:
+		user
+		def mesgDiv=$("#userMessagesList")
+
+		then:
+		$("#userMessagesList")
+		waitFor(){
+			//browser.driver.executeScript("arguments[0].scrollIntoView();",mesgDiv)
 		}
 	}
 
