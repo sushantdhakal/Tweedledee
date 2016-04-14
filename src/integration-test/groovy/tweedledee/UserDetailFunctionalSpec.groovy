@@ -1,7 +1,10 @@
 package tweedledee
 
 import geb.spock.GebSpec
+import grails.converters.JSON
 import grails.test.mixin.integration.Integration
+import groovyx.net.http.HttpResponseException
+import groovyx.net.http.RESTClient
 import spock.lang.*
 
 @Integration
@@ -10,8 +13,13 @@ class UserDetailFunctionalSpec extends GebSpec {
 	@Shared
 	def user
 
+	RESTClient restClient
+
+	@Shared
+	def token
 
 	def setup(){
+		restClient=new RESTClient(baseUrl)
 		user=[handle:'admin',name:'admin',password:'12345678pP',email:'admin@admin.com']
 		go '/#/login'
 		waitFor("quick"){ 
@@ -19,6 +27,9 @@ class UserDetailFunctionalSpec extends GebSpec {
 			$("#password").value(user.password)
 			$("#submitBtn").click();
 		}
+		def auth=([username:user.name, password:user.password] as JSON) as String
+		def resp=restClient.post(path:'/api/login',body:auth,requestContentType:'application/json')
+		if(resp.status==200) token=resp.data.access_token
 	}
 
 	// Requirment: U1.1
@@ -31,17 +42,24 @@ class UserDetailFunctionalSpec extends GebSpec {
 			$("#profileName").text().contains(user.name)
 		}
 	}*/
+
 	// Requirment: U1.2
 	def 'User detail page will contain a list of message for the current user'(){
 		when:
-		user
-		def mesgDiv=$("#userMessagesList")
+		def mesgs=[]
+		def resp=restClient.get(path:'/api/account/'+user.name+'/messages?max=25&offset=0',headers:['X-Auth-Token':token])
+		if(resp.status==200) mesgs=resp.data
+		def scrollProof = 	"var style = window.getComputedStyle(document.getElementById('userMessagesList'), null);"+
+							"var vHeight = parseInt(style.getPropertyValue('height'));"+
+							"var sHeight = document.getElementById('userMessagesList').scrollHeight;"+
+							"return (sHeight > vHeight) ? true : false;"
+		sleep(5000)
 
 		then:
-		$("#userMessagesList")
-		waitFor(){
-			//browser.driver.executeScript("arguments[0].scrollIntoView();",mesgDiv)
-		}
+		browser.driver.executeScript(scrollProof)
+		mesgs.each(){
+			$("messageId${it.id}_text").text() == it.text
+		}		
 	}
 
 }

@@ -11,9 +11,9 @@
     </ul>
     <div id="userMessagesList" class="message-list">
         <ul class="list-unstyled">
-            <li class="list-item" ng-repeat="message in messages | orderBy:'dateCreated'">
-                <span class="message-text">{{message.text}}</span>
-                <span class="message-text-date">( {{message.dateCreated | date:"EEE M/yy '@' h:mma"}} )</span>
+            <li id="messageId{{message.id}}" class="list-item" ng-repeat="message in messages | orderBy:'message.dateCreated'">
+                <span id="messageId{{message.id}}_text" class="message-text">{{message.text}}</span>
+                <span id="messageId{{message.id}}_date" class="message-text-date">( {{message.dateCreated | date:"EEE M/yy '@' h:mma"}} )</span>
             </li>
         </ul>
     </div>
