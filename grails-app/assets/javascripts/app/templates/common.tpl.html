@@ -31,12 +31,14 @@
 </div>
 <!-- /#sidebar-wrapper -->
 
+
+
 <div class="row">
     <div class="col-lg-6" style="float: right;">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for messages...">
+            <input type="text" class="form-control" ng-model="text" placeholder="Search for messages...">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
+        <button href="#/searchDetail" class="btn btn-default" type="submit" ng-click="vm.searchResults('abc')">Go!</button>
       </span>
         </div><!-- /input-group -->
     </div><!-- /.col-lg-6 -->

@@ -45,7 +45,7 @@ angular.module('app').controller('accountController', function ($resource, $scop
             var temp = response.data;
 
             if(temp.handle == userNameParameter){
-                $location.path('/profile');
+                $location.path('/api/profile');
             }
             else {
                 $scope.nameForUser1 = temp.name;

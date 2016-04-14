@@ -23,7 +23,7 @@ angular.module('app').controller('mayKnowController', function ($resource, $scop
                 continue;
             $http({
                 method: 'GET',
-                url: '/message/'+ currUser +'/messages'
+                url: '/api/message/'+ currUser +'/messages'
             }).then(function successCallback(response1) {
                 var messageRespArr = "";
 
