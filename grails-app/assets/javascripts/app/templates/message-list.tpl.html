@@ -6,7 +6,7 @@
     
     <ul class="list-unstyled list-inline message-paging">
     <li ng-show="start>1" ng-click="pageprev()"><span ng-click="pageprev()" class="message-nextprev">prev</span></li>
-    <li>Showing {{max}} of your most recent messages</li>
+    <li>Showing {{max}} of your most recent messages <span ng-show="offset<messageCount">(<a ng-click="showmore()">show more</a>)</span> <span ng-show="offset==messageCount">(<a ng-click="refresh()">refresh list</a>)</span></li>
     <li ng-show="end<messageCount"><span ng-click="pagenext()" class="message-nextprev">next</span></li>
     </ul>
     <div id="userMessagesList" class="message-list">

@@ -1,20 +1,9 @@
-<div ng-include src="'/app/common.html'"></div>
+<p>Currently logged in: {{currentUserLoggedIn}}</p>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Messages</div>
-    <div class="panel-body">
+<div ng-include src="'/app/common.html'" ng-controller="searchController"></div>
 
+<div ng-include="'/app/message-list.html'" ng-controller="messagesController"></div>
 
-
-        <table class="table">
-
-            <tr ng-repeat="message in userMessages">
-                <td>{{message}}</td>
-            </tr>
-        </table>
-
-    </div>
-</div>
 
 
 
