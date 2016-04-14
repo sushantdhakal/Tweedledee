@@ -24,6 +24,7 @@ angular.module('app').controller('accountController', function ($resource, $scop
                 if(tempFollowingList[i].handle == handleName){
                     $scope.iAmFollowing = true;
                     $scope.followingUser = handleName;
+                    break;
                 }
             }
             // this callback will be called asynchronously
@@ -34,7 +35,7 @@ angular.module('app').controller('accountController', function ($resource, $scop
         });
     }
 
-     function getUserDetails(handleName) {
+    function getUserDetails(handleName) {
 
         $http({
             method: 'GET',
@@ -73,7 +74,7 @@ angular.module('app').controller('accountController', function ($resource, $scop
         });
     };
 
-     function getMessages(handleName){
+    function getMessages(handleName){
         $http({
             method: 'GET',
             url: '/message/' + handleName + '/messages'

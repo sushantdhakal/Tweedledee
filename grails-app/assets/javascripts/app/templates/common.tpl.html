@@ -13,10 +13,10 @@
             <a href="#/feed">Messages</a>
         </li>
         <li ng-controller="followerController">
-            <a href="#/followers">Followers [{{numberOfFollowers}}]</a>
+            <a href="#/followers">Followers <span class="badge">{{numberOfFollowers}}</span></a>
         </li>
         <li ng-controller="followingController">
-            <a href="#/following">Followees [{{numberOfFollowing}}]</a>
+            <a href="#/following">Followees <span class="badge">{{numberOfFollowing}}</span></a>
         </li>
         <li>
             <a href="#/mayKnow">People You May Know</a>
@@ -30,3 +30,15 @@
     </ul>
 </div>
 <!-- /#sidebar-wrapper -->
+
+<div class="row">
+    <div class="col-lg-6" style="float: right;">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for messages...">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Go!</button>
+      </span>
+        </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+</div>
+<br>

@@ -1,90 +1,68 @@
-<!-- Sidebar -->
-<div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
-        <li class="sidebar-brand">
-            <a href="#">
-                Edit Profile
-            </a>
-        </li>
-        <li>
-            <a href="#/profile">Profile</a>
-        </li>
-        <li>
-            <a href="#/feed">Messages</a>
-        </li>
-        <li ng-controller="followerController">
-            <a href="#/followers">Followers [{{numberOfFollowers}}]</a>
-        </li>
-        <li ng-controller="followingController">
-            <a href="#/following">Followees [{{numberOfFollowing}}]</a>
-        </li>
-        <li>
-            <a href="#/mayKnow">People You May Know</a>
-        </li>
-        <li>
-            <a href="#">Contact</a>
-        </li>
-        <li>
-            <a href="#/logout">Logout</a>
-        </li>
-    </ul>
-</div>
-<!-- /#sidebar-wrapper -->
+<div ng-include src="'/app/common.html'"></div>
 
-<div id="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div ng-controller="accountController" class="action_buttons_header" style="text-align: right;">
-                <input type="submit" ng-if="!iAmFollowing" ng-click="doFollow()" class="btn btn-info" value="Follow"/>
-            <div ng-if="iAmFollowing">I am already following {{followingUser}}</div>
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">PROFILE DETAILS</h3>
+        <div ng-controller="accountController" class="action_buttons_header" style="text-align: right;">
+            <input type="submit" ng-if="!iAmFollowing" ng-click="doFollow()" class="btn btn-info" value="Follow"/>
+            <div ng-if="iAmFollowing"><button class="btn btn-success">Currently Following</button></div>
+        </div>
+    </div>
+    <div class="panel-body">
+
+        <p>
+            Name: {{nameForUser1}}
+        </p>
+        <p>Email: {{emailAddressForUser1}}</p>
+
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">FOLLOWERS</h3>
             </div>
-            <div class="col-lg-12">
-                <h1>Profile</h1>
+
+            <!-- Table -->
+            <table>
+                <tr ng-repeat="follower in followersForUser1">
+                    <td><a ng-href="#/account/{{follower}}">{{follower}}</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h3 class="panel-title">FOLLOWING</h3>
+            </div>
+
+            <!-- Table -->
+            <table>
+
+                <tr ng-repeat="following in followingForUser1">
+                    <td><a ng-href="#/account/{{following}}">{{following}}</a></td>
+
+                </tr>
+            </table>
+        </div>
 
 
-                <p>
-                    Name: {{nameForUser1}}
-                </p>
-                <p>Email: {{emailAddressForUser1}}</p>
+        <div class="panel panel-danger">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h3 class="panel-title">MESSAGES</h3>
+            </div>
 
-
-                <p>Followers:
-                <table>
-
-                    <tr ng-repeat="follower in followersForUser1">
-                        <td><a ng-href="#/account/{{follower}}">{{follower}}</a></td>
-                    </tr>
-                </table>
-
-
-                </p>
-                <p>Following: </p>
-                <table>
-
-                    <tr ng-repeat="following in followingForUser1">
-                        <td><a ng-href="#/account/{{following}}">{{following}}</a></td>
-
-                    </tr>
-                </table>
-
-                <p>Messages: </p>
-
-                <div ng-repeat="usermsg in userMessagesPosted">
-                    <p> {{usermsg.messageDetail}} </p>
-                    <p>Message posted on: {{usermsg.messageCreatedDate}}</p>
-
-                </div>
-
-
-
-
-
-
-
-
-
+            <div ng-repeat="usermsg in userMessagesPosted">
+                <p> {{usermsg.messageDetail}} </p>
+                <p>Message posted on: {{usermsg.messageCreatedDate}}</p>
 
             </div>
         </div>
+
     </div>
 </div>
+
+
+
