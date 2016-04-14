@@ -45,8 +45,6 @@ body {
     font-size: 0.75em
 }
 
-
-
 .navbar-custom {
     background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
     color:white;
@@ -85,4 +83,8 @@ body {
 .sidebar-nav > .sidebar-brand a {
     color: #999999;
 }
+
+.tweedleDeeHeader { color: #b48608; font-family: "Great Vibes", cursive; font-size: 60px; line-height: 75px; font-weight: normal; margin-bottom: 0px; margin-top: 10px; text-align: left; text-shadow: 0 1px 1px #fff; }
+
+.tweedleDeeHeader2 { color: #CEF0D4; font-family: 'Rouge Script', cursive; font-size: 130px; font-weight: normal; line-height: 48px; margin: 0 0 50px; text-align: center; text-shadow: 1px 1px 2px #082b34; }
 
