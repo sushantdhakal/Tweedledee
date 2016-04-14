@@ -8,29 +8,25 @@ angular.module('app')
         templateUrl: '/app/login.html',
         controller: 'loginController'
       })
-      .when('/home/:handle?', {
-        templateUrl: '/app/home.html',
-        controller: 'homeController'
-      })
-        .when('/profile', {
-          templateUrl: '/app/profile.html',
+     .when('/profile', {
+          templateUrl: '/app/user-details.html',
           controller: 'profileController'
         })
       .when('/feed', {
         templateUrl: '/app/feed.html',
-        controller: 'feedController'
+        controller: 'messagesController'
       })
         .when('/logout', {
             templateUrl: '/app/logout.html',
             controller: 'logoutController'
         })
         .when('/mayKnow',{
-            templateUrl: '/app/mayKnow.html',
-            controller: 'mayKnowController'
+            templateUrl: '/app/user-details.html',
+            controller: 'profileController'
         })
-        .when('/account/:param', {
-          templateUrl: '/app/accountDetail.html',
-          controller: 'accountController'
+        .when('/account/:id', {
+          templateUrl: '/app/user-details.html',
+          controller: 'profileController'
         })
         .when('/followers',{
             templateUrl: '/app/follower.html',

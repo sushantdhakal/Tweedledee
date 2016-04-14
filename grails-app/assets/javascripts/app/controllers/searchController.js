@@ -1,26 +1,30 @@
-angular.module('app').controller('searchController', function ($resource, $scope, $http, $rootScope, securityService, $location, $routeParams) {
+angular.module('app')
+.controller('searchController',function (
+    $scope, $http, $routeParams, $interval, securityService, profileService) {
 
-    var handleName = $routeParams.param;
-    var temp3 = securityService.currentUser();
-    var userNameParameter = temp3.username;
+    var userCreds = securityService.currentUser();
+    $scope.loggedInUserHandle = userCreds.username;
+    
+    if($routeParams.id) $scope.viewingUserHandle=$routeParams.id;
+    else $scope.viewingUserId=$scope.loggedInUserHandle;
 
+    var MAX_MESG=25; init(MAX_MESG);
 
-    var searchSuccess = function (response) {
-        /*currentUser = {
-            username: response.data.username,
-            roles: response.data.roles,
-            token: response.data['access_token']
-        };*/
-    };
+    $interval(function(){ getMessages(); },25000);
 
-    var searchFailure = function () {
-       /* currentUser = undefined
-        delete $rootScope.currentUser;*/
-    };
+    $scope.search = function(){
+        getMessages($scope.searchTerm);
+    }
 
-    $scope.searchResults = function (searchableText) {
-        var searchPayload = {searchTerm: searchableText};
-        return $http.post('/api/messages/search', searchPayload).then(searchSuccess, searchFailure);
-    };
+    function init(max){
+        $scope.max=max;
+        $scope.offset=0;
+        getMessages($scope.searchTerm);
+    }
+
+    function getMessages(term){ 
+        if(!angular.isDefined(term)) term = '';
+        profileService.getMessagesBySearchTerm($scope,term);
+    }
 
 });

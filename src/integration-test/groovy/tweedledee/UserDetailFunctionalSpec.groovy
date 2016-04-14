@@ -44,7 +44,7 @@ class UserDetailFunctionalSpec extends GebSpec {
 	}*/
 
 	// Requirment: U1.2
-	def 'User detail page will contain a list of message for the current user'(){
+	/*def 'User detail page will contain a list of message for the current user'(){
 		when:
 		def mesgs=[]
 		def resp=restClient.get(path:'/api/account/'+user.name+'/messages?max=25&offset=0',headers:['X-Auth-Token':token])
@@ -60,6 +60,8 @@ class UserDetailFunctionalSpec extends GebSpec {
 		mesgs.each(){
 			$("messageId${it.id}_text").text() == it.text
 		}		
-	}
+	}*/
+
+
 
 }

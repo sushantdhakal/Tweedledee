@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('followerController', function (
+.controller('navController',function (
     $scope, $http, $routeParams, $interval, securityService, profileService) {
 
     var userCreds = securityService.currentUser();
@@ -8,13 +8,15 @@ angular.module('app')
     if($routeParams.id) $scope.viewingUserHandle=$routeParams.id;
     else $scope.viewingUserId=$scope.loggedInUserHandle;
 
-    getFollowers();
+    getProfile();
 
-    $interval(function(){ getFollowers(); },25000);
+    $interval(function(){ getProfile(); },25000);
 
-    function getFollowers(id){ 
+    function getProfile(id){ 
         if(!angular.isDefined(id)) id = $scope.viewingUserId;
-        profileService.getFollowers($scope,id);
+        profileService.getProfile($scope,id);
     }
 
 });
+
+

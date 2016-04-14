@@ -1,43 +1,22 @@
-angular.module('app').controller('profileController', function ($resource, $scope, $http, $rootScope, securityService) {
+angular.module('app')
+.controller('profileController',function (
+    $scope, $http, $routeParams, $interval, securityService, profileService) {
 
-    var temp3 = securityService.currentUser();
-    var userNameParameter = temp3.username;
+    var userCreds = securityService.currentUser();
+    $scope.loggedInUserHandle = userCreds.username;
+    
+    if($routeParams.id) $scope.viewingUserHandle=$routeParams.id;
+    else $scope.viewingUserId=$scope.loggedInUserHandle;
 
-    $scope.currentUserLoggedIn =  userNameParameter;
+    getProfile();
 
-    $http({
-        method: 'GET',
-        url: '/api/account/' + userNameParameter
-    }).then(function successCallback(response) {
-        var temp=response.data;
-        $scope.nameForUser = temp.name;
-        $scope.emailAddressForUser = temp.email;
-        var followers = [];
-        var following = [];
+    $interval(function(){ getProfile(); },25000);
 
-        for(var fol = 0; fol<temp.followers.length; fol++){
-            followers.push(temp.followers[fol].handle);
-        }
+    function getProfile(id){ 
+        if(!angular.isDefined(id)) id = $scope.viewingUserId;
+        profileService.getProfile($scope,id);
+    }
 
-        for(var fol = 0; fol<temp.following.length; fol++){
-            following.push(temp.following[fol].handle);
-        }
-
-        $scope.followersForUser = followers;
-        $scope.followingForUser = following;
-
-        console.log(response);
-        temp = response.data;
-        for (var i = 0; i < temp.length; i++) {
-            var tempArr = [];
-
-        }
-        // this callback will be called asynchronously
-        // when the response is available
-    }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    });
 });
 
 

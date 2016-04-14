@@ -15,8 +15,7 @@ body {
     overflow: scroll;
 }
 .errorMessage{
-    font-family: Calibri;
-    color: red;
+    color:red;
 }
 .data-row{
     margin-bottom:15px;

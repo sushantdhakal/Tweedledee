@@ -1,15 +1,5 @@
-<p>Currently logged in: {{currentUserLoggedIn}}</p>
 
- <div ng-include src="'/app/common.html'"></div>
-
-<div class="row">
-    <div class="col-md-2 text-left">
-        <h2>@{{handleForUser}}</h2>
-    </div>
-    <div class="col-md-6">
-        <div ng-include src="'/app/search-box.html'" ng-controller="searchController"></div>
-    </div>
-</div>
+<div ng-include src="'/app/nav-bar.html'" ng-controller="navController"></div>
 
 <div class="panel panel-primary">
     <div class="panel-heading">
@@ -18,9 +8,9 @@
     <div class="panel-body">
 
         <p id="profileName">
-            Name: {{nameForUser}}
+            Name: {{name}}
         </p>
-        <p id="profileEmail">Email: {{emailAddressForUser}}</p>
+        <p id="profileEmail">Email: {{email}}</p>
 
 
         <div class="panel panel-info">
@@ -30,8 +20,8 @@
 
             <!-- Table -->
             <table class="table" id="followerList">
-                <tr ng-repeat="follower in followersForUser">
-                    <td><a ng-href="#/account/{{follower}}">{{follower}}</a></td>
+                <tr ng-repeat="follower in followers">
+                    <td><a ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a></td>
                 </tr>
             </table>
         </div>
@@ -43,9 +33,9 @@
             </div>
 
             <!-- Table -->
-            <table class="table" id="followingList">
+            <table class="table" id="following">
                 <tr ng-repeat="following in followingForUser">
-                    <td><a ng-href="#/account/{{following}}">{{following}}</a></td>
+                    <td><a ng-href="#/account/{{following.handle}}">{{following.handle}}</a></td>
                 </tr>
             </table>
         </div>
