@@ -4,12 +4,15 @@ body {
     height:600px;
 }
 .mainBodyDiv{
-    margin-top: 65px;
-    margin-left: 12%;
-    width: 64%;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 10px;
+    margin: auto;
+    margin-top: 65px;
+    width: 64%;
+    height: auto;
     overflow: scroll;
-    height:1000px;
 }
 .errorMessage{
     font-family: Calibri;
@@ -49,12 +52,15 @@ body {
     background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
     color:white;
     opacity:0.95;
+    box-shadow: inset 0px 0px 0px;
 }
 
 .navbar-nav{
     background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    margin-left: 85px;
     color:white;
     opacity:0.95;
+    box-shadow: inset 0px 0px 0px;
 }
 
 .navbar-nav li {
