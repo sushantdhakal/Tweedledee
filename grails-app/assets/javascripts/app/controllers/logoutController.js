@@ -3,6 +3,6 @@ angular.module('app').controller('logoutController', function ($resource, $scope
     $scope.doLogout = function() {
         securityService.doLogout();
         delete $scope.error;
-        $location.path('/logout');
+        $location.path('/api/logout');
     };
 });

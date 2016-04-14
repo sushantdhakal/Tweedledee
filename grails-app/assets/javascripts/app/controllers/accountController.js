@@ -14,7 +14,7 @@ angular.module('app').controller('accountController', function ($resource, $scop
     function checkIfAlreadyFollowing(userNameParameter){
         $http({
             method: 'GET',
-            url: '/account/'+userNameParameter+'/following'
+            url: '/api/account/'+userNameParameter+'/following'
         }).then(function successCallback(response) {
             $scope.numberOfFollowing = response.data.followingCount
 
@@ -39,13 +39,13 @@ angular.module('app').controller('accountController', function ($resource, $scop
 
         $http({
             method: 'GET',
-            url: '/account/' + handleName
+            url: '/api/account/' + handleName
         }).then(function successCallback(response) {
 
             var temp = response.data;
 
             if(temp.handle == userNameParameter){
-                $location.path('/profile');
+                $location.path('/api/profile');
             }
             else {
                 $scope.nameForUser1 = temp.name;
@@ -77,7 +77,7 @@ angular.module('app').controller('accountController', function ($resource, $scop
     function getMessages(handleName){
         $http({
             method: 'GET',
-            url: '/message/' + handleName + '/messages'
+            url: '/api/message/' + handleName + '/messages'
         }).then(function successCallback(response) {
             var temp="";
             console.log(response);

@@ -10,7 +10,7 @@ angular.module('app').controller('loginController', function($scope, $location, 
         var currentUser = securityService.currentUser();
         if (currentUser) {
           delete $scope.error;
-          $location.path('/profile');
+          $location.path('/api/profile');
             currentUserLoggedIn = currentUser.username;
         } else {
           $scope.error = 'Invalid login. Check you username/password.';

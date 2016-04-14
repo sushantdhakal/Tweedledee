@@ -8,7 +8,7 @@ angular.module('app').controller('feedController', function ($resource, $scope, 
 
   $http({
     method: 'GET',
-    url: '/message/'+userNameParameter+'/messages'
+    url: '/api/message/'+userNameParameter+'/messages'
   }).then(function successCallback(response) {
     var temp="";
     console.log(response);
