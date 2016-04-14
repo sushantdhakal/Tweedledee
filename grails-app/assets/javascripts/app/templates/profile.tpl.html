@@ -3,42 +3,47 @@
 </p>
 <div ng-include src="'/app/common.html'"></div>
 
-<!-- Page Content -->
-<div id="page-content-wrapper">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>Profile</h1>
 
-
-                <p>
-                    Name: {{nameForUser}}
-                </p>
-                <p>Email: {{emailAddressForUser}}</p>
-
-
-                <p>Followers:
-                <table>
-
-                    <tr ng-repeat="follower in followersForUser">
-                        <td><a ng-href="#/account/{{follower}}">{{follower}}</a></td>
-                    </tr>
-                </table>
-
-
-                </p>
-                <p>Following: </p>
-                <table>
-
-                    <tr ng-repeat="following in followingForUser">
-                        <td><a ng-href="#/account/{{following}}">{{following}}</a></td>
-                    </tr>
-                </table>
-
-
-
-            </div>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">YOUR PROFILE</h3>
         </div>
+    <div class="panel-body">
+
+        <p>
+            Name: {{nameForUser}}
+        </p>
+        <p>Email: {{emailAddressForUser}}</p>
+
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">FOLLOWERS</h3>
+            </div>
+
+            <!-- Table -->
+            <table class="table">
+                <tr ng-repeat="follower in followersForUser">
+                    <td><a ng-href="#/account/{{follower}}">{{follower}}</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="panel panel-success">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h3 class="panel-title">FOLLOWING</h3>
+            </div>
+
+            <!-- Table -->
+            <table class="table">
+                <tr ng-repeat="following in followingForUser">
+                    <td><a ng-href="#/account/{{following}}">{{following}}</a></td>
+                </tr>
+            </table>
+        </div>
+
     </div>
 </div>
-<!-- /#page-content-wrapper -->
+
+
