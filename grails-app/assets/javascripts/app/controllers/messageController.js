@@ -4,32 +4,35 @@ angular.module('app')
     var temp3 = securityService.currentUser();
     var userNameParameter = temp3.username;
     var baseUrl = '/api/account/' + userNameParameter;
-
+    $http.get(baseUrl).then(function(resp){ $scope.messageCount=resp.data.messageCount; })
+    
     $scope.currentUserLoggedIn =  userNameParameter;
     $scope.messages = [];
-    
-    resetPaging(25,0,1,25);
-    getMessages();
+    var MAX_MESG=25
 
-    $scope.pagenext = function(){
-        var newstart = ( ($scope.end+1)<$scope.messageCount ) ? ($scope.end+1) : $scope.start;
-        var newend = ( (newstart+$scope.max)<$scope.messageCount ) ? (newstart+$scope.max) : $scope.messageCount-($scope.messageCount-$scope.end);
-        var newoffset = newend-newstart;
-        var newmax = ( (newstart+$scope.max)<$scope.messageCount ) ? $scope.max : ($scope.messageCount-$scope.end);
-        resetPaging(newmax,newoffset,newstart,newend); getMessages();
+    init(MAX_MESG);
+
+    function init(max){
+        $scope.max=max;
+        $scope.offset=0;
+        getMessages();
     }
 
-    $scope.pageprev = function(){
-        resetPaging($scope.max,$scope.offset); getMessages();
+    $scope.refresh = function(){
+        init(MAX_MESG);
     }
 
-    function resetPaging(max,offset,start,end){
-
-        $scope.offset       = offset;
-        $scope.max          = max;
-        $scope.start        = start;
-        $scope.end          = end;
-
+    $scope.showmore=function(){
+        console.log('$scope.messageCount ',$scope.messageCount);
+        var newoffset=$scope.offset+($scope.max+1);console.log('newoffset ',newoffset);
+        var newend=newoffset+$scope.max;console.log('newend ',newend);
+        if( newend<$scope.messageCount) { $scope.offset=newoffset; getMessages(); }
+        else{
+            var over=(newoffset+$scope.max)-$scope.messageCount;console.log('over '+over);
+            var newmax=$scope.max-over;console.log('newmax '+newmax);
+            if(newmax>0) { $scope.max=newmax; getMessages(); }
+            else $scope.offset=$scope.messageCount;
+        }
     }
 
     function getMessages(){
