@@ -1,4 +1,35 @@
+<nav class="navbar navbar-custom navbar-fixed-top">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            <li>
+                <a href="#/profile"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile</a>
+            </li>
+            <li>
+                <a href="#/feed"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Messages</a>
+            </li>
+            <li ng-controller="followerController">
+                <a href="#/followers"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Followers <span class="badge">{{numberOfFollowers}}</span></a>
+            </li>
+            <li ng-controller="followingController">
+                <a href="#/following"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Following <span class="badge">{{numberOfFollowing}}</span></a>
+            </li>
+            <!--
+            <li>
+                <a href="#/mayKnow">People You May Know</a>
+            </li>
+            -->
+            <li>
+                <a href="#"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> Contact</a>
+            </li>
+            <li>
+                <a href="#/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <!-- Sidebar -->
+<!--
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav">
         <li class="sidebar-brand">
@@ -28,7 +59,7 @@
             <a href="#/logout">Logout</a>
         </li>
     </ul>
-</div>
+</div>-->
 <!-- /#sidebar-wrapper -->
 
 
