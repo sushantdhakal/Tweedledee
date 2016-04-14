@@ -31,19 +31,19 @@ class BootStrap {
 
         admin2.addToFollowers(admin3).save(flush: true, failOnError: true);
 
-        (1..20).each {
+        (1..128).each {
             msgNumber -> admin.addToMessages(text: "This is admin's message# $msgNumber").save(flush: true, failOnError: true)
         }
 
-        (1..10).each {
+        (1..100).each {
             msgNumber -> admin1.addToMessages(text: "This is Sushant's message# $msgNumber").save(flush: true, failOnError: true)
         }
 
-        (1..10).each {
+        (1..55).each {
             msgNumber -> admin2.addToMessages(text: "This is Paul's message# $msgNumber").save(flush: true, failOnError: true)
         }
 
-        (1..15).each {
+        (1..43).each {
             msgNumber -> admin3.addToMessages(text: "This is Mike's message# $msgNumber").save(flush: true, failOnError: true)
         }
     }

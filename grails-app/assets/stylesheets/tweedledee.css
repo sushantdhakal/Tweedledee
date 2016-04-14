@@ -1,7 +1,7 @@
 body {
     padding-top: 70px;
     border:1px solid black;
-    height:100%;
+    height:600px;
 }
 .mainBodyDiv{
     margin-top: 100px;
@@ -15,4 +15,33 @@ body {
 .errorMessage{
     font-family: Calibri;
     color: red;
+}
+.data-row{
+    margin-bottom:15px;
+}
+.data-label{
+    font-weight: 600;
+    margin-right: 7px;
+}
+.message-nextprev{
+    color:blue;
+    cursor:auto;
+}
+.message-paging{
+    font-size: 0.75em;
+    font-style: italic;
+}
+.message-list{
+    overflow:auto;
+    height:150px;
+    background-color:#eee;
+    padding:7px;
+    border: 1px solid #ddd;
+}
+.message-text{
+    font-style: italic;
+    font-weight: 400;
+}
+.message-text-date{
+    font-size: 0.75em
 }

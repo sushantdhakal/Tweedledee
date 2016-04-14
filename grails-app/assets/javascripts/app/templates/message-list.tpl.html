@@ -1,0 +1,21 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">YOUR MESSAGES</h3>
+    </div>
+    <div class="panel-body">
+    
+    <ul class="list-unstyled list-inline message-paging">
+    <li ng-show="start>1" ng-click="pageprev()"><span ng-click="pageprev()" class="message-nextprev">prev</span></li>
+    <li>Showing {{max}} of your most recent messages</li>
+    <li ng-show="end<messageCount"><span ng-click="pagenext()" class="message-nextprev">next</span></li>
+    </ul>
+    <div id="userMessagesList" class="message-list">
+        <ul class="list-unstyled">
+            <li class="list-item" ng-repeat="message in messages | orderBy:'dateCreated'">
+                <span class="message-text">{{message.text}}</span>
+                <span class="message-text-date">( {{message.dateCreated | date:"EEE M/yy '@' h:mma"}} )</span>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
