@@ -4,13 +4,12 @@ body {
     height:600px;
 }
 .mainBodyDiv{
-    margin-top: 100px;
-    margin-left: 18%;
-    width: 60%;
+    margin-top: 65px;
+    margin-left: 12%;
+    width: 64%;
     padding: 10px;
-    border: solid red 5px;
     overflow: scroll;
-    height: 70%;
+    height:1000px;
 }
 .errorMessage{
     font-family: Calibri;
@@ -45,3 +44,45 @@ body {
 .message-text-date{
     font-size: 0.75em
 }
+
+
+
+.navbar-custom {
+    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    color:white;
+    opacity:0.95;
+}
+
+.navbar-nav{
+    background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
+    color:white;
+    opacity:0.95;
+}
+
+.navbar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.navbar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-nav li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.navbar-nav li a:active,
+.navbar-nav li a:focus {
+    text-decoration: none;
+}
+
+
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+
