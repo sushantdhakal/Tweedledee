@@ -4,27 +4,15 @@ angular.module('app')
 
     var userCreds = securityService.currentUser();
     $scope.loggedInUserHandle = userCreds.username;
-    
-    if($routeParams.id) $scope.viewingUserHandle=$routeParams.id;
+    $scope.messages=[];
+    $scope.max=25;
+    $scope.offset=0;
+
+    if($routeParams.id) $scope.viewingUserId=$routeParams.id;
     else $scope.viewingUserId=$scope.loggedInUserHandle;
 
-    var MAX_MESG=25; init(MAX_MESG);
-
-    $interval(function(){ getMessages(); },25000);
-
     $scope.search = function(){
-        getMessages($scope.searchTerm);
-    }
-
-    function init(max){
-        $scope.max=max;
-        $scope.offset=0;
-        getMessages($scope.searchTerm);
-    }
-
-    function getMessages(term){ 
-        if(!angular.isDefined(term)) term = '';
-        profileService.getMessagesBySearchTerm($scope,term);
+        profileService.getMessagesBySearchTerm($scope);
     }
 
 });
