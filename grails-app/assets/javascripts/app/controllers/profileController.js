@@ -7,7 +7,7 @@ angular.module('app').controller('profileController', function ($resource, $scop
 
     $http({
         method: 'GET',
-        url: '/account/' + userNameParameter
+        url: '/api/account/' + userNameParameter
     }).then(function successCallback(response) {
         var temp=response.data;
         $scope.nameForUser = temp.name;
