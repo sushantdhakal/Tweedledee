@@ -8,7 +8,7 @@ angular.module('app').controller('mayKnowController', function ($resource, $scop
 
     $http({
         method: 'GET',
-        url: '/accounts/'
+        url: '/api/accounts/'
     }).then(function successCallback(response) {
         var temp="";
         console.log(response);
@@ -23,7 +23,7 @@ angular.module('app').controller('mayKnowController', function ($resource, $scop
                 continue;
             $http({
                 method: 'GET',
-                url: '/message/'+ currUser +'/messages'
+                url: '/api/message/'+ currUser +'/messages'
             }).then(function successCallback(response1) {
                 var messageRespArr = "";
 

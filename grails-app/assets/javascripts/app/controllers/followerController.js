@@ -9,7 +9,7 @@ angular.module('app').controller('followerController', function ($resource, $sco
 
     $http({
         method: 'GET',
-        url: '/account/'+userNameParameter+'/followers'
+        url: '/api/account/'+userNameParameter+'/followers'
     }).then(function successCallback(response) {
         $scope.numberOfFollowers = response.data.followerCount
 
