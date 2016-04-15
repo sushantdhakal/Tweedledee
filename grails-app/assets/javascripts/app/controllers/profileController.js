@@ -22,10 +22,10 @@ angular.module('app')
     //$interval(function(){ getProfile(); },25000);
 
     $scope.edit = function(field){
-        if(field=='name') $scope.showNameInput=true;
-        if(field=='email') $scope.showEmailInput=true;
+        if(field=='name') $scope.showNameInput=!$scope.showNameInput;
+        if(field=='email') $scope.showEmailInput=!$scope.showEmailInput;
     }
-    
+
     function getProfile(id){ 
         if(!angular.isDefined(id)) id = $scope.viewingUserId;
         profileService.getProfile($scope,id);

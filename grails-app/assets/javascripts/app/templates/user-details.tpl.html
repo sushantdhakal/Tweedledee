@@ -9,13 +9,24 @@
     <div class="panel-body">
 
 <div class="row" style="margin-bottom:10px;">
-        <div id="profileName" class="col-md-6" ng-click="edit('name')">
-            <span class="user-detail-label">Name:</span> <span ng-show="!showNameInput" class="user-detail-text">{{name}}</span>
-            <input id="editNameInput" ng-model="name" class="form-control" ng-show="showNameInput"> <button ng-show="showNameInput" class="btn btn-link" ng-click="showNameInput=false;">cancel</button> <button ng-show="showNameInput" class="btn btn-link" ng-click="save()">save</button>
+        <div id="profileName" class="col-md-6">
+            
+            <span class="user-detail-label">Name:</span> <span ng-show="!showNameInput" class="user-detail-text" ng-click="edit('name')">{{name}}</span>
+
+            <input id="editNameInput" ng-model="name" class="form-control" ng-show="showNameInput"> 
+            
+            <button ng-show="showNameInput" class="btn btn-link" ng-click="edit('name')">cancel</button> 
+            <button ng-show="showNameInput" class="btn btn-link" ng-click="save()">save</button>
+
         </div>
-        <div id="profileEmail" class="col-md-6" ng-click="edit('email')">
-            <span class="user-detail-label">Email:</span> <span ng-show="!showEmailInput" class="user-detail-text">{{email}}</span>
-            <input id="editEmailInput" ng-model="email" class="form-control" ng-show="showEmailInput"> <button ng-show="showEmailInput" class="btn btn-link" ng-click="showEmailInput=false;">cancel</button> <button ng-show="showEmailInput" class="btn btn-link" ng-click="save()">save</button>
+        <div id="profileEmail" class="col-md-6">
+            
+            <span class="user-detail-label">Email:</span> <span ng-show="!showEmailInput" class="user-detail-text" ng-click="edit('email')">{{email}}</span>
+            
+            <input id="editEmailInput" ng-model="email" class="form-control" ng-show="showEmailInput"> 
+
+            <button ng-show="showEmailInput" class="btn btn-link" ng-click="edit('email')">cancel</button> 
+            <button ng-show="showEmailInput" class="btn btn-link" ng-click="save()">save</button>
         </div>
  </div>       
 
