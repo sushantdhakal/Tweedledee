@@ -20,20 +20,20 @@ class UserDetailFunctionalSpec extends GebSpec {
 
 	def setup(){
 		restClient=new RESTClient(baseUrl)
-		user=[handle:'admin',name:'admin',password:'12345678pP',email:'admin@admin.com']
+		user=[handle:'admin',name:'Johnny Admin',password:'12345678pP',email:'admin@tweedledee.com']
 		go '/#/login'
 		waitFor("quick"){ 
-			$("#username").value(user.name)
+			$("#username").value(user.handle)
 			$("#password").value(user.password)
 			$("#submitBtn").click();
 		}
-		def auth=([username:user.name, password:user.password] as JSON) as String
+		def auth=([username:user.handle, password:user.password] as JSON) as String
 		def resp=restClient.post(path:'/api/login',body:auth,requestContentType:'application/json')
 		if(resp.status==200) token=resp.data.access_token
 	}
 
 	// Requirment: U1.1
-	/*def 'User detail page will display the current user name'(){
+	def 'User detail page will display the current user name'(){
 		when:
 		user
 
@@ -41,13 +41,13 @@ class UserDetailFunctionalSpec extends GebSpec {
 		waitFor(){
 			$("#profileName").text().contains(user.name)
 		}
-	}*/
+	}
 
 	// Requirment: U1.2
-	/*def 'User detail page will contain a list of message for the current user'(){
+	def 'User detail page will contain a list of message for the current user'(){
 		when:
 		def mesgs=[]
-		def resp=restClient.get(path:'/api/account/'+user.name+'/messages?max=25&offset=0',headers:['X-Auth-Token':token])
+		def resp=restClient.get(path:'/api/account/'+user.handle+'/messages?max=25&offset=0',headers:['X-Auth-Token':token])
 		if(resp.status==200) mesgs=resp.data
 		def scrollProof = 	"var style = window.getComputedStyle(document.getElementById('userMessagesList'), null);"+
 							"var vHeight = parseInt(style.getPropertyValue('height'));"+
@@ -60,7 +60,7 @@ class UserDetailFunctionalSpec extends GebSpec {
 		mesgs.each(){
 			$("messageId${it.id}_text").text() == it.text
 		}		
-	}*/
+	}
 
 
 

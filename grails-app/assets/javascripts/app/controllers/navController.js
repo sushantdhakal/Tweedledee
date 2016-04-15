@@ -4,7 +4,7 @@ angular.module('app')
 
     var userCreds = securityService.currentUser();
     $scope.loggedInUserHandle = userCreds.username;
-    $scope.isFollowing=true;
+    $scope.isFollowing=false;
     $scope.isLoggedInUser=true;
 
     if($routeParams.id) $scope.viewingUserId=$routeParams.id;
@@ -18,7 +18,7 @@ angular.module('app')
             $scope.isLoggedInUser=false;
             $scope.isFollowing=profileService.isFollowing($scope);
             console.log('isFollowing',$scope.isFollowing)
-        },750);
+        },100);
     }
 
     $scope.reloader = $interval(function(){ getProfile(); },25000);

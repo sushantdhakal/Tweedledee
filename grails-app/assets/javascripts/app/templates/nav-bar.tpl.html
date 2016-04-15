@@ -37,6 +37,9 @@
         <li ng-show="!isLoggedInUser && !isFollowing">
             <button id="followMeBtn" class="btn btn-warning btn-xs" ng-click="followme()">Follow!</button>
         </li>
+        <li ng-show="!isLoggedInUser && isFollowing">
+            <i id="followMeIcon" class="glyphicon glyphicon-ok" ng-click="followme()" style="margin-left:5px;color:green"></i> Following
+        </li>
         </ul>
     </div>
     <div class="col-md-2"></div>
@@ -44,22 +47,25 @@
       
       <form class="form-search" style="padding:7px">
           <div class="input-group">
-              <input id="searchBox" ng-model="searchTerm" type="text" class="form-control" placeholder="Search messages..." ng-focus="searchTerm='';messages=[]">
+              <input id="searchBox" ng-model="searchTerm" type="text" class="form-control" placeholder="Search messages..." ng-focus="reset()">
               <span class="input-group-btn">
                   <button id="searchBtn" type="submit" class="btn btn-search" ng-click="search()">GO!</button>
               </span>
           </div>
       </form>
 
-      <div id="searchResults" ng-show="messages.length>0" style="margin-bottom:10px;">
-        <div class="text-left" style="width:100%">Found {{messages.length}} messages.</div>
-        <div class="message-list">
-            <ul class="list-unstyled text-left">
-                <li ng-repeat="mesobj in messages | orderBy:'mesobj.message.dateCreated'">
-                    <span id="messageId{{mesobj.message.id}}_text" class="message-text">{{mesobj.message.text}}</span> <a href="#/account/{{mesobj.handle}}">{{mesobj.handle}}</a>
-                </li>
-            </ul>
+      <div id="searchResultsNotFound" ng-show="hasSearchResults && messages.length==0" style="margin-bottom:10px;">
+            <div class="text-left" style="width:100%">No Messages Found.</div>
         </div>
+      <div id="searchResults" ng-show="messages.length>0" style="margin-bottom:10px;">
+            <div class="text-left" style="width:100%">Found {{messages.length}} messages.</div>
+            <div class="message-list">
+                <ul class="list-unstyled text-left">
+                    <li ng-repeat="mesobj in messages | orderBy:'mesobj.message.dateCreated'">
+                        <span id="messageId{{mesobj.message.id}}_text" class="message-text">{{mesobj.message.text}}</span> <a href="#/account/{{mesobj.handle}}">{{mesobj.handle}}</a>
+                    </li>
+                </ul>
+            </div>
       </div>
 
     </div>

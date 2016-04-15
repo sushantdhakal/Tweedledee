@@ -78,6 +78,7 @@ class BootStrap {
             } else rr.add(failed:"Account loop ${ct1} failed to post")
         }
         def ss=Account.list()
+        def ctt=1
         if(ss){
             def nn=ss.id
             nn.each(){
@@ -87,13 +88,15 @@ class BootStrap {
                         def v=Account.get(tt)
                         if(v) it.addToFollowers(v)
                         it.save()
-                        v.addToFollowing(it)
-                        v.save()
+                        if(ctt!=2||ctt!=4){
+                            v.addToFollowing(it)
+                            v.save()
+                        }
                     }
                 }
             }
         }
-        
+        ctt=ctt+1
     }
 
     def destroy = {
