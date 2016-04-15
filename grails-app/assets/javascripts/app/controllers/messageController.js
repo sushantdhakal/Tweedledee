@@ -4,7 +4,8 @@ angular.module('app')
 
     var userCreds = securityService.currentUser();
     $scope.loggedInUserHandle = userCreds.username;
-    
+    $scope.loading=false;
+
     if($routeParams.id) $scope.viewingUserId=$routeParams.id;
     else $scope.viewingUserId=$scope.loggedInUserHandle;
 
@@ -19,6 +20,7 @@ angular.module('app')
     }
 
     function getMessages(id){ 
+        $scope.loading=true;
         if(!angular.isDefined(id)) id = $scope.viewingUserId;
         profileService.getMessagesByUser($scope,id);
     }

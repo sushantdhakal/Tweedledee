@@ -14,6 +14,21 @@ body {
     height: auto;
     overflow: scroll;
 }
+.user-detail-label{
+    font-weight: 600;
+    font-size: 1.5em;
+    margin-left: 7px;
+}
+.user-detail-text {
+  font-size: 1.5em;
+  padding:5px;
+}
+.user-detail-text:hover{
+  cursor:pointer;
+  border:1px solid #ddd;
+  border-radius:5px;   
+  -moz-border-radius:5px;
+}
 .search-row{ 
     display:table;
     table-layout:fixed; 
@@ -24,9 +39,13 @@ body {
     text-align:center;
     height:100%;
 }
+.ok-check{
+  margin-left:5px;
+  color:green;
+}
 .view-handle{
     font-weight:600;
-    font-size:1.6em;
+    font-size:1.75em;
 }
 .border-red{
     border: 3px solid red
@@ -113,3 +132,39 @@ body {
 
 .tweedleDeeHeader2 { color: #CEF0D4; font-family: 'Rouge Script', cursive; font-size: 130px; font-weight: normal; line-height: 48px; margin: 0 0 50px; text-align: center; text-shadow: 1px 1px 2px #082b34; }
 
+/* Spin annimation  */
+.spin{
+     -webkit-transform-origin: 50% 44%;
+     transform-origin:50% 44%;
+     -ms-transform-origin:50% 44%; /* IE 9 */
+     -webkit-animation: spin .7s infinite linear;
+     -moz-animation: spin .7s infinite linear;
+     -o-animation: spin .7s infinite linear;
+     animation: spin .7s infinite linear;
+}
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

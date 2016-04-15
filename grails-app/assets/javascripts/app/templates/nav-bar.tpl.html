@@ -30,19 +30,14 @@
 </nav>
 
 <div class="row search-row">
-    <div class="col-md-4 search-col" style="padding-top:7px;">
-        <ul class="list-inline">
-        <li>
-            <span class="view-handle">@{{handle}}</span class="view-handle"> </li>
-        <li ng-show="!isLoggedInUser && !isFollowing">
-            <button id="followMeBtn" class="btn btn-warning btn-xs" ng-click="followme()">Follow!</button>
-        </li>
-        <li ng-show="!isLoggedInUser && isFollowing">
-            <i id="followMeIcon" class="glyphicon glyphicon-ok" ng-click="followme()" style="margin-left:5px;color:green"></i> Following
-        </li>
-        </ul>
+    <div class="col-md-4 search-col" style="padding-top:7px;text-align:left">
+        <div class="view-handle">@{{handle}}</div>
+        <div class="" ng-show="!isLoggedInUser && !isFollowing"><button id="followMeBtn" class="btn btn-warning btn-xs" ng-click="followme()">Follow!</button></div>
+        <div class="" ng-show="!isLoggedInUser && isFollowing"><i id="followMeIcon" class="glyphicon glyphicon-ok ok-check" ng-click="followme()"></i> Following</div>
     </div>
+
     <div class="col-md-2"></div>
+
     <div class="col-md-6 search-col" ng-controller="searchController">
       
       <form class="form-search" style="padding:7px">
@@ -72,5 +67,5 @@
 </div>
 
 
-<div class="alert alert-danger" ng-show="alert.active" ng-click="alert.active=false">{{alert.mesg}}</div>
+<div class="alert alert-danger" ng-show="alert.active" ng-click="alert.active=false"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i>{{alert.mesg}}</div>
 

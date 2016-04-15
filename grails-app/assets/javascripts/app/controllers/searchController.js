@@ -8,11 +8,13 @@ angular.module('app')
     $scope.max=25;
     $scope.offset=0;
     $scope.hasSearchResults=false;
+    $scope.loading=false;
 
     if($routeParams.id) $scope.viewingUserId=$routeParams.id;
     else $scope.viewingUserId=$scope.loggedInUserHandle;
 
     $scope.search = function(){
+        $scope.loading=true;
         profileService.getMessagesBySearchTerm($scope);
     }
     $scope.reset = function(){

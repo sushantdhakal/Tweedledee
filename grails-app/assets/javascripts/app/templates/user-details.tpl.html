@@ -8,40 +8,57 @@
     </div>
     <div class="panel-body">
 
-        <p id="profileName">
-            Name: {{name}}
-        </p>
-        <p id="profileEmail">Email: {{email}}</p>
+<div class="row" style="margin-bottom:10px;">
+        <div id="profileName" class="col-md-6" ng-click="">
+            <span class="user-detail-label">Name:</span> <span class="user-detail-text">{{name}}</span>
+        </div>
+        <div id="profileEmail" class="col-md-6" ng-click="">
+            <span class="user-detail-label">Email</span>: <span class="user-detail-text">{{email}}</span>
+        </div>
+ </div>       
 
+<div class="row">
+    <div class="col-md-6">
 
-        <div class="panel panel-info">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">FOLLOWERS</h3>
             </div>
 
             <!-- Table -->
-            <table class="table" id="followerList">
-                <tr ng-repeat="follower in followers">
+            <table ng-show="followers.length>0" class="table" id="followerList">
+                <tr ng-repeat="follower in followers" style="cursor: pointer;">
                     <td><a ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a></td>
                 </tr>
             </table>
-        </div>
 
-        <div class="panel panel-success">
+            <div ng-show="followers.length==0">No followers.</div>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
             <!-- Default panel contents -->
             <div class="panel-heading">
                 <h3 class="panel-title">FOLLOWING</h3>
             </div>
 
             <!-- Table -->
-            <table class="table" id="following">
-                <tr ng-repeat="follower in following">
+            <table ng-show="following.length>0" class="table" id="following">
+                <tr ng-repeat="follower in following" style="cursor: pointer;">
                     <td><a ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a></td>
                 </tr>
             </table>
+
+            <div ng-show="following.length==0">Not following anyone right now.</div>
         </div>
 
-        <div ng-include="'/app/message-list.html'" ng-controller="messagesController"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div ng-include="'/app/message-list.html'" ng-controller="messagesController"></div>
+</div>
 
     </div>
 

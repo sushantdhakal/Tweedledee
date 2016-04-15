@@ -1,8 +1,12 @@
 angular.module('app')
-.factory('profileService',function ($http, $interval, errorService) {
+.factory('profileService',function ($http, $interval, $timeout, errorService) {
     
     var service = {}, baseUrl = '/api/';
     var alertObj = {active:false,mesg:''}
+
+    function stoploading(v) {
+        $timeout(function(){ v.loading=false; },1000);
+    }
 
     service.getProfile = function(scope,id){
 
@@ -13,7 +17,7 @@ angular.module('app')
             url: baseUrl+'/account'+accountId
         }).then(function successCallback(resp) {
             console.log('get profile',resp);
-
+            scope.loading=false;
             if(resp.status==200){
                 scope.name                 =resp.data.name;
                 scope.handle               =resp.data.handle;
@@ -24,6 +28,7 @@ angular.module('app')
             }
 
         }, function errorCallback(fail) {
+            scope.loading=false;
             var m='An error has occured while trying to fetch profile data. ';
             if(fail.status==404) m=m+' User was not found (404).';
             if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
@@ -41,10 +46,11 @@ angular.module('app')
 
         $http.get(baseUrl+'/account/'+accountId+'/messages?max='+scope.max+'&offset='+scope.offset).then(function(resp){
             console.log('get messages',resp);
-
+            $timeout(function(){scope.loading=false;},1000);
             if(resp.status==200) scope.messages=angular.copy(resp.data); 
 
         },function(fail){
+            scope.loading=false;
             var m='An error has occured while trying to fetch messages. '+fail.status;
             scope.alert=alertObj;
             if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
@@ -62,12 +68,15 @@ angular.module('app')
         $http.post(baseUrl+'messages/search?max='+scope.max+'&offset='+scope.offset,payload).then(function(resp){
             console.log('get messages',resp);
 
+            scope.loading=false;
+
             if(resp.status==200) {
                 scope.messages=angular.copy(resp.data); 
                 scope.hasSearchResults=true;
             }
 
         },function(fail){
+            scope.loading=false;
             var m='An error has occured while trying to fetch messages. '+fail.status;
             scope.alert=alertObj;
             if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
@@ -83,10 +92,11 @@ angular.module('app')
         scope.messages=[];
         $http.get(baseUrl+'/account/'+accountId+'/followers?max='+scope.max+'&offset='+scope.offset).then(function(resp){
             console.log('get followers',resp);
-
+            scope.loading=false;
             if(resp.status==200) scope.followers=angular.copy(resp.data.followers); 
 
         },function(fail){
+            scope.loading=false;
             var m='An error has occured while trying to fetch follower users. '+fail.status;
             scope.alert=alertObj;
             if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
@@ -102,10 +112,11 @@ angular.module('app')
         scope.messages=[];
         $http.get(baseUrl+'/account/'+accountId+'/following?max='+scope.max+'&offset='+scope.offset).then(function(resp){
             console.log('get following',resp);
-
+            scope.loading=false;
             if(resp.status==200) scope.following=angular.copy(resp.data.following); 
 
         },function(fail){
+            scope.loading=false;
             var m='An error has occured while trying to fetch following users. '+fail.status;
             scope.alert=alertObj;
             if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
