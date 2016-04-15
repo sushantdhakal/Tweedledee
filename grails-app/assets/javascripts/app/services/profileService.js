@@ -1,5 +1,5 @@
 angular.module('app')
-.factory('profileService',function ($http, $interval, $timeout, errorService) {
+.factory('profileService',function ($http, $interval, $timeout, $route, errorService) {
     
     var service = {}, baseUrl = '/api/';
     var alertObj = {active:false,mesg:''}
@@ -107,13 +107,15 @@ angular.module('app')
 
     service.getFollowing = function(scope,id){
 
-        var accountId = (angular.isDefined(id)) ? id : 0;
+        var hasScope = (scope!==null) ? true : false,
+        accountId = (angular.isDefined(id)) ? id : 0;
 
         scope.messages=[];
+
         $http.get(baseUrl+'/account/'+accountId+'/following?max='+scope.max+'&offset='+scope.offset).then(function(resp){
             console.log('get following',resp);
             scope.loading=false;
-            if(resp.status==200) scope.following=angular.copy(resp.data.following); 
+            if(resp.status==200) scope.following=angular.copy(resp.data.following);
 
         },function(fail){
             scope.loading=false;
@@ -127,14 +129,37 @@ angular.module('app')
 
     service.isFollowing = function(scope){
         var ret = true;
-        var id = scope.viewingUserId;
-        var following = (angular.isDefined(scope.following)) ? scope.following : [];
-        console.log('following tttoooo',following)
-        angular.forEach(following,function(followee){
-            if(followee.id==id || followee.handle==id) ret = true;
-        })
+        $http.get(baseUrl+'/account/'+scope.viewingUserId+'/followers').then(function(resp){
+            console.log('compare followers',resp.data);
+            if(resp.status==200){
+                angular.forEach(resp.data.followers,function(follower){
+                    if(follower.handle==scope.loggedInUserHandle) scope.isFollowing=true;
+                })
+            }
+        },function(fail){ console.log('follower compare failed',fail); })
         
         return ret;
+    }
+
+    service.follow = function(scope,id){
+
+        var accountId = (angular.isDefined(id)) ? id : 0;
+
+        $http.get(baseUrl+'/account/'+accountId+'/follow?followerId='+scope.viewingUserId).then(function(resp){
+            console.log('add  follower ',resp);
+            if(resp.status==200) {
+                scope.isFollowing=true;
+                $route.reload();
+                //$location.path('/account/'+scope.viewingUserId);
+            }
+        },function(fail){
+            scope.loading=false;
+            var m='An error has occured while trying to add a follower. '+fail.status;
+            scope.alert=alertObj;
+            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
+            errorService.showAlert(scope.alert,m);
+        });
+
     }
 
     return service;

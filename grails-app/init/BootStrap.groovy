@@ -33,6 +33,7 @@ class BootStrap {
         admin.addToFollowing(admin2).save(flush: true, failOnError: true);
 
         admin2.addToFollowers(admin3).save(flush: true, failOnError: true);
+        admin3.addToFollowing(admin2).save(flush: true, failOnError: true);
 
         (1..128).each {
             msgNumber -> admin.addToMessages(text: "This is admin's message# $msgNumber").save(flush: true, failOnError: true)
@@ -50,7 +51,7 @@ class BootStrap {
             msgNumber -> admin3.addToMessages(text: "This is Mike's message# $msgNumber").save(flush: true, failOnError: true)
         }
 
-        // More users
+        /* More users
         (1..5).each {
             def ct1=it
             def pp=[handle:"hulk_${ct1}",name:'Hulk Hogan ${ct1}',email:"hulk${ct1}@iam.me",password:'12345678aA']
@@ -96,7 +97,7 @@ class BootStrap {
                 }
             }
         }
-        ctt=ctt+1
+        ctt=ctt+1*/
     }
 
     def destroy = {

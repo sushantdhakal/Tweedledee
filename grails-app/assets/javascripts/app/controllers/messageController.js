@@ -5,8 +5,9 @@ angular.module('app')
     var userCreds = securityService.currentUser();
     $scope.loggedInUserHandle = userCreds.username;
     $scope.loading=false;
+    $scope.isLoggedInUser=true;
 
-    if($routeParams.id) $scope.viewingUserId=$routeParams.id;
+    if($routeParams.id) { $scope.viewingUserId=$routeParams.id; $scope.isLoggedInUser=false; }
     else $scope.viewingUserId=$scope.loggedInUserHandle;
 
     var MAX_MESG=25; init(MAX_MESG);

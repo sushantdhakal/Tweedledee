@@ -23,21 +23,27 @@ body {
   font-size: 1.5em;
   padding:5px;
 }
-.user-detail-text:hover{
+.user-detail-logged{
+
+}
+.user-detail-logged:hover{
   cursor:pointer;
   border:1px solid #ddd;
   border-radius:5px;   
   -moz-border-radius:5px;
 }
+
 .search-row{ 
     display:table;
     table-layout:fixed; 
 }
 .search-col{
-    display:table-cell;
-    vertical-align:middle;
-    text-align:center;
-    height:100%;
+    text-align:left
+}
+.search-results{
+  margin-bottom:10px;
+  width:100%;
+  text-align:left;
 }
 .ok-check{
   margin-left:5px;

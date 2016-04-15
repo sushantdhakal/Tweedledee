@@ -13,11 +13,6 @@
             <li ng-controller="followingController">
                 <a href="#/following"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Following <span class="badge" ng-show="following.length>0">{{following.length}}</span></a>
             </li>
-            <!--
-            <li>
-                <a href="#/mayKnow">People You May Know</a>
-            </li>
-            -->
             <li>
                 <a href="#"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> Contact</a>
             </li>
@@ -30,13 +25,15 @@
 </nav>
 
 <div class="row search-row">
-    <div class="col-md-4 search-col" style="padding-top:7px;text-align:left">
-        <div class="view-handle">@{{handle}}</div>
-        <div class="" ng-show="!isLoggedInUser && !isFollowing"><button id="followMeBtn" class="btn btn-warning btn-xs" ng-click="followme()">Follow!</button></div>
-        <div class="" ng-show="!isLoggedInUser && isFollowing"><i id="followMeIcon" class="glyphicon glyphicon-ok ok-check" ng-click="followme()"></i> Following</div>
-    </div>
+    <div class="col-md-6 search-col">
+        <ul class="list-inline">
+        <li><div class="view-handle">@{{handle}}</div></li>
+        
+        <li><div class="" ng-show="!isLoggedInUser && !isFollowing"><button id="followMeBtn" class="btn btn-warning btn-xs" ng-click="followme()">Follow!</button></div></li>
 
-    <div class="col-md-2"></div>
+        <li><div class="" ng-show="!isLoggedInUser && isFollowing"><i id="followMeIcon" class="glyphicon glyphicon-ok ok-check" ng-click="followme()"></i> Following</div></li>
+        </ul>
+    </div>
 
     <div class="col-md-6 search-col" ng-controller="searchController">
       
@@ -44,16 +41,17 @@
           <div class="input-group">
               <input id="searchBox" ng-model="searchTerm" type="text" class="form-control" placeholder="Search messages..." ng-focus="reset()">
               <span class="input-group-btn">
-                  <button id="searchBtn" type="submit" class="btn btn-search" ng-click="search()">GO!</button>
+                  <button id="searchBtn" type="submit" class="btn btn-primary" ng-click="search()">GO!</button>
               </span>
           </div>
       </form>
 
-      <div id="searchResultsNotFound" ng-show="hasSearchResults && messages.length==0" style="margin-bottom:10px;">
-            <div class="text-left" style="width:100%">No Messages Found.</div>
+      <div id="searchResultsNotFound" ng-show="hasSearchResults && messages.length==0" class="search-results">
+            No Messages Found. <span class="btn btn-link btn-xs" ng-click="reset()">clear</span>
         </div>
-      <div id="searchResults" ng-show="messages.length>0" style="margin-bottom:10px;">
-            <div class="text-left" style="width:100%">Found {{messages.length}} messages.</div>
+      <div id="searchResults" class="search-results" ng-show="messages.length>0">
+            Found {{messages.length}} messages for <em>{{searchTerm}}</em> <span class="btn btn-link btn-xs" ng-click="reset()">clear</span>
+            
             <div class="message-list">
                 <ul class="list-unstyled text-left">
                     <li ng-repeat="mesobj in messages | orderBy:'mesobj.message.dateCreated'">
@@ -61,11 +59,12 @@
                     </li>
                 </ul>
             </div>
+
       </div>
 
     </div>
 </div>
 
 
-<div class="alert alert-danger" ng-show="alert.active" ng-click="alert.active=false"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i>{{alert.mesg}}</div>
+<div class="alert" ng-class="{'alert-success':(alert.class=='success'),'alert-danger':(alert.class=='danger')}" ng-show="alert.active" ng-click="alert.active=false"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i>{{alert.mesg}}</div>
 

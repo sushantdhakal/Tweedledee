@@ -13,16 +13,15 @@ angular.module('app')
     getProfile();
 
     if($scope.viewingUserId!=$scope.loggedInUserHandle) {
-        $timeout(function(){
-            console.log('following xxx',$scope.following)
-            $scope.isLoggedInUser=false;
-            $scope.isFollowing=profileService.isFollowing($scope);
-            console.log('isFollowing',$scope.isFollowing)
-        },100);
+        $scope.isLoggedInUser=false;
+        profileService.isFollowing($scope);
     }
 
     $scope.reloader = $interval(function(){ getProfile(); },25000);
 
+    $scope.followme = function() {
+        profileService.follow($scope,$scope.loggedInUserHandle);
+    }
 
     function getProfile(id){ 
         if(!angular.isDefined(id)) id = $scope.viewingUserId;

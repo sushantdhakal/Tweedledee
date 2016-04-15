@@ -22,10 +22,20 @@ angular.module('app')
     //$interval(function(){ getProfile(); },25000);
 
     $scope.edit = function(field){
-        if(field=='name') $scope.showNameInput=!$scope.showNameInput;
-        if(field=='email') $scope.showEmailInput=!$scope.showEmailInput;
+        if($scope.isLoggedInUser){
+            if(field=='name') $scope.showNameInput=!$scope.showNameInput;
+            if(field=='email') $scope.showEmailInput=!$scope.showEmailInput;
+        }
     }
 
+    $scope.save = function(){
+        //Name ng-model = $scope.name
+        //Email ng-model = $scope.email
+        if($scope.isLoggedInUser){
+            //profileService.save(scope);
+        }
+    }
+    
     function getProfile(id){ 
         if(!angular.isDefined(id)) id = $scope.viewingUserId;
         profileService.getProfile($scope,id);
