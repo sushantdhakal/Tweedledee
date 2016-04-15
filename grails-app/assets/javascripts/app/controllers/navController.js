@@ -23,6 +23,7 @@ angular.module('app')
 
     $scope.reloader = $interval(function(){ getProfile(); },25000);
 
+
     function getProfile(id){ 
         if(!angular.isDefined(id)) id = $scope.viewingUserId;
         

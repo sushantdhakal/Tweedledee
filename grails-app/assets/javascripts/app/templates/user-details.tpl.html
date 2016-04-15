@@ -9,11 +9,13 @@
     <div class="panel-body">
 
 <div class="row" style="margin-bottom:10px;">
-        <div id="profileName" class="col-md-6" ng-click="">
-            <span class="user-detail-label">Name:</span> <span class="user-detail-text">{{name}}</span>
+        <div id="profileName" class="col-md-6" ng-click="edit('name')">
+            <span class="user-detail-label">Name:</span> <span ng-show="!showNameInput" class="user-detail-text">{{name}}</span>
+            <input id="editNameInput" ng-model="name" class="form-control" ng-show="showNameInput"> <button ng-show="showNameInput" class="btn btn-link" ng-click="showNameInput=false;">cancel</button> <button ng-show="showNameInput" class="btn btn-link" ng-click="save()">save</button>
         </div>
-        <div id="profileEmail" class="col-md-6" ng-click="">
-            <span class="user-detail-label">Email</span>: <span class="user-detail-text">{{email}}</span>
+        <div id="profileEmail" class="col-md-6" ng-click="edit('email')">
+            <span class="user-detail-label">Email:</span> <span ng-show="!showEmailInput" class="user-detail-text">{{email}}</span>
+            <input id="editEmailInput" ng-model="email" class="form-control" ng-show="showEmailInput"> <button ng-show="showEmailInput" class="btn btn-link" ng-click="showEmailInput=false;">cancel</button> <button ng-show="showEmailInput" class="btn btn-link" ng-click="save()">save</button>
         </div>
  </div>       
 

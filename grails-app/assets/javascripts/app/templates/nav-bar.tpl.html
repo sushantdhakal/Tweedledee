@@ -25,7 +25,7 @@
                 <a href="#/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a>
             </li>
         </ul>
-        <span class="navbar-text navbar-right"><a href="#/profile" class="navbar-link">@ {{loggedInUserHandle}}</a></span>
+        <span ng-show="showLoggedInUser" class="navbar-text navbar-right"><a href="#/profile" class="navbar-link">@ {{loggedInUserHandle}}</a></span>
     </div>
 </nav>
 
