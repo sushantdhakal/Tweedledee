@@ -1,4 +1,4 @@
-angular.module('app').factory('securityService', ['$http', '$rootScope', function ($http, $rootScope) {
+angular.module('app').factory('securityService', ['$http', '$rootScope','$location', function ($http, $rootScope,$location) {
   var service = {};
   var currentUser;
 
@@ -23,12 +23,13 @@ angular.module('app').factory('securityService', ['$http', '$rootScope', functio
   };
 
   service.logout = function (){
-    currentUser = null;
+    currentUser = undefined;
+    delete $rootScope.currentUser;
+    $location.path('#/login?logout=1');
   }
 
   service.currentUser = function () {
     return currentUser;
   };
-
   return service;
 }]);
