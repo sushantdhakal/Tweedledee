@@ -15,7 +15,7 @@
 
             <li><input id="editNameInput" ng-model="name" class="form-control" ng-show="isLoggedInUser && showNameInput"></li> 
 
-            <li><button ng-show="showNameInput" class="btn btn-warning btn-xs" ng-click="edit('name')">cancel</button> 
+            <li><button ng-show="showNameInput" class="btn btn-warning btn-xs" ng-click="cancel()">cancel</button>
             <button id="userSaveBtn" ng-show="isLoggedInUser && showNameInput" class="btn btn-warning btn-xs" ng-click="save()">save</button></li>
             </ul>
         </div>
@@ -26,7 +26,7 @@
             
             <li><input id="editEmailInput" ng-model="email" class="form-control" ng-show="isLoggedInUser && showEmailInput"> </li>
 
-            <li><button ng-show="showEmailInput" class="btn btn-warning btn-xs" ng-click="edit('email')">cancel</button> 
+            <li><button ng-show="showEmailInput" class="btn btn-warning btn-xs" ng-click="cancel()">cancel</button>
             <button id="emailSaveBtn" ng-show="isLoggedInUser && showEmailInput" class="btn btn-warning btn-xs" ng-click="save()">save</button></li>
             </ul>
         </div>

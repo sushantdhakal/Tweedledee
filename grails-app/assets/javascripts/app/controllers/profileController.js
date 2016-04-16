@@ -1,6 +1,6 @@
 angular.module('app')
 .controller('profileController',function (
-    $scope, $http, $routeParams, $interval, securityService, profileService) {
+    $scope, $http, $route, $routeParams, $interval, securityService, profileService) {
 
     var userCreds = securityService.currentUser();
     $scope.loggedInUserHandle = userCreds.username;
@@ -31,6 +31,12 @@ angular.module('app')
     $scope.save = function(){
         if($scope.isLoggedInUser){
             profileService.save($scope, $scope.profileId);
+        }
+    }
+
+    $scope.cancel = function(){
+        if($scope.isLoggedInUser){
+            $route.reload();
         }
     }
     
