@@ -1,7 +1,7 @@
 angular.module('app')
 .factory('profileService',function ($http, $interval, $timeout, $route, errorService) {
     
-    var service = {}, baseUrl = '/api/';
+    var service = {}, baseUrl = '/api';
     var alertObj = {active:false,mesg:''}
 
 
@@ -15,8 +15,7 @@ angular.module('app')
 
         $http({
             method: 'GET',
-            url: baseUrl+'/account'+accountId,
-            headers: {'X-Auth-Token': scope.currentToken}
+            url: baseUrl+'/account'+accountId
         }).then(function successCallback(resp) {
             console.log('get profile',resp);
             scope.loading=false;
@@ -68,7 +67,7 @@ angular.module('app')
 
         var payload = (angular.isDefined(term)) ? {"searchTerm":term} : {"searchTerm":''};
 
-        $http.post(baseUrl+'messages/search?max='+scope.max+'&offset='+scope.offset,payload).then(function(resp){
+        $http.post(baseUrl+'/messages/search?max='+scope.max+'&offset='+scope.offset,payload).then(function(resp){
             console.log('get messages',resp);
 
             scope.loading=false;
@@ -93,7 +92,7 @@ angular.module('app')
         var accountId = (angular.isDefined(id)) ? id : 0;
 
         scope.messages=[];
-        $http.get(baseUrl+'/account/'+accountId+'/followers?max='+scope.max+'&offset='+scope.offset,{headers: {'X-Auth-Token': scope.currentToken}}).then(function(resp){
+        $http.get(baseUrl+'/account/'+accountId+'/followers?max='+scope.max+'&offset='+scope.offset).then(function(resp){
             console.log('get followers',resp);
             scope.loading=false;
             if(resp.status==200) scope.followers=angular.copy(resp.data.followers); 
@@ -115,7 +114,7 @@ angular.module('app')
 
         scope.messages=[];
 
-        $http.get(baseUrl+'/account/'+accountId+'/following?max='+scope.max+'&offset='+scope.offset,{headers: {'X-Auth-Token': scope.currentToken}}).then(function(resp){
+        $http.get(baseUrl+'/account/'+accountId+'/following?max='+scope.max+'&offset='+scope.offset).then(function(resp){
             console.log('get following',resp);
             scope.loading=false;
             if(resp.status==200) scope.following=angular.copy(resp.data.following);
@@ -132,7 +131,7 @@ angular.module('app')
 
     service.isFollowing = function(scope){
         var ret = true;
-        $http.get(baseUrl+'/account/'+scope.viewingUserId+'/followers',{headers: {'X-Auth-Token': scope.currentToken}}).then(function(resp){
+        $http.get(baseUrl+'/account/'+scope.viewingUserId+'/followers').then(function(resp){
             console.log('compare followers',resp.data);
             if(resp.status==200){
                 angular.forEach(resp.data.followers,function(follower){
@@ -148,7 +147,7 @@ angular.module('app')
 
         var accountId = (angular.isDefined(id)) ? id : 0;
 
-        $http.get(baseUrl+'/account/'+accountId+'/follow?followerId='+scope.viewingUserId,{headers: {'X-Auth-Token': scope.currentToken}}).then(function(resp){
+        $http.get(baseUrl+'/account/'+accountId+'/follow?followerId='+scope.viewingUserId).then(function(resp){
             console.log('add  follower ',resp);
             if(resp.status==200) {
                 scope.isFollowing=true;

@@ -9,6 +9,7 @@ import spock.lang.*
 
 @Integration
 @Stepwise
+@Ignore
 class UserDetailFunctionalSpec extends GebSpec {
 
 	@Shared
