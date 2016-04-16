@@ -29,10 +29,8 @@ angular.module('app')
     }
 
     $scope.save = function(){
-        //Name ng-model = $scope.name
-        //Email ng-model = $scope.email
         if($scope.isLoggedInUser){
-            //profileService.save(scope);
+            profileService.save($scope, $scope.profileId);
         }
     }
     

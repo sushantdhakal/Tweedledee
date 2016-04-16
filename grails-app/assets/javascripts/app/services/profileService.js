@@ -20,6 +20,7 @@ angular.module('app')
             scope.loading=false;
             if(resp.status==200){
                 scope.name                 =resp.data.name;
+                scope.profileId            =resp.data.id;
                 scope.handle               =resp.data.handle;
                 scope.email                =resp.data.email;
                 scope.messageCount         =resp.data.messageCount;
@@ -172,7 +173,7 @@ angular.module('app')
             if(resp.status==200) $route.reload();
         },function(fail){
             scope.loading=false;
-            var m='An error has occured while trying to add a follower. '+fail.status;
+            var m='An error has occured while trying edit you profile. '+fail.status;
             scope.alert=alertObj;
             if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
             errorService.showAlert(scope.alert,m);
