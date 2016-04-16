@@ -8,6 +8,7 @@ angular.module('app')
     $scope.isFollowing=false;
     $scope.showNameInput=false;
     $scope.showEmailInput=false;
+    $scope.currentToken = userCreds.token;
 
     if($routeParams.id) $scope.viewingUserId=$routeParams.id;
     else $scope.viewingUserId=$scope.loggedInUserHandle;
