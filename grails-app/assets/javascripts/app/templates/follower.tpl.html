@@ -1,5 +1,17 @@
-<div ng-include src="'/app/common.html'"></div>
-<div>
-    <h2>{{numberOfFollowers}}</h2>
-    <h2>{{userFollowers}}</h2>
+<div ng-include src="'/app/nav-bar.html'" ng-controller="navController"></div>
+
+<div class="panel panel-primary">
+<div class="panel panel-success">
+<!-- Default panel contents -->
+<div class="panel-heading">
+<h3 class="panel-title">FOLLOWERS</h3>
+</div>
+
+<!-- Table -->
+<table class="table" id="followers">
+<tr ng-repeat="follower in followers">
+    <td><a ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a></td>
+</tr>
+</table>
+</div>
 </div>

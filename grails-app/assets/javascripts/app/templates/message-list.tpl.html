@@ -1,19 +1,20 @@
-<div class="panel panel-danger">
+<div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">YOUR MESSAGES</h3>
+        <h3 class="panel-title">
+        <span ng-show="isLoggedInUser">YOUR</span> MESSAGES <i class="glyphicon glyphicon-refresh" ng-class="{'spin':loading}" ng-click="refresh()" style="cursor:pointer;"></i></h3>
     </div>
     <div class="panel-body">
     
     <ul class="list-unstyled list-inline message-paging">
-    <li ng-show="start>1" ng-click="pageprev()"><span ng-click="pageprev()" class="message-nextprev">prev</span></li>
-    <li>Showing {{max}} of your most recent messages <span ng-show="offset<messageCount">(<a ng-click="showmore()">show more</a>)</span> <span ng-show="offset==messageCount">(<a ng-click="refresh()">refresh list</a>)</span></li>
-    <li ng-show="end<messageCount"><span ng-click="pagenext()" class="message-nextprev">next</span></li>
+    <li ng-show="start>1" ng-click="pageprev()" style="cursor:pointer;"><span ng-click="pageprev()" class="message-nextprev">prev</span></li>
+    <li>Showing {{max}} of your most recent messages <span ng-show="offset<messageCount">(<a ng-click="showmore()" style="cursor:pointer;">show more</a>)</span> <span ng-show="offset==messageCount">(<a ng-click="refresh()" style="cursor:pointer;">refresh list</a>)</span></li>
+    <li ng-show="end<messageCount"><span ng-click="pagenext()" class="message-nextprev" style="cursor:pointer;">next</span></li>
     </ul>
     <div id="userMessagesList" class="message-list">
         <ul class="list-unstyled">
-            <li class="list-item" ng-repeat="message in messages | orderBy:'dateCreated'">
-                <span class="message-text">{{message.text}}</span>
-                <span class="message-text-date">( {{message.dateCreated | date:"EEE M/yy '@' h:mma"}} )</span>
+            <li id="messageId{{message.id}}" class="list-item" ng-repeat="message in messages | orderBy:'message.dateCreated'">
+                <span id="message_{{message.handle}}_text" class="message-text">{{message.text}}</span>
+                <span id="messageId{{message.id}}_date" class="message-text-date">( {{message.dateCreated | date:"EEE M/yy '@' h:mma"}} )</span>
             </li>
         </ul>
     </div>

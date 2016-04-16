@@ -14,7 +14,7 @@ grails.plugin.springsecurity.rest.token.validation.useBearerToken = false
 grails.plugin.springsecurity.rest.token.validation.headerName = 'X-Auth-Token'
 
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'tweedledee.Account'
-grails.plugin.springsecurity.userLookup.usernamePropertyName = 'name'
+grails.plugin.springsecurity.userLookup.usernamePropertyName = 'handle'
 
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'tweedledee.AccountRole'
 

@@ -1,8 +1,6 @@
-angular.module('app').controller('logoutController', function ($resource, $scope, $http, $rootScope, securityService) {
+angular.module('app').controller('logoutController', function ($resource, $scope, $location, $http, $rootScope, securityService) {
 
-    $scope.doLogout = function() {
-        securityService.doLogout();
-        delete $scope.error;
-        $location.path('/api/logout');
-    };
+	securityService.logout();
+	$location.path('/login?logout=1');
+
 });

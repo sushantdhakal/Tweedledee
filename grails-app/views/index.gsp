@@ -11,14 +11,6 @@
 </head>
 
 <body class="mainBodyDiv" ng-app="app">
-<h1 class="tweedleDeeHeader">TweedleDee</h1>
-
-
-<div ng-view>
-    <div ng-show="currentUserLoggedIn != null">
-        Welcome {{currentUserLoggedIn}}
-    </div>
-    </div>
-
+    <div ng-view></div>
 </body>
 </html>

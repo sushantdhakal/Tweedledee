@@ -1,43 +1,44 @@
-angular.module('app').controller('profileController', function ($resource, $scope, $http, $rootScope, securityService) {
+angular.module('app')
+.controller('profileController',function (
+    $scope, $http, $routeParams, $interval, securityService, profileService) {
 
-    var temp3 = securityService.currentUser();
-    var userNameParameter = temp3.username;
+    var userCreds = securityService.currentUser();
+    $scope.loggedInUserHandle = userCreds.username;
+    $scope.isLoggedInUser=true;
+    $scope.isFollowing=false;
+    $scope.showNameInput=false;
+    $scope.showEmailInput=false;
 
-    $scope.currentUserLoggedIn =  userNameParameter;
+    if($routeParams.id) $scope.viewingUserId=$routeParams.id;
+    else $scope.viewingUserId=$scope.loggedInUserHandle;
 
-    $http({
-        method: 'GET',
-        url: '/api/account/' + userNameParameter
-    }).then(function successCallback(response) {
-        var temp=response.data;
-        $scope.nameForUser = temp.name;
-        $scope.emailAddressForUser = temp.email;
-        var followers = [];
-        var following = [];
+    if($scope.viewingUserId!=$scope.loggedInUserHandle) {
+        $scope.isLoggedInUser=false;
+        $scope.isFollowing=profileService.isFollowing($scope,$scope.viewingUserId);
+    }
 
-        for(var fol = 0; fol<temp.followers.length; fol++){
-            followers.push(temp.followers[fol].handle);
+    getProfile();
+
+    //$interval(function(){ getProfile(); },25000);
+
+    $scope.edit = function(field){
+        if($scope.isLoggedInUser){
+            if(field=='name') $scope.showNameInput=!$scope.showNameInput;
+            if(field=='email') $scope.showEmailInput=!$scope.showEmailInput;
         }
+    }
 
-        for(var fol = 0; fol<temp.following.length; fol++){
-            following.push(temp.following[fol].handle);
+    $scope.save = function(){
+        if($scope.isLoggedInUser){
+            profileService.save($scope, $scope.profileId);
         }
+    }
+    
+    function getProfile(id){ 
+        if(!angular.isDefined(id)) id = $scope.viewingUserId;
+        profileService.getProfile($scope,id);
+    }
 
-        $scope.followersForUser = followers;
-        $scope.followingForUser = following;
-
-        console.log(response);
-        temp = response.data;
-        for (var i = 0; i < temp.length; i++) {
-            var tempArr = [];
-
-        }
-        // this callback will be called asynchronously
-        // when the response is available
-    }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    });
 });
 
 

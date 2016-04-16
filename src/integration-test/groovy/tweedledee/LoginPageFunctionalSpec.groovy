@@ -2,7 +2,9 @@ package tweedledee
 
 import geb.spock.GebSpec
 import grails.test.mixin.integration.Integration
+import spock.lang.*
 
+@Ignore
 @Integration
 class LoginPageFunctionalSpec extends GebSpec {
 	

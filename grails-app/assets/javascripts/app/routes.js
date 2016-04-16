@@ -8,41 +8,37 @@ angular.module('app')
         templateUrl: '/app/login.html',
         controller: 'loginController'
       })
-      .when('/home/:handle?', {
-        templateUrl: '/app/home.html',
-        controller: 'homeController'
-      })
-        .when('/profile', {
-          templateUrl: '/app/profile.html',
+     .when('/profile', {
+          templateUrl: '/app/user-details.html',
           controller: 'profileController'
         })
       .when('/feed', {
         templateUrl: '/app/feed.html',
-        controller: 'feedController'
+        controller: 'messagesController'
       })
-        .when('/logout', {
-            templateUrl: '/app/logout.html',
-            controller: 'logoutController'
-        })
-        .when('/mayKnow',{
-            templateUrl: '/app/mayKnow.html',
-            controller: 'mayKnowController'
-        })
-        .when('/account/:param', {
-          templateUrl: '/app/accountDetail.html',
-          controller: 'accountController'
-        })
-        .when('/followers',{
-            templateUrl: '/app/follower.html',
-            controller: 'followerController'
-        })
-        .when('/following',{
-            templateUrl: '/app/following.html',
-            controller: 'followingController'
-        })
-      .otherwise({
-        redirectTo: '/profile'
+      .when('/logout', {
+          template: '',
+          controller: 'logoutController'
       })
+      .when('/mayKnow',{
+          templateUrl: '/app/user-details.html',
+          controller: 'profileController'
+      })
+      .when('/account/:id', {
+        templateUrl: '/app/user-details.html',
+        controller: 'profileController'
+      })
+      .when('/followers',{
+          templateUrl: '/app/follower.html',
+          controller: 'followerController'
+      })
+      .when('/following',{
+          templateUrl: '/app/following.html',
+          controller: 'followingController'
+      })
+    .otherwise({
+      redirectTo: '/profile'
+    })
   })
     
   // Protect all routes other than login

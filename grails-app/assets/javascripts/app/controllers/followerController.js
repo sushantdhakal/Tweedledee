@@ -1,28 +1,20 @@
-angular.module('app').controller('followerController', function ($resource, $scope, $http, $rootScope, securityService, $routeParams) {
+angular.module('app')
+.controller('followerController', function (
+    $scope, $http, $routeParams, $interval, securityService, profileService) {
 
-    $scope.userFollowers = [];
-    var temp3 = securityService.currentUser();
-    var userNameParameter = temp3.username;
-    var tempFollowersList = [];
+    var userCreds = securityService.currentUser();
+    $scope.loggedInUserHandle = userCreds.username;
+    
+    if($routeParams.id) $scope.viewingUserId=$routeParams.id;
+    else $scope.viewingUserId=$scope.loggedInUserHandle;
 
-    $scope.currentUserLoggedIn =  userNameParameter;
+    getFollowers();
 
-    $http({
-        method: 'GET',
-        url: '/api/account/'+userNameParameter+'/followers'
-    }).then(function successCallback(response) {
-        $scope.numberOfFollowers = response.data.followerCount
+    $interval(function(){ getFollowers(); },25000);
 
-        tempFollowersList = response.data.followers;
-        for (var i = 0; i < tempFollowersList.length; i++) {
-            var temp = [];
-            temp.push({'name': tempFollowersList[i].name, 'handle': tempFollowersList[i].handle, 'email': tempFollowersList[i].handle});
-            $scope.userFollowers.push(temp);
-        }
-        // this callback will be called asynchronously
-        // when the response is available
-    }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-    });
+    function getFollowers(id){ 
+        if(!angular.isDefined(id)) id = $scope.viewingUserId;
+        profileService.getFollowers($scope,id);
+    }
+
 });
