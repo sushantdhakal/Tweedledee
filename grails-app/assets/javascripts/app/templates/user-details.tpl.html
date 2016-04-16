@@ -16,18 +16,18 @@
             <li><input id="editNameInput" ng-model="name" class="form-control" ng-show="isLoggedInUser && showNameInput"></li> 
 
             <li><button ng-show="showNameInput" class="btn btn-warning btn-xs" ng-click="edit('name')">cancel</button> 
-            <button ng-show="isLoggedInUser && showNameInput" class="btn btn-warning btn-xs" ng-click="save()">save</button></li>
+            <button id="userSaveBtn" ng-show="isLoggedInUser && showNameInput" class="btn btn-warning btn-xs" ng-click="save()">save</button></li>
             </ul>
         </div>
         <div id="profileEmail" class="col-md-6">
             <ul class="list-inline">
             <li>
-            <span class="user-detail-label">Email:</span> <span id="profileName" ng-show="!showEmailInput" class="user-detail-text" ng-class="{'user-detail-logged':isLoggedInUser}" ng-click="edit('email')">{{email}}</span></li>
+            <span class="user-detail-label">Email:</span> <span id="profileEmail" ng-show="!showEmailInput" class="user-detail-text" ng-class="{'user-detail-logged':isLoggedInUser}" ng-click="edit('email')">{{email}}</span></li>
             
             <li><input id="editEmailInput" ng-model="email" class="form-control" ng-show="isLoggedInUser && showEmailInput"> </li>
 
             <li><button ng-show="showEmailInput" class="btn btn-warning btn-xs" ng-click="edit('email')">cancel</button> 
-            <button ng-show="isLoggedInUser && showEmailInput" class="btn btn-warning btn-xs" ng-click="save()">save</button></li>
+            <button id="emailSaveBtn" ng-show="isLoggedInUser && showEmailInput" class="btn btn-warning btn-xs" ng-click="save()">save</button></li>
             </ul>
         </div>
  </div>       

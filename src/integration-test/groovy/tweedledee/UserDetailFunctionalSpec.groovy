@@ -8,6 +8,7 @@ import groovyx.net.http.RESTClient
 import spock.lang.*
 
 @Integration
+@Stepwise
 class UserDetailFunctionalSpec extends GebSpec {
 
 	@Shared
@@ -20,7 +21,7 @@ class UserDetailFunctionalSpec extends GebSpec {
 
 	def setup(){
 		restClient=new RESTClient(baseUrl)
-		user=[handle:'admin',name:'Johnny Admin',password:'12345678pP',email:'admin@tweedledee.com']
+		user=[handle:'paulM',name:'Paul S Michalek',password:'12345678pP',email:'paul@tweedledee.com']
 		go '/#/login'
 		waitFor("quick"){ 
 			$("#username").value(user.handle)
@@ -62,28 +63,84 @@ class UserDetailFunctionalSpec extends GebSpec {
 		}		
 	}
 
-	// Requirment: U2 & U3
-	def 'Following user'(){
+	// Requirment: U2
+	def ' Users detail page will provide a way for the logged in user to follow the detail user'(){
 
 	when:
 		go '/#/login'
+		waitFor("quick"){ 
+			$("#username").value(user.handle)
+			$("#password").value(user.password)
+			$("#submitBtn").click()
+		}
 		sleep(1000)
-		$("#username").value(user.handle)
-		$("#password").value(user.password)
-		$("#submitBtn").click()
-		sleep(1000)
-		$("#following_paulM").click()
+		$("#follower_mikeCalvo").click()
+		sleep(5000)
+
+	then:
+		$("#followMeBtn")
+	}
+
+	// Requirment: U3
+	def 'When the logged in user is following the detail user, the detail page will display a message or icon indicating this'(){
+
+	when:
+		go '/#/login'
+		waitFor("quick"){ 
+			$("#username").value(user.handle)
+			$("#password").value(user.password)
+			$("#submitBtn").click()
+		}
 		sleep(1000)
 		$("#follower_mikeCalvo").click()
 		sleep(1000)
 		$("#followMeBtn").click()
 		sleep(5000)
 
-		then:
-		$("#followingMessage").text().contains("Following")
+	then:
+		$("#follower_paulM")
 	}
 
+	// Requirment: U4.1
+	def 'When the logged in user goes to their own detail page, they can edit their name'(){
 
+	when:
+		go '/#/login'
+		waitFor("quick"){ 
+			$("#username").value(user.handle)
+			$("#password").value(user.password)
+			$("#submitBtn").click()
+		}
+		$("#profileName").click()
+		sleep(1000)
+		$("#editNameInput").value("PaulsNewName")
+		sleep(1000)
+		$("#nameSaveBtn").click()
+		sleep(5000)
 
+	then:
+		$("#profileName").text() == "PaulsNewName"
+	}
+
+	// Requirment: U4.2
+	def 'When the logged in user goes to their own detail page, they can edit their email'(){
+
+	when:
+		go '/#/login'
+		waitFor("quick"){ 
+			$("#username").value(user.handle)
+			$("#password").value(user.password)
+			$("#submitBtn").click()
+		}
+		$("#profileEmail").click()
+		sleep(1000)
+		$("#editEmailInput").value("PaulsNewEmail@mymail.com")
+		sleep(1000)
+		$("#emailSaveBtn").click()
+		sleep(5000)
+
+	then:
+		$("#profileName").text() == "PaulsNewEmail@mymail.com"
+	}
 
 }

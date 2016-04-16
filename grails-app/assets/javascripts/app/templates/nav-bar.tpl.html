@@ -34,9 +34,9 @@
 <div class="row search-row">
     <div class="col-md-6 search-col">
         <ul class="list-inline">
-        <li><div class="view-handle">@{{handle}}</div></li>
+        <li><div id="profileHandle" class="view-handle">@{{handle}}</div></li>
         
-        <li><button ng-show="!isLoggedInUser && !isFollowing" id="followMeBtn" class="btn btn-warning btn-xs" ng-click="followme()">Follow!</button></li>
+        <li><input type="button" ng-show="!isLoggedInUser && !isFollowing" id="followMeBtn" class="btn btn-warning btn-xs" ng-click="followme()" value="Follow!"></li>
 
         <li><div id="followingMessage" ng-show="!isLoggedInUser && isFollowing"><i id="followMeIcon" class="glyphicon glyphicon-ok ok-check"></i> Following</div></li>
         </ul>
@@ -48,7 +48,7 @@
           <div class="input-group">
               <input id="searchBox" ng-model="searchTerm" type="text" class="form-control" placeholder="Search messages..." ng-focus="reset()">
               <span class="input-group-btn">
-                  <button id="searchBtn" type="submit" class="btn btn-primary" ng-click="search()">GO!</button>
+                  <input id="searchBtn" type="button" class="btn btn-primary" ng-click="search()" value="GO!">
               </span>
           </div>
       </form>
