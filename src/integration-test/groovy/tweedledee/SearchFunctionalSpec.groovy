@@ -33,6 +33,7 @@ class SearchFunctionalSpec extends GebSpec {
         }
         $("#searchBox").value("hello sushant")
         $("#searchBtn").click()
+
     }
 
     //N1

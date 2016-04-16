@@ -47,9 +47,7 @@ angular.module('app')
 
         scope.messages=[];
 
-        $http.get(baseUrl+'/account/'+accountId+'/messages?max='+scope.max+'&offset='+scope.offset, {
-            headers: {'X-Auth-Token': scope.currentToken}
-        }).then(function(resp){
+        $http.get(baseUrl+'/account/'+accountId+'/messages?max='+scope.max+'&offset='+scope.offset).then(function(resp){
             console.log('get messages',resp);
             $timeout(function(){scope.loading=false;},1000);
             if(resp.status==200) scope.messages=angular.copy(resp.data); 
@@ -70,7 +68,7 @@ angular.module('app')
 
         var payload = (angular.isDefined(term)) ? {"searchTerm":term} : {"searchTerm":''};
 
-        $http.post(baseUrl+'messages/search?max='+scope.max+'&offset='+scope.offset, {headers: {'X-Auth-Token': scope.currentToken}},payload).then(function(resp){
+        $http.post(baseUrl+'messages/search?max='+scope.max+'&offset='+scope.offset,payload).then(function(resp){
             console.log('get messages',resp);
 
             scope.loading=false;
