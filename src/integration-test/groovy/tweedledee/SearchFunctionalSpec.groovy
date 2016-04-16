@@ -32,8 +32,7 @@ class SearchFunctionalSpec extends GebSpec {
             currentUrl.contains "profile"
         }
         $("#searchBox").value("hello sushant")
-        waitFor(1000)
-        $("searchBtn").click()
+        $("#searchBtn").click()
     }
 
     //N1
