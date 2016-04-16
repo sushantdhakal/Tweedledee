@@ -1,7 +1,18 @@
-angular.module('app').controller('loginController', function($scope, $location, securityService) {
+angular.module('app').controller('loginController', function($scope, $location, $routeParams, $timeout, securityService) {
   
+  $scope.error='';
+  $scope.message='';
+
+  if( angular.isDefined($location.search().logout) ) {
+    var lo=$location.search();
+    if(lo.logout) {
+      $scope.message='You\'ve been logged out of Tweedeldee, sorry to see you go! :-(';
+      $timeout(function(){ $scope.message='';},10000);
+    }
+  } 
+
   $scope.loginAttempt = {};
-    $scope.currentUserLoggedIn = "";
+  $scope.currentUserLoggedIn = "";
   
   $scope.doLogin = function() {
     securityService

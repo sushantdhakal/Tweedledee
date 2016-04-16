@@ -1,3 +1,10 @@
+<div id="pageload" class="page-loading-shadow fadein fadeout" ng-show="loading"></div>
+<div id="pageload-text" class="page-loading-container fadein fadeout" ng-show="viewLoading">
+    <div class="page-loading-text"><i class="fa fa-spinner fa-spin fa-3" style="margin-right:5px;">
+    </i>Loading...</i>
+    </div>
+</div>
+
 <nav class="navbar navbar-custom navbar-fixed-top">
     <div class="container">
         <ul class="nav navbar-nav">
@@ -17,7 +24,7 @@
                 <a href="#"><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span> Contact</a>
             </li>
             <li>
-                <a href="#/logout"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a>
+                <a href="#/login?logout=1"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a>
             </li>
         </ul>
         <span ng-show="showLoggedInUser" class="navbar-text navbar-right"><a href="#/profile" class="navbar-link">@ {{loggedInUserHandle}}</a></span>
@@ -31,7 +38,7 @@
         
         <li><div class="" ng-show="!isLoggedInUser && !isFollowing"><button id="followMeBtn" class="btn btn-warning btn-xs" ng-click="followme()">Follow!</button></div></li>
 
-        <li><div class="" ng-show="!isLoggedInUser && isFollowing"><i id="followMeIcon" class="glyphicon glyphicon-ok ok-check" ng-click="followme()"></i> Following</div></li>
+        <li><div id="followingMessage" class="" ng-show="!isLoggedInUser && isFollowing"><i id="followMeIcon" class="glyphicon glyphicon-ok ok-check" ng-click="followme()"></i> Following</div></li>
         </ul>
     </div>
 

@@ -43,7 +43,7 @@
             <!-- Table -->
             <table ng-show="followers.length>0" class="table" id="followerList">
                 <tr ng-repeat="follower in followers" style="cursor: pointer;">
-                    <td><a ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a></td>
+                    <td><a id="follower_{{follower.handle}}" ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a></td>
                 </tr>
             </table>
 
@@ -61,7 +61,7 @@
             <!-- Table -->
             <table ng-show="following.length>0" class="table" id="following">
                 <tr ng-repeat="follower in following" style="cursor: pointer;">
-                    <td><a ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a></td>
+                    <td><a id="following_{{follower.handle}}" ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a></td>
                 </tr>
             </table>
 

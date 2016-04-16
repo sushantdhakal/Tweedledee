@@ -16,29 +16,29 @@ angular.module('app')
         templateUrl: '/app/feed.html',
         controller: 'messagesController'
       })
-        .when('/logout', {
-            templateUrl: '/app/logout.html',
-            controller: 'logoutController'
-        })
-        .when('/mayKnow',{
-            templateUrl: '/app/user-details.html',
-            controller: 'profileController'
-        })
-        .when('/account/:id', {
+      .when('/logout', {
+          template: '',
+          controller: 'logoutController'
+      })
+      .when('/mayKnow',{
           templateUrl: '/app/user-details.html',
           controller: 'profileController'
-        })
-        .when('/followers',{
-            templateUrl: '/app/follower.html',
-            controller: 'followerController'
-        })
-        .when('/following',{
-            templateUrl: '/app/following.html',
-            controller: 'followingController'
-        })
-      .otherwise({
-        redirectTo: '/profile'
       })
+      .when('/account/:id', {
+        templateUrl: '/app/user-details.html',
+        controller: 'profileController'
+      })
+      .when('/followers',{
+          templateUrl: '/app/follower.html',
+          controller: 'followerController'
+      })
+      .when('/following',{
+          templateUrl: '/app/following.html',
+          controller: 'followingController'
+      })
+    .otherwise({
+      redirectTo: '/profile'
+    })
   })
     
   // Protect all routes other than login

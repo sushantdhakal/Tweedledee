@@ -4,7 +4,7 @@ angular.module('app')
 
     var userCreds = securityService.currentUser();
     $scope.loggedInUserHandle = userCreds.username;
-    $scope.loading=false;
+    $scope.loading=true;
     $scope.isLoggedInUser=true;
 
     if($routeParams.id) { $scope.viewingUserId=$routeParams.id; $scope.isLoggedInUser=false; }

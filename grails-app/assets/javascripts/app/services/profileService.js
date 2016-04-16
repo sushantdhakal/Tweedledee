@@ -162,5 +162,22 @@ angular.module('app')
 
     }
 
+    service.save = function(scope,id){
+
+        var accountId = (angular.isDefined(id)) ? id : 0;
+        var payload = {name:scope.name,email:scope.email};
+
+        $http.put(baseUrl+'/account/'+accountId,payload).then(function(resp){
+            console.log('update account  ',resp);
+            if(resp.status==200) $route.reload();
+        },function(fail){
+            scope.loading=false;
+            var m='An error has occured while trying to add a follower. '+fail.status;
+            scope.alert=alertObj;
+            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
+            errorService.showAlert(scope.alert,m);
+        });
+
+    }
     return service;
 });

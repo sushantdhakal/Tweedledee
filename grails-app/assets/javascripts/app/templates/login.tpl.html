@@ -1,4 +1,7 @@
  <div class="tweedleDeeHeader">Tweedledee</div>
+
+ <div ng-show="message!=''" class="alert alert-info">{{message}}</div>
+
  <div class="loginBox" id="login-holder" class="container" align="center">
         <div id="loginbox" style="margin: 50px; width: 300px;" align="left">
             <div id="innerLogin">
@@ -12,7 +15,7 @@
                         <label for="password">Password</label>
                         <input ng-model="loginAttempt.password" id="password" class="form-control" type="password"/>
                     </div>
-                    <p id="errorMessage" class="errorMessage">{{error}}</p>
+                    <p id="errorMessage" ng-show="error!=''" class="errorMessage">{{error}}</p>
 
                     <input id="submitBtn" type="submit" ng-click="doLogin()" class="btn btn-primary" value="Login"/>
                     

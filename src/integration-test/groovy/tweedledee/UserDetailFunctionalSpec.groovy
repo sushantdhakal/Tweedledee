@@ -54,13 +54,43 @@ class UserDetailFunctionalSpec extends GebSpec {
 							"var sHeight = document.getElementById('userMessagesList').scrollHeight;"+
 							"return (sHeight > vHeight) ? true : false;"
 		sleep(5000)
-
+   
 		then:
 		browser.driver.executeScript(scrollProof)
 		mesgs.each(){
 			$("messageId${it.id}_text").text() == it.text
 		}		
 	}
+	def 'Following user'(){
+
+	when:
+		go '/#/login'
+		waitFor("quick"){ 
+			$("#username").value(user.handle)
+			$("#password").value(user.password)
+			$("#submitBtn").click();
+			waitFor(){
+				$("#following_paulM").click();
+			}
+			waitFor(5){
+				$("#follower_mikeCalvo").click();
+				waitFor(5){
+					$("#followMeBtn").click();
+				}
+			}
+		}
+
+		then:
+		waitFor(5){
+			//$("#following_paulM");
+			//$("#followMeBtn")
+			//("#followMeBtn")
+			$("$followingMessage")
+
+		}
+
+	}
+
 
 
 

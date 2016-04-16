@@ -6,6 +6,7 @@ angular.module('app')
     $scope.loggedInUserHandle = userCreds.username;
     $scope.isFollowing=false;
     $scope.isLoggedInUser=true;
+    $scope.loading=true;
 
     if($routeParams.id) $scope.viewingUserId=$routeParams.id;
     else $scope.viewingUserId=$scope.loggedInUserHandle;
