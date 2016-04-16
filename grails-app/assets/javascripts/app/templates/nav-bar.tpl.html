@@ -36,9 +36,9 @@
         <ul class="list-inline">
         <li><div class="view-handle">@{{handle}}</div></li>
         
-        <li><div class="" ng-show="!isLoggedInUser && !isFollowing"><button id="followMeBtn" class="btn btn-warning btn-xs" ng-click="followme()">Follow!</button></div></li>
+        <li><button ng-show="!isLoggedInUser && !isFollowing" id="followMeBtn" class="btn btn-warning btn-xs" ng-click="followme()">Follow!</button></li>
 
-        <li><div id="followingMessage" class="" ng-show="!isLoggedInUser && isFollowing"><i id="followMeIcon" class="glyphicon glyphicon-ok ok-check" ng-click="followme()"></i> Following</div></li>
+        <li><div id="followingMessage" ng-show="!isLoggedInUser && isFollowing"><i id="followMeIcon" class="glyphicon glyphicon-ok ok-check"></i> Following</div></li>
         </ul>
     </div>
 

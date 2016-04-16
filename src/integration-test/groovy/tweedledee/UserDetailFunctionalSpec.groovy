@@ -25,7 +25,7 @@ class UserDetailFunctionalSpec extends GebSpec {
 		waitFor("quick"){ 
 			$("#username").value(user.handle)
 			$("#password").value(user.password)
-			$("#submitBtn").click();
+			$("#submitBtn").click()
 		}
 		def auth=([username:user.handle, password:user.password] as JSON) as String
 		def resp=restClient.post(path:'/api/login',body:auth,requestContentType:'application/json')
@@ -61,34 +61,26 @@ class UserDetailFunctionalSpec extends GebSpec {
 			$("messageId${it.id}_text").text() == it.text
 		}		
 	}
+
+	// Requirment: U2 & U3
 	def 'Following user'(){
 
 	when:
 		go '/#/login'
-		waitFor("quick"){ 
-			$("#username").value(user.handle)
-			$("#password").value(user.password)
-			$("#submitBtn").click();
-			waitFor(){
-				$("#following_paulM").click();
-			}
-			waitFor(5){
-				$("#follower_mikeCalvo").click();
-				waitFor(5){
-					$("#followMeBtn").click();
-				}
-			}
-		}
+		sleep(1000)
+		$("#username").value(user.handle)
+		$("#password").value(user.password)
+		$("#submitBtn").click()
+		sleep(1000)
+		$("#following_paulM").click()
+		sleep(1000)
+		$("#follower_mikeCalvo").click()
+		sleep(1000)
+		$("#followMeBtn").click()
+		sleep(5000)
 
 		then:
-		waitFor(5){
-			//$("#following_paulM");
-			//$("#followMeBtn")
-			//("#followMeBtn")
-			$("$followingMessage")
-
-		}
-
+		$("#followingMessage").text().contains("Following")
 	}
 
 
