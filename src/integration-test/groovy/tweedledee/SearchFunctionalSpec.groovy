@@ -5,6 +5,7 @@ import grails.test.mixin.integration.Integration
 import org.junit.BeforeClass
 import spock.lang.Ignore
 import spock.lang.Stepwise
+import org.openqa.selenium.JavascriptExecutor;
 
 @Integration
 @Stepwise
@@ -44,6 +45,7 @@ class SearchFunctionalSpec extends GebSpec {
         $("#searchBtn").click()
         waitFor(){
             $('#userMessagesList').displayed
+          //  ((JavascriptExecutor) driver).executeScript("scroll(0,20);");
         }
     }
 
@@ -66,17 +68,21 @@ class SearchFunctionalSpec extends GebSpec {
     }
 
     //S4
-   /* def 'Clicking on the posting user will route to user details page'(){
+    def 'Clicking on the posting user will route to user details page'() {
         when:
-          login()
+        login()
         then:
         sleep(1500)
         $('#searchBox').value("message")
         sleep(1500)
         $("#searchBtn").click()
-        waitFor(){
+        waitFor() {
             $('#userMessagesList').displayed
-            $("div.message-list").find('a')
+            $("div.message-list").find('a').click()
         }
-    }*/
+
+        $("div.row div.col-md-6 ul.list-inline li div.view-handle").text().contains("mikeCalvo")
+        $("div.row div.col-md-6 ul.list-inline li span.user-detail-text").text().contains("Mike Calvo")
+    }
 }
+
