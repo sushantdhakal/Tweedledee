@@ -8,6 +8,7 @@ import spock.lang.Stepwise
 
 @Integration
 @Stepwise
+@Ignore
 class SearchFunctionalSpec extends GebSpec {
 
     def login() {
@@ -34,13 +35,19 @@ class SearchFunctionalSpec extends GebSpec {
 
     //S2
     def 'Search Box is for provided finding messages'() {
-        when: 'n'
-          login()
+        when:
+        go '/#/login'
+        waitFor("quick"){
+            $("#username").value("admin")
+            $("#password").value("12345678pP")
+            $("#submitBtn").click();
+        }
         then:
-        sleep(2000)
+        sleep(1500)
         $("#searchBox").value("message")
         $("#searchBtn").click()
-        waitFor("quick") {
+        waitFor(){
+            sleep(2000)
             $('#message-list').isDisplayed()
         }
     }
