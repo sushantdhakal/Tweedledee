@@ -8,6 +8,7 @@ import spock.lang.Stepwise
 
 @Integration
 @Stepwise
+@Ignore
 class SearchFunctionalSpec extends GebSpec {
 
     def login() {

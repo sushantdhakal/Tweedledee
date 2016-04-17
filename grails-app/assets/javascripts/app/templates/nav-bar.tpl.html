@@ -36,7 +36,7 @@
         <ul class="list-inline">
         <li><div id="profileHandle" class="view-handle">@{{handle}}</div></li>
         
-        <li><input type="button" ng-show="!isLoggedInUser && !isFollowing" id="followMeBtn" class="btn btn-warning btn-xs" ng-click="followme()" value="Follow!"></li>
+        <li><input id="followMeBtn" type="button" ng-show="!isLoggedInUser && !isFollowing"  class="btn btn-warning btn-xs" ng-click="followme()" value="Follow!"></li>
 
         <li><div id="followingMessage" ng-show="!isLoggedInUser && isFollowing"><i id="followMeIcon" class="glyphicon glyphicon-ok ok-check"></i> Following</div></li>
         </ul>
@@ -73,5 +73,5 @@
 </div>
 
 
-<div class="alert" ng-class="{'alert-success':(alert.class=='success'),'alert-danger':(alert.class=='danger')}" ng-show="alert.active" ng-click="alert.active=false"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></i>{{alert.mesg}}</div>
+<div class="alert" ng-class="{'alert-success':(alert.class=='success'),'alert-danger':(alert.class=='danger')}" ng-show="alert.active" ng-click="alert.active=false"><i class="glyphicon glyphicon-exclamation-sign" aria-hidden="true" style="margin-right:5px;"></i>{{alert.mesg}}</div>
 
