@@ -8,7 +8,6 @@ import spock.lang.Stepwise
 
 @Integration
 @Stepwise
-@Ignore
 class SearchFunctionalSpec extends GebSpec {
 
     def login() {
@@ -33,35 +32,51 @@ class SearchFunctionalSpec extends GebSpec {
     }
 
 
-    //S2
+    // S2.1
     def 'Search Box is for provided finding messages'() {
         when:
-        go '/#/login'
-        waitFor("quick"){
-            $("#username").value("admin")
-            $("#password").value("12345678pP")
-            $("#submitBtn").click();
-        }
+        login()
+
         then:
         sleep(1500)
-        $("#searchBox").value("message")
+        $('#searchBox').value("message")
+        sleep(1500)
         $("#searchBtn").click()
         waitFor(){
-            sleep(2000)
-            $('#message-list').isDisplayed()
+            $('#userMessagesList').displayed
         }
     }
 
-    def 'Search will not find messages'(){
+    // S2.2
+
+    def 'Search with invalid message search will display error message'(){
         when:
-        waitFor(){
-            $("#searchBox").value("Hello There")
-            $("#searchBtn").click()
-        }
+        login()
+
         then:
-        !($("#message-list").isDisplayed())
-        $("#searchResultsNotFound").value(" No Messages Found. ")
+        sleep(1500)
+        $("#searchBox").value("Hello There")
+        sleep(1500)
+        $("#searchBtn").click()
+        waitFor() {
+            $('#searchResultsNotFound').displayed
+           // !($("#userMessagesList").displayed)
+            $("#searchResultsNotFound").text().contains("No Messages Found.")
+        }
     }
 
-    //S3 and S4
+    //S4
+   /* def 'Clicking on the posting user will route to user details page'(){
+        when:
+          login()
+        then:
+        sleep(1500)
+        $('#searchBox').value("message")
+        sleep(1500)
+        $("#searchBtn").click()
+        waitFor(){
+            $('#userMessagesList').displayed
+            $("div.message-list").find('a')
+        }
+    }*/
 }
