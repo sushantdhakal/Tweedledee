@@ -8,7 +8,7 @@ import spock.lang.*
 class LogoutPageFunctionalSpec extends GebSpec {
 
     // Requirment: N3
-    def 'Login to tweedledee'(){
+    def 'Logout from tweedledee'(){
         when:
         go '/#/login'
         waitFor("quick"){
