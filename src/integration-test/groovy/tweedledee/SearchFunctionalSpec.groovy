@@ -5,6 +5,7 @@ import grails.test.mixin.integration.Integration
 import org.junit.BeforeClass
 import spock.lang.Ignore
 import spock.lang.Stepwise
+import org.openqa.selenium.JavascriptExecutor;
 
 @Integration
 @Stepwise
@@ -24,7 +25,7 @@ class SearchFunctionalSpec extends GebSpec {
     //S1 and N2
     def 'Search Box is displayed'(){
         when: 'n'
-            login()
+        login()
         then:
         sleep(2000)
         waitFor("quick") {
@@ -32,9 +33,8 @@ class SearchFunctionalSpec extends GebSpec {
         }
     }
 
-
     // S2.1
-    def 'Search Box is for provided finding messages'() {
+    def 'Search Box is for provided finding messages and checks for scrollable element'() {
         when:
         login()
 
@@ -43,9 +43,16 @@ class SearchFunctionalSpec extends GebSpec {
         $('#searchBox').value("message")
         sleep(1500)
         $("#searchBtn").click()
-        waitFor(){
-            $('#userMessagesList').displayed
-        }
+
+        $('#userMessagesList').displayed
+        def scrollProof = 	"var style = window.getComputedStyle(document.getElementById('userMessagesList'), null);"+
+                "var vHeight = parseInt(style.getPropertyValue('height'));"+
+                "var sHeight = document.getElementById('userMessagesList').scrollHeight;"+
+                "return (sHeight > vHeight) ? true : false;"
+        sleep(5000)
+
+        then:
+        browser.driver.executeScript(scrollProof)
     }
 
     // S2.2
@@ -61,23 +68,28 @@ class SearchFunctionalSpec extends GebSpec {
         $("#searchBtn").click()
         waitFor() {
             $('#searchResultsNotFound').displayed
-           // !($("#userMessagesList").displayed)
+            // !($("#userMessagesList").displayed)
             $("#searchResultsNotFound").text().contains("No Messages Found.")
         }
     }
 
     //S4
-   /* def 'Clicking on the posting user will route to user details page'(){
+    def 'Clicking on the posting user will route to user details page'() {
         when:
-          login()
+        login()
         then:
         sleep(1500)
         $('#searchBox').value("message")
         sleep(1500)
         $("#searchBtn").click()
-        waitFor(){
+        waitFor() {
             $('#userMessagesList').displayed
-            $("div.message-list").find('a')
+            $("div.message-list").find('a').click()
         }
-    }*/
+
+        sleep(1500);
+        $("div.row div.col-md-6 ul.list-inline li div.view-handle").text().contains("mikeCalvo")
+        $("div.row div.col-md-6 ul.list-inline li span.user-detail-text").text().contains("Mike Calvo")
+    }
 }
+
