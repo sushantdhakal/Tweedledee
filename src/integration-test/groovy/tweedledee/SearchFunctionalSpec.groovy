@@ -25,22 +25,24 @@ class SearchFunctionalSpec extends GebSpec {
         when: 'n'
             login()
         then:
-            $("#searchBox").isDisplayed()
+        sleep(2000)
+        waitFor("quick") {
+            $('#searchBox').isDisplayed()
+        }
     }
 
 
     //S2
-    def 'Search Box is for provided finding messages'(){
+    def 'Search Box is for provided finding messages'() {
         when: 'n'
-         login()
-        waitFor("quick"){
-            $("#searchBox").value("message")
-            $("#searchBtn").click()
-        }
+          login()
         then:
-        Thread.sleep(2000)
-        $("#message-list").isDisplayed()
-
+        sleep(2000)
+        $("#searchBox").value("message")
+        $("#searchBtn").click()
+        waitFor("quick") {
+            $('#message-list').isDisplayed()
+        }
     }
 
     def 'Search will not find messages'(){
