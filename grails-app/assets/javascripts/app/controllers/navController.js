@@ -31,6 +31,9 @@ angular.module('app')
         profileService.getProfile($scope,id);
     
     }
+    $scope.doLogout = function(){
+        securityService.logout();
+    }
 
 });
 
