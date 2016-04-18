@@ -2,8 +2,6 @@ package tweedledee
 
 import geb.spock.GebSpec
 import grails.test.mixin.integration.Integration
-import org.junit.BeforeClass
-import spock.lang.Ignore
 import spock.lang.Stepwise
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -20,7 +18,6 @@ class SearchFunctionalSpec extends GebSpec {
             $("#submitBtn").click();
         }
     }
-
 
     //S1 and N2
     def 'Search Box is displayed'(){
@@ -50,8 +47,6 @@ class SearchFunctionalSpec extends GebSpec {
                 "var sHeight = document.getElementById('userMessagesList').scrollHeight;"+
                 "return (sHeight > vHeight) ? true : false;"
         sleep(5000)
-
-        then:
         browser.driver.executeScript(scrollProof)
     }
 
@@ -68,8 +63,23 @@ class SearchFunctionalSpec extends GebSpec {
         $("#searchBtn").click()
         waitFor() {
             $('#searchResultsNotFound').displayed
-            // !($("#userMessagesList").displayed)
             $("#searchResultsNotFound").text().contains("No Messages Found.")
+        }
+    }
+
+    //S3
+    def 'Search result will display message and handle'(){
+        when:
+          login()
+        then:
+        sleep(1500)
+        $('#searchBox').value("message")
+        sleep(1500)
+        $("#searchBtn").click()
+        waitFor() {
+            $('#userMessagesList').displayed
+            $("div.message-list ul.list-unstyled li.ng-scope span.message-text").text().contains("This is Mike's message")
+            $("div.message-list ul.list-unstyled li.ng-scope a.ng-binding").text().equalsIgnoreCase("mikeCalvo")
         }
     }
 
@@ -86,7 +96,6 @@ class SearchFunctionalSpec extends GebSpec {
             $('#userMessagesList').displayed
             $("div.message-list").find('a').click()
         }
-
         sleep(1500);
         $("div.row div.col-md-6 ul.list-inline li div.view-handle").text().contains("mikeCalvo")
         $("div.row div.col-md-6 ul.list-inline li span.user-detail-text").text().contains("Mike Calvo")
