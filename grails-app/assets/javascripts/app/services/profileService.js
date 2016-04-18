@@ -1,8 +1,9 @@
 angular.module('app')
 .factory('profileService',function ($http, $interval, $timeout, $route, errorService) {
     
-    var service = {}, baseUrl = '/api/';
+    var service = {}, baseUrl = '/api';
     var alertObj = {active:false,mesg:''}
+
 
     function stoploading(v) {
         $timeout(function(){ v.loading=false; },1000);
@@ -66,7 +67,7 @@ angular.module('app')
 
         var payload = (angular.isDefined(term)) ? {"searchTerm":term} : {"searchTerm":''};
 
-        $http.post(baseUrl+'messages/search?max='+scope.max+'&offset='+scope.offset,payload).then(function(resp){
+        $http.post(baseUrl+'/messages/search?max='+scope.max+'&offset='+scope.offset,payload).then(function(resp){
             console.log('get messages',resp);
 
             scope.loading=false;

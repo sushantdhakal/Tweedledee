@@ -16,12 +16,12 @@ body {
 }
 .user-detail-label{
     font-weight: 600;
-    font-size: 1.5em;
+    font-size: 1.25em;
     margin-left: 7px;
 }
 .user-detail-text {
-  font-size: 1.5em;
-  padding:5px;
+  font-size: 1.25em;
+  padding:3px;
 }
 .user-detail-logged{
 
