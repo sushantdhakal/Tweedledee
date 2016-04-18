@@ -16,7 +16,7 @@
                     Name:
                 </li>
 
-                <li ng-show="isLoggedInUser && !showNameInput" class="user-detail-text" ng-class="{'user-detail-logged':isLoggedInUser}">
+                <li ng-show="!showNameInput" class="user-detail-text" ng-class="{'user-detail-logged':isLoggedInUser}">
                     <span id="profileName" ng-click="edit('name')">{{name}}</span>
                 </li>
 
@@ -45,7 +45,7 @@
                     Email:
                 </li>
 
-                <li ng-show="isLoggedInUser && !showEmailInput" class="user-detail-text" ng-class="{'user-detail-logged':isLoggedInUser}">
+                <li ng-show="!showEmailInput" class="user-detail-text" ng-class="{'user-detail-logged':isLoggedInUser}">
                     <span id="profileEmail" ng-click="edit('email')">{{email}}</span>
                 </li>
 

@@ -34,11 +34,17 @@
 <div class="row search-row">
     <div class="col-md-6 search-col">
         <ul class="list-inline">
-        <li><div id="profileHandle" class="view-handle">@{{handle}}</div></li>
+        <li id="profileHandle" class="view-handle">
+            @{{handle}}
+        </li>
         
-        <li><input id="followMeBtn" type="button" ng-show="!isLoggedInUser && !isFollowing"  class="btn btn-warning btn-xs" ng-click="followme()" value="Follow!"></li>
+        <li>
+            <input id="followMeBtn" type="button" ng-show="!isLoggedInUser && !isFollowing"  class="btn btn-warning btn-xs" ng-click="followme()" value="Follow!">
+        </li>
 
-        <li><div id="followingMessage" ng-show="!isLoggedInUser && isFollowing"><i id="followMeIcon" class="glyphicon glyphicon-ok ok-check"></i> Following</div></li>
+        <li id="followingMessage" ng-show="!isLoggedInUser && isFollowing">
+            <i id="followMeIcon" class="glyphicon glyphicon-ok ok-check"></i> Following
+        </li>
         </ul>
     </div>
 

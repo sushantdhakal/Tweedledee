@@ -19,10 +19,13 @@ class UserDetailFunctionalSpec extends GebSpec {
 	@Shared
 	def token
 
-	def setup(){
+	def setup()
+	{
 		restClient=new RESTClient(baseUrl)
-		user=[handle:'paulM',name:'Paul S Michalek',password:'12345678pP',email:'paul@tweedledee.com']
-		go '/#/login'
+		user=[handle:'admin',name:'Johnny Admin',password:'12345678pP',email:'admin@tweedledee.com']
+		go '/#/login?logout=1'
+		sleep(1000)
+		go '/'
 		waitFor("quick"){ 
 			$("#username").value(user.handle)
 			$("#password").value(user.password)
@@ -34,115 +37,110 @@ class UserDetailFunctionalSpec extends GebSpec {
 	}
 
 	// Requirment: U1.1
-	def 'User detail page will display the current user name'(){
+	def 'User detail page will display the current user name (U1)'()
+	{
 		when:
-		user
+			user
+			sleep(5000)
 
 		then:
-		waitFor(){
 			$("#profileName").text().contains(user.name)
-		}
+		
+
 	}
 
 	// Requirment: U1.2
-	def 'User detail page will contain a list of message for the current user'(){
+	def 'User detail page will contain a list of message for the current user (U1)'()
+	{
+		
 		when:
-		def mesgs=[]
-		def resp=restClient.get(path:'/api/account/'+user.handle+'/messages?max=25&offset=0',headers:['X-Auth-Token':token])
-		if(resp.status==200) mesgs=resp.data
-		def scrollProof = 	"var style = window.getComputedStyle(document.getElementById('userMessagesList'), null);"+
-							"var vHeight = parseInt(style.getPropertyValue('height'));"+
-							"var sHeight = document.getElementById('userMessagesList').scrollHeight;"+
-							"return (sHeight > vHeight) ? true : false;"
-		sleep(5000)
+			def mesgs=[]
+			def resp=restClient.get(path:'/api/account/'+user.handle+'/messages?max=25&offset=0',headers:['X-Auth-Token':token])
+			if(resp.status==200) mesgs=resp.data
+			def scrollProof = 	"var style = window.getComputedStyle(document.getElementById('userMessagesList'), null);"+
+								"var vHeight = parseInt(style.getPropertyValue('height'));"+
+								"var sHeight = document.getElementById('userMessagesList').scrollHeight;"+
+								"return (sHeight > vHeight) ? true : false;"
+			sleep(5000)
    
 		then:
-		browser.driver.executeScript(scrollProof)
-		mesgs.each(){
-			$("messageId${it.id}_text").text() == it.text
-		}		
+			browser.driver.executeScript(scrollProof)
+			mesgs.each(){
+				$("messageId${it.id}_text").text() == it.text
+			}
+
 	}
 
 	// Requirment: U2
-	def ' Users detail page will provide a way for the logged in user to follow the detail user'(){
+	def ' Users detail page will provide a way for the logged in user to follow the detail user (U2)'()
+	{
 
-	when:
-		go '/#/login'
-		waitFor("quick"){ 
-			$("#username").value(user.handle)
-			$("#password").value(user.password)
-			$("#submitBtn").click()
-		}
-		sleep(1000)
-		$("#follower_mikeCalvo").click()
-		sleep(5000)
+		when:
+			user
+			go '/#/account/mikeCalvo'
+			sleep(5000)
 
-	then:
-		$("input",id:"followMeBtn").value()=="Follow!"
+		then:
+			$("input",id:"followMeBtn").value()=="Follow!"
+	
 	}
 
 	// Requirment: U3
-	def 'When the logged in user is following the detail user, the detail page will display a message or icon indicating this'(){
+	def 'When the logged in user is following the detail user, the detail page will display a message or icon indicating this (U3)'()
+	{
 
-	when:
-		go '/#/login'
-		waitFor("quick"){ 
-			$("#username").value(user.handle)
-			$("#password").value(user.password)
-			$("#submitBtn").click()
+		when:
+			user
+			go '/#/account/paulM'
+			sleep(5000)
+
+		then:
+		waitFor(5,0.1){
+			$("li",id:"followingMessage")
+			$("li",id:"followingMessage").text().contains("Following")
 		}
-		sleep(1000)
-		$("#follower_mikeCalvo").click()
-		//sleep(2000)
-		//$("input", id:"followMeBtn").click()
-		//sleep(5000)
+			
 
-	then:
-	$("input", id:"followMeBtn")
-		//$("#follower_paulM")
 	}
 
 	// Requirment: U4.1
-	def 'When the logged in user goes to their own detail page, they can edit their name'(){
+	def 'When the logged in user goes to their own detail page, they can edit their name (U4)'()
+	{
 
-	when:
-		go '/#/login'
-		waitFor("quick"){ 
-			$("#username").value(user.handle)
-			$("#password").value(user.password)
-			$("#submitBtn").click()
-		}
-		//$("#profileName").click()
-		//sleep(1000)
-		//$("#editNameInput").value("PaulsNewName")
-		//sleep(1000)
-		//$("#nameSaveBtn").click()
-		sleep(5000)
+		when:
+			user
+			sleep(5000)
 
-	then:
-		$("span",id:"profileName")
-		//$("#profileName").text() == "PaulsNewName"
+		then:
+			$("input",id:"editNameBtn").click()
+			sleep(1000)
+			$("input",id:"editNameInput").value("AdminsNewName")
+			sleep(1000)
+			$("input",id:"editNameSaveBtn").click()
+			waitFor(5,0.1){
+				$("span",id:"profileName").text() == "AdminsNewName"
+			}
+
 	}
 
 	// Requirment: U4.2
-	def 'When the logged in user goes to their own detail page, they can edit their email'(){
+	def 'When the logged in user goes to their own detail page, they can edit their email (U4)'()
+	{
 
-	when:
-		go '/#/login'
-		waitFor("quick"){ 
-			$("#username").value(user.handle)
-			$("#password").value(user.password)
-			$("#submitBtn").click()
-		}
-		$("#profileEmail").click()
-		sleep(1000)
-		$("#editEmailInput").value("PaulsNewEmail@mymail.com")
-		sleep(1000)
-		$("#emailSaveBtn").click()
-		sleep(5000)
+		when:
+			user
+			sleep(5000)
 
-	then:
-		$("#profileName").text() == "PaulsNewEmail@mymail.com"
+		then:
+			$("input",id:"editEmailBtn").click()
+			sleep(1000)
+			$("input",id:"editEmailInput").value("newadmineamil@me.net")
+			sleep(1000)
+			$("input",id:"editEmailSaveBtn").click()
+			waitFor(5,0.1){
+				$("span",id:"profileEmail").text() == "newadmineamil@me.net"
+			}
+
 	}
 
 }
