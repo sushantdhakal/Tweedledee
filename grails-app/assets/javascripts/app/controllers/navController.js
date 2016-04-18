@@ -7,6 +7,7 @@ angular.module('app')
     $scope.isFollowing=false;
     $scope.isLoggedInUser=true;
     $scope.loading=true;
+    $scope.showLoggedInUser=false;
 
     if($routeParams.id) $scope.viewingUserId=$routeParams.id;
     else $scope.viewingUserId=$scope.loggedInUserHandle;
@@ -25,7 +26,7 @@ angular.module('app')
     }
 
     function getProfile(id){ 
-        if(!angular.isDefined(id)) id = $scope.viewingUserId;
+        if(!angular.isDefined(id)) id = $scope.loggedInUserHandle;
         
         profileService.getProfile($scope,id);
     

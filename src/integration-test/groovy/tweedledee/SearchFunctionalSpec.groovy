@@ -7,7 +7,6 @@ import org.openqa.selenium.JavascriptExecutor;
 
 @Integration
 @Stepwise
-@Ignore
 class SearchFunctionalSpec extends GebSpec {
 
     def login() {
