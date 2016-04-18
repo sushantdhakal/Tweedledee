@@ -36,6 +36,9 @@ angular.module('app')
           templateUrl: '/app/following.html',
           controller: 'followingController'
       })
+	  .when('/contact',{
+            templateUrl: '/app/contact.html'
+        })
     .otherwise({
       redirectTo: '/profile'
     })
