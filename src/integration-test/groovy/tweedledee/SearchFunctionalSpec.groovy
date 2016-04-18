@@ -7,7 +7,6 @@ import org.openqa.selenium.JavascriptExecutor;
 
 @Integration
 @Stepwise
-@Ignore
 class SearchFunctionalSpec extends GebSpec {
 
     def login() {
@@ -97,8 +96,8 @@ class SearchFunctionalSpec extends GebSpec {
             $("div.message-list").find('a').click()
         }
         sleep(1500);
-        $("div.row div.col-md-6 ul.list-inline li div.view-handle").text().contains("mikeCalvo")
-        $("div.row div.col-md-6 ul.list-inline li span.user-detail-text").text().contains("Mike Calvo")
+        $("div.row div.col-md-6 ul.list-inline li.view-handle").text().contains("mikeCalvo")
+        $("div.row div.col-md-6 ul.list-inline li.user-detail-text span.ng-binding").text().contains("Mike Calvo")
     }
 }
 
