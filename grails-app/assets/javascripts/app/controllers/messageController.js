@@ -1,18 +1,25 @@
 angular.module('app')
 .controller('messagesController',function (
-    $scope, $http, $routeParams, $interval, securityService, profileService, messageService) {
+    $scope, $http, $routeParams, $location, $interval, securityService, profileService, messageService) {
 
+    var search=false;
     var userCreds = securityService.currentUser();
     $scope.loggedInUserHandle = userCreds.username;
     $scope.loading=true;
     $scope.isLoggedInUser=true;
+    $scope.searchTerm='';
+    
+    if( angular.isDefined($location.search().q) ) {
+        search=true;
+        $scope.searchTerm=$location.search().q
+    }
 
     if($routeParams.id) { $scope.viewingUserId=$routeParams.id; $scope.isLoggedInUser=false; }
     else $scope.viewingUserId=$scope.loggedInUserHandle;
 
     var MAX_MESG=25; init(MAX_MESG);
 
-    $interval(function(){ getMessages(); },25000);
+    //$interval(function(){ getMessages(); },25000);
 
     function init(max){
         $scope.max=max;
@@ -23,7 +30,8 @@ angular.module('app')
     function getMessages(id){ 
         $scope.loading=true;
         if(!angular.isDefined(id)) id = $scope.viewingUserId;
-        messageService.getMessagesByUser($scope,id);
+        if(!search) messageService.getMessagesByUser($scope,id);
+        else profileService.getMessagesBySearchTerm($scope);
     }
 
     $scope.refresh = function(){

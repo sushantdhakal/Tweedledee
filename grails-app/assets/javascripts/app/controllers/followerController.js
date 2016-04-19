@@ -15,6 +15,7 @@ angular.module('app')
     function getFollowers(id){ 
         if(!angular.isDefined(id)) id = $scope.viewingUserId;
         profileService.getFollowers($scope,id);
+        profileService.getFollowing($scope,id);
     }
 
 });

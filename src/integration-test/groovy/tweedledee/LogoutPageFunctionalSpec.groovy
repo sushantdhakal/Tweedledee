@@ -4,6 +4,7 @@ import geb.spock.GebSpec
 import grails.test.mixin.integration.Integration
 import spock.lang.*
 
+@Ignore
 @Integration
 class LogoutPageFunctionalSpec extends GebSpec {
 

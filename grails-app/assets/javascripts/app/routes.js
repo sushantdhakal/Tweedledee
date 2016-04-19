@@ -5,7 +5,7 @@ angular.module('app')
 
     $routeProvider
       .when('/login', {
-        templateUrl: '/app/login.html',
+        templateUrl: '/app/login2.html',
         controller: 'loginController'
       })
      .when('/profile', {
@@ -13,6 +13,10 @@ angular.module('app')
           controller: 'profileController'
         })
       .when('/feed', {
+        templateUrl: '/app/feed.html',
+        controller: 'messagesController'
+      })
+      .when('/search', {
         templateUrl: '/app/feed.html',
         controller: 'messagesController'
       })

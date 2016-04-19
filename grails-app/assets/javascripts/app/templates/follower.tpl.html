@@ -1,17 +1,21 @@
-<div ng-include src="'/app/nav-bar2.html'" ng-controller="navController"></div>
+<div nav-bar followers="followers" following="following"></div>
 
-<div class="panel panel-primary">
-<div class="panel panel-success">
-<!-- Default panel contents -->
-<div class="panel-heading">
-<h3 class="panel-title">FOLLOWERS</h3>
-</div>
+<div class="container">
 
-<!-- Table -->
-<table class="table" id="followers">
-<tr ng-repeat="follower in followers">
-    <td><a ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a></td>
-</tr>
-</table>
-</div>
+<div class="row text-center">
+
+	<h2><i class="fa fa-group icon-left color-two"></i> Users Following You</h2>
+
+	<div ng-show="followers.length>0">
+		
+    <h3 ng-repeat="follower in followers">
+        <a id="following_{{follower.handle}}" ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a>
+    </h3>
+	
+	</div>
+
+	<div ng-show="followers.length==0">
+		<p> You have no followers at this time. How about go recruit a few? </p>
+	</div>
+
 </div>

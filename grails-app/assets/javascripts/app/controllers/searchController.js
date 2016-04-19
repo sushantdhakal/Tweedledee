@@ -1,6 +1,6 @@
 angular.module('app')
 .controller('searchController',function (
-    $scope, $http, $routeParams, $interval, securityService, profileService) {
+    $scope, $http, $routeParams, $location, $interval, securityService, profileService) {
 
     var userCreds = securityService.currentUser();
     $scope.loggedInUserHandle = userCreds.username;
@@ -15,7 +15,8 @@ angular.module('app')
 
     $scope.search = function(){
         $scope.loading=true;
-        profileService.getMessagesBySearchTerm($scope);
+        //profileService.getMessagesBySearchTerm($scope);
+        $location.path('/search?q='+$scope.searchTerm)
     }
     $scope.reset = function(){
         $scope.searchTerm='';

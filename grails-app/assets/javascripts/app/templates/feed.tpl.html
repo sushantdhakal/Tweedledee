@@ -1,5 +1,18 @@
-<div ng-include src="'/app/nav-bar2.html'" ng-controller="navController"></div>
+<div nav-bar followers="followers" following="following"></div>
 
-<div ng-include="'/app/message-list.html'" ng-controller="messagesController"></div>
+<div class="container">
+
+<div class="row text-center">
+
+	<h2><i class="fa fa-envelope icon-left color-two"></i> Messages</h2>
+
+	<div class="col-sm-8 col-sm-push-2" ng-include="'/app/message-list.html'"></div>
+
+	<div class="paddig" ng-show="following.length==0">
+		<p> No messages found. </p>
+	</div>
+
+</div>
+
 
 

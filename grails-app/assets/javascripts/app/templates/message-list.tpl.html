@@ -4,8 +4,12 @@
         <span ng-click="pageprev()" class="message-nextprev">prev</span>
     </li>
 
-    <li>
+    <li ng-show="searchTerm==''">
         <i class="fa clickable" ng-class="{'fa-spinner fa-spin':loading,'fa-refresh':!loading}" ng-click="refresh()"></i> Showing {{max}} of your most recent messages <span ng-show="offset<messageCount">(<a class="clickable" ng-click="showmore()">show more</a>)</span> <span ng-show="offset==messageCount">(<a ng-click="refresh()">refresh list</a>)</span>
+    </li>
+
+    <li ng-show="searchTerm!=''">
+        <i class="fa clickable" ng-class="{'fa-spinner fa-spin':loading,'fa-refresh':!loading}" ng-click="refresh()"></i> Found {{messageCount}} message. Showing {{max}} of the most recent. <span ng-show="offset<messageCount">(<a class="clickable" ng-click="showmore()">show more</a>)</span> <span ng-show="offset==messageCount">(<a ng-click="refresh()">refresh list</a>)</span>
     </li>
 
     <li ng-show="end<messageCount">
@@ -18,9 +22,9 @@
     
     <div id="messageId{{message.id}}" class="message-box" ng-repeat="message in messages | orderBy:'message.dateCreated'">
 
-        <h3 id="message_{{message.handle}}_text" class="message-text">{{message.text}}</h3>
+        <h3 id="message_{{message.handle}}_text">{{message.text}}</h3>
 
-        <p id="messageId{{message.id}}_date" class="message-text-date">@ {{message.dateCreated | date:"EEE M/yy '@' h:mma"}}</p>
+        <p id="messageId{{message.id}}_date">{{message.dateCreated | date:"MMM d"}}</p>
 
         <p class="small">- {{viewingUserId}}</p>
         
