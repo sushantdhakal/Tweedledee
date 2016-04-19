@@ -1,6 +1,6 @@
 angular.module('app')
 .controller('messagesController',function (
-    $scope, $http, $routeParams, $interval, securityService, profileService) {
+    $scope, $http, $routeParams, $interval, securityService, profileService, messageService) {
 
     var userCreds = securityService.currentUser();
     $scope.loggedInUserHandle = userCreds.username;
@@ -23,7 +23,7 @@ angular.module('app')
     function getMessages(id){ 
         $scope.loading=true;
         if(!angular.isDefined(id)) id = $scope.viewingUserId;
-        profileService.getMessagesByUser($scope,id);
+        messageService.getMessagesByUser($scope,id);
     }
 
     $scope.refresh = function(){
@@ -32,12 +32,12 @@ angular.module('app')
 
     $scope.showmore=function(){
         console.log('$scope.messageCount ',$scope.messageCount);
-        var newoffset=$scope.offset+($scope.max+1);console.log('newoffset ',newoffset);
-        var newend=newoffset+$scope.max;console.log('newend ',newend);
+        var newoffset=$scope.offset+($scope.max+1);
+        var newend=newoffset+$scope.max;
         if( newend<$scope.messageCount) { $scope.offset=newoffset; getMessages(); }
         else{
-            var over=(newoffset+$scope.max)-$scope.messageCount;console.log('over '+over);
-            var newmax=$scope.max-over;console.log('newmax '+newmax);
+            var over=(newoffset+$scope.max)-$scope.messageCount;
+            var newmax=$scope.max-over;
             if(newmax>0) { $scope.max=newmax; getMessages(); }
             else $scope.offset=$scope.messageCount;
         }

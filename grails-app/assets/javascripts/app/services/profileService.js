@@ -4,11 +4,6 @@ angular.module('app')
     var service = {}, baseUrl = '/api';
     var alertObj = {active:false,mesg:''}
 
-
-    function stoploading(v) {
-        $timeout(function(){ v.loading=false; },1000);
-    }
-
     service.getProfile = function(scope,id){
 
         var accountId = (angular.isDefined(id)) ? '/'+id : '';
@@ -35,53 +30,6 @@ angular.module('app')
             if(fail.status==404) m=m+' User was not found (404).';
             if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
             scope.alert=alertObj;
-            errorService.showAlert(scope.alert,m);
-        });
-
-    }
-
-    service.getMessagesByUser = function(scope,id){
-
-        var accountId = (angular.isDefined(id)) ? id : 0;
-
-        scope.messages=[];
-
-        $http.get(baseUrl+'/account/'+accountId+'/messages?max='+scope.max+'&offset='+scope.offset).then(function(resp){
-            console.log('get messages',resp);
-            $timeout(function(){scope.loading=false;},1000);
-            if(resp.status==200) scope.messages=angular.copy(resp.data); 
-
-        },function(fail){
-            scope.loading=false;
-            var m='An error has occured while trying to fetch messages. '+fail.status;
-            scope.alert=alertObj;
-            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
-            errorService.showAlert(scope.alert,m);
-        });
-
-    }
-
-    service.getMessagesBySearchTerm = function(scope){
-        
-        var term = scope.searchTerm;
-
-        var payload = (angular.isDefined(term)) ? {"searchTerm":term} : {"searchTerm":''};
-
-        $http.post(baseUrl+'/messages/search?max='+scope.max+'&offset='+scope.offset,payload).then(function(resp){
-            console.log('get messages',resp);
-
-            scope.loading=false;
-
-            if(resp.status==200) {
-                scope.messages=angular.copy(resp.data); 
-                scope.hasSearchResults=true;
-            }
-
-        },function(fail){
-            scope.loading=false;
-            var m='An error has occured while trying to fetch messages. '+fail.status;
-            scope.alert=alertObj;
-            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
             errorService.showAlert(scope.alert,m);
         });
 
