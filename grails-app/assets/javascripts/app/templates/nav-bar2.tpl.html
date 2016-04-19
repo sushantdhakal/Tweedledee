@@ -1,0 +1,49 @@
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        
+        <ul class="nav navbar-nav navbar-left">
+            <li>
+                <a href="#/profile"><i class="fa fa-home" aria-hidden="true"></i> Home </a>
+            </li>
+            <li>
+                <a href="#/feed"><i class="fa fa-envelope" aria-hidden="true"></i> Messages </a>
+            </li>
+            <li>
+                <a href="#/followers"><i class="fa fa-users" aria-hidden="true"></i> Followers <i class="badge">{{followers.length}}</i></a>
+            </li>
+            <li>
+                <a href="#/following"><i class="fa fa-heart" aria-hidden="true"></i> Following <i class="badge">{{following.length}}</i></a>
+            </li>
+        </ul>
+
+        <div class="col-md-3 navbar-text" ng-show="showAlert">
+           <i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i> {{alert}}
+        </div>
+
+        <div class="navbar-right">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input id="searchBox" type="text" ng-model="searchText" class="form-control input-sm" placeholder="Search Tweedledee..">
+                    <div class="input-group-btn">
+                        <button id="searchBtn" class="btn btn-prmiary btn-sm" type="submit" ng-click="search()"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>  
+    </div>
+
+</nav>
+
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#/contact"><span class="" aria-hidden="true"></span> Contact</a>
+            </li>
+            <li>
+                <a id="logoutLink" ng-click="doLogout()" href="#/login?logout=1"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>

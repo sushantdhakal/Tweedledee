@@ -1,4 +1,50 @@
-body {
+body { 
+  padding-top:70px;
+}
+
+.fadein,
+.fadeout {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.2s;
+  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.2s;
+  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.2s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.2s;
+}
+
+.fadein.ng-hide-remove, 
+.fadein.not-visible-remove,
+.fadeout.ng-hide-add.ng-hide-add-active, 
+.fadeout.not-visible-add.not-visible-add-active,
+.ng-enter {
+  opacity: 0;
+}
+
+.fadeout.ng-hide-add,
+.fadeout.not-visible-add,
+.fadein.ng-hide-remove.ng-hide-remove-active,
+.fadein.not-visible-remove.not-visible-remove-active {
+  opacity: 1;
+}
+
+.fake-pic{
+  height:200px;
+  width:242px;
+  background-color: #ddd;
+  border:1px solid #555;
+  margin-bottom: 10px
+}
+.message-box{
+  vertical-align: middle;
+  padding-left:5px;
+  padding-right:5px;
+  padding-bottom:3px;
+  padding-top:3px;
+  border:1px solid #ddd;
+  border-radius:5px;   
+  -moz-border-radius:5px;
+  margin-bottom: 5px;
+}
+.clickable{ cursor: pointer; }
+/*body {
     padding-top: 70px;
     border:1px solid black;
     height:600px;
@@ -14,6 +60,7 @@ body {
     height: auto;
     overflow: scroll;
 }
+
 .user-detail-label{
     font-weight: 600;
     font-size: 1.25em;
@@ -92,6 +139,7 @@ body {
     font-size: 0.75em
 }
 
+/*
 .navbar-custom {
     background: linear-gradient(141deg, #0fb8ad 0%, #1fc8db 51%, #2cb5e8 75%);
     color:white;
@@ -137,6 +185,7 @@ body {
 .tweedleDeeHeader { color: #b48608; font-family: "Great Vibes", cursive; font-size: 60px; line-height: 75px; font-weight: normal; margin-bottom: 0px; margin-top: 10px; text-align: left; text-shadow: 0 1px 1px #fff; }
 
 .tweedleDeeHeader2 { color: #CEF0D4; font-family: 'Rouge Script', cursive; font-size: 130px; font-weight: normal; line-height: 48px; margin: 0 0 50px; text-align: center; text-shadow: 1px 1px 2px #082b34; }
+*/
 
 /* Spin annimation  */
 .spin{
@@ -177,7 +226,7 @@ body {
 
 /** 
  * Page loading/refreshing classes
- */
+ 
 
 .fadein,
 .fadeout {

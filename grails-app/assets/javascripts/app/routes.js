@@ -47,7 +47,7 @@ angular.module('app')
   // Protect all routes other than login
   .run(function ($rootScope, $location, securityService) {
     $rootScope.$on('$routeChangeStart', function (event, next) {
-      if (next.$$route.originalPath != '/login') {
+      if (typeof next.$$route!=='undefined' && typeof next.$$route.originalPath!=='undefined' && next.$$route.originalPath!='/login') {
         if (!securityService.currentUser()) {
           $location.path('/login');
         }

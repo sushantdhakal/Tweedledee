@@ -1,5 +1,5 @@
 angular.module('app')
-.factory('messageService',function ($http, $interval, $timeout, $route, profileService, errorService) {
+.factory('messageService',function ($http, $interval, $timeout, $route, errorService) {
     
     var service = {}, baseUrl = '/api';
     var alertObj = {active:false,mesg:''}
