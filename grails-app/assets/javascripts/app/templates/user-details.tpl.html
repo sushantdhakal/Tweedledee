@@ -9,9 +9,16 @@
 
 <div ng-show="profileimg!=''" class="profile-pic-container"><img src="../assets/{{profileimg}}" class="profile-pic"></div>
 
-<h3 ng-show="!isLoggedInUser">@ {{handle}} <span follow-me></span></h3>
+<div ng-show="!isLoggedInUser" class="row profile-handle-container">
+    <ul class="list-inline">
+    <li class="profile-handle"><i class="fa fa-at fa-lg icon-left color-two"></i>{{handle}}</li>
+    <li follow-me viewed-user="handle"></li>
+    </ul>
+</div>
 
-<h3 ng-show="isLoggedInUser">@ {{handle}}</h3>
+<div ng-show="isLoggedInUser" class="row profile-handle-container">
+    <div class="col-sm-10 profile-handle"><i class="fa fa-at fa-lg icon-left color-two"></i>{{handle}}</div>
+</div>
 
 <ul class="list-inline">
 

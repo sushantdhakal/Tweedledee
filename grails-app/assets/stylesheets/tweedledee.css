@@ -1,22 +1,23 @@
-body { 
-  padding-top:70px;
-}
-.border{border:1px solid red;}
+
+
 /* 
  * Layout and formatting 
  */
 
+body { padding-top:70px; }
 .color-one{ color:#b366ff; }
 .color-two{ color:#3333ff; }
 .color-three{ color:#ff3377; }
 .color-one-bg{ background-color:#b366ff; }
 .color-two-bg{ background-color:#3333ff; }
-.color-three-bg{ background-color:#ff3377; }
+.color-three-bg{ background-color:red; }
 .logo {  }
 .logo-icon {  }
 .logo-title { line-height:normal!important; font-size: 1.5em; }
 .icon-left{ margin-right:5px; }
 .icon-right{ margin-left:5px; }
+.profile-handle-container { margin-bottom:10px; }
+.profile-handle { font-size:1.5em; font-weight:600; }
 .profile-pic{
   height:200px;
   width:242px;

@@ -100,6 +100,7 @@ angular.module('app')
         var ret = true;
         $http.get(baseUrl+'/account/'+scope.viewingUserId+'/followers').then(function(resp){
             console.log('compare followers',resp.data);
+            scope.isFollowing=false;
             if(resp.status==200){
                 angular.forEach(resp.data.followers,function(follower){
                     if(follower.handle==scope.loggedInUserHandle) scope.isFollowing=true;
