@@ -1,14 +1,16 @@
-<div nav-bar followers="followers" following="following"></div>
+<div nav-bar></div>
 
 <div class="container">
 
 <div class="row text-center">
 
-	<h2><i class="fa fa-envelope icon-left color-two"></i> Messages</h2>
+	<h2 ng-show="searchTerm==''"><i class="fa fa-envelope icon-left color-two"></i> Messages for <a href="#/account/{{viewingUserId}}"><i class="fa fa-at icon-left"></i>{{viewingUserId}}</a> <span follow-me></span></h2>
 
-	<div class="col-sm-8 col-sm-push-2" ng-include="'/app/message-list.html'"></div>
+	<h2 ng-show="searchTerm!=''"><i class="fa fa-envelope icon-left color-two"></i> Message Search Results </h2>
 
-	<div class="paddig" ng-show="following.length==0">
+	<div class="col-sm-8 col-sm-push-2" ng-show="messages.length>0" ng-include="'/app/message-list.html'"></div>
+
+	<div class="col-sm-8 col-sm-push-2" ng-show="messages.length==0">
 		<p> No messages found. </p>
 	</div>
 

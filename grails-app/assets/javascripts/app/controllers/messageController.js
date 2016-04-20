@@ -11,13 +11,13 @@ angular.module('app')
     
     if( angular.isDefined($location.search().q) ) {
         search=true;
-        $scope.searchTerm=$location.search().q
+        $scope.searchTerm=$location.search().q;
     }
 
     if($routeParams.id) { $scope.viewingUserId=$routeParams.id; $scope.isLoggedInUser=false; }
     else $scope.viewingUserId=$scope.loggedInUserHandle;
 
-    var MAX_MESG=25; init(MAX_MESG);
+    var MAX_MESG=10; init(MAX_MESG);
 
     //$interval(function(){ getMessages(); },25000);
 
@@ -31,7 +31,7 @@ angular.module('app')
         $scope.loading=true;
         if(!angular.isDefined(id)) id = $scope.viewingUserId;
         if(!search) messageService.getMessagesByUser($scope,id);
-        else profileService.getMessagesBySearchTerm($scope);
+        else messageService.getMessagesBySearchTerm($scope);
     }
 
     $scope.refresh = function(){

@@ -17,11 +17,24 @@ body {
 .logo-title { line-height:normal!important; font-size: 1.5em; }
 .icon-left{ margin-right:5px; }
 .icon-right{ margin-left:5px; }
-.fake-pic{
+.profile-pic{
   height:200px;
   width:242px;
-  background-color: #ddd;
-  border:1px solid #555;
+  border:1px solid #ddd;
+}
+.profile-pic-container{
+  height:201px;
+  width:243px;
+  margin-bottom: 10px
+}
+.profile-pic-thumb{
+  height:20px;
+  width:62px;
+  border:1px solid #ddd;
+}
+.profile-pic-container-thumb{
+  height:21px;
+  width:63px;
   margin-bottom: 10px
 }
 .message-box{

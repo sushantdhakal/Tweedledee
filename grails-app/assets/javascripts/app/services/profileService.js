@@ -1,8 +1,14 @@
 angular.module('app')
-.factory('profileService',function ($http, $interval, $timeout, $route, errorService) {
+.factory('profileService',function ($http, $interval, $timeout, $route, $httpParamSerializer, errorService) {
     
     var service = {}, baseUrl = '/api';
     var alertObj = {active:false,mesg:''}
+    var imgs = {
+        "admin":"placeholderimg4.png",
+        "sushantdhakal":"placeholderimg2.png",
+        "paulM":"placeholderimg3.png",
+        "mikeCalvo":"placeholderimg2.png"
+    };
 
     service.getProfile = function(scope,id){
 
@@ -22,6 +28,7 @@ angular.module('app')
                 scope.messageCount         =resp.data.messageCount;
                 scope.followers            =angular.copy(resp.data.followers);
                 scope.following            =angular.copy(resp.data.following);
+                scope.profileimg           =(imgs[scope.handle])?imgs[scope.handle]:"placeholderimg2.png";
             }
 
         }, function errorCallback(fail) {
@@ -37,10 +44,16 @@ angular.module('app')
 
     service.getFollowers = function(scope,id){
 
-        var accountId = (angular.isDefined(id)) ? id : 0;
+        var accountId = (angular.isDefined(id)) ? id : 0,
+            rPath = baseUrl+'/account/'+accountId+'/followers',
+            params={};
 
+        if(angular.isDefined(scope.max)&&scope.max>0) params.max=scope.max;
+        if(angular.isDefined(scope.offset)&&scope.offset>0) params.offset=scope.offset;
+        if(!_.isEmpty(params)) rPath=rPath+'?'+$httpParamSerializer(params);
+        
         scope.messages=[];
-        $http.get(baseUrl+'/account/'+accountId+'/followers?max='+scope.max+'&offset='+scope.offset).then(function(resp){
+        $http.get(rPath).then(function(resp){
             console.log('get followers',resp);
             scope.loading=false;
             if(resp.status==200) scope.followers=angular.copy(resp.data.followers); 
@@ -58,11 +71,17 @@ angular.module('app')
     service.getFollowing = function(scope,id){
 
         var hasScope = (scope!==null) ? true : false,
-        accountId = (angular.isDefined(id)) ? id : 0;
+        accountId = (angular.isDefined(id)) ? id : 0,
+            rPath = baseUrl+'/account/'+accountId+'/following',
+            params={};
+
+        if(angular.isDefined(scope.max)&&scope.max>0) params.max=scope.max;
+        if(angular.isDefined(scope.offset)&&scope.offset>0) params.offset=scope.offset;
+        if(!_.isEmpty(params)) rPath=rPath+'?'+$httpParamSerializer(params);
 
         scope.messages=[];
 
-        $http.get(baseUrl+'/account/'+accountId+'/following?max='+scope.max+'&offset='+scope.offset).then(function(resp){
+        $http.get(rPath).then(function(resp){
             console.log('get following',resp);
             scope.loading=false;
             if(resp.status==200) scope.following=angular.copy(resp.data.following);

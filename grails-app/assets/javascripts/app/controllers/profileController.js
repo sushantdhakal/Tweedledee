@@ -41,6 +41,10 @@ angular.module('app')
         }
     }
     
+    $scope.followme = function() {
+        profileService.follow($scope,$scope.loggedInUserHandle);
+    }
+    
     function getProfile(id){ 
         if(!angular.isDefined(id)) id = $scope.viewingUserId;
         profileService.getProfile($scope,id);

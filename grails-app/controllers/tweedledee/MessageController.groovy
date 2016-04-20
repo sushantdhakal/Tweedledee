@@ -41,10 +41,12 @@ class MessageController extends RestfulController<Message> {
         } else _respondError(404,"No account found")
     }
 
-    def searchMessages(){
+    def searchMessages(final Integer max,final Integer offset){
+        def limit = Math.min(max?:10,100)
+        def os = (offset) ? Math.min(offset,100):0
         def searchTerm=request.JSON.searchTerm
         def res = Message.where {
-            text==~"%$searchTerm%" }.list().collect{
+            text==~"%$searchTerm%" }.list(max:limit,offset:os).collect{
             res->return [message:res, handle:Account.get(res.account.id).handle]
         }
         respond res

@@ -1,5 +1,5 @@
 
-<div nav-bar followers="followers" following="following"></div>
+<div nav-bar></div>
 
 <div class="container">
 
@@ -7,9 +7,11 @@
 
 <div class="col-md-4">
 
-<div class="fake-pic"></div>
+<div ng-show="profileimg!=''" class="profile-pic-container"><img src="../assets/{{profileimg}}" class="profile-pic"></div>
 
-<h3>{{handle}}</h3>
+<h3 ng-show="!isLoggedInUser">@ {{handle}} <span follow-me></span></h3>
+
+<h3 ng-show="isLoggedInUser">@ {{handle}}</h3>
 
 <ul class="list-inline">
 

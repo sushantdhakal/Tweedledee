@@ -18,7 +18,7 @@
 
 </ul>
 
-<div id="userMessagesList" class="message-list">
+<div id="userMessagesList" class="message-list-container">
     
     <div id="messageId{{message.id}}" class="message-box" ng-repeat="message in messages | orderBy:'message.dateCreated'">
 
@@ -26,7 +26,9 @@
 
         <p id="messageId{{message.id}}_date">{{message.dateCreated | date:"MMM d"}}</p>
 
-        <p class="small">- {{viewingUserId}}</p>
+        <p>
+            <a href="#/account/{{message.handle}}"><i class="fa fa-at fa-lg icon-left"></i>{{message.handle}}</a>
+        </p>
         
         <i class="fa fa-retweet fa-lg"></i>
     </div>

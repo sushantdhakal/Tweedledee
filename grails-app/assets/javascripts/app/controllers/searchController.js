@@ -9,6 +9,7 @@ angular.module('app')
     $scope.offset=0;
     $scope.hasSearchResults=false;
     $scope.loading=false;
+    $scope.searchTerm='';
 
     if($routeParams.id) $scope.viewingUserId=$routeParams.id;
     else $scope.viewingUserId=$scope.loggedInUserHandle;
@@ -16,7 +17,8 @@ angular.module('app')
     $scope.search = function(){
         $scope.loading=true;
         //profileService.getMessagesBySearchTerm($scope);
-        $location.path('/search?q='+$scope.searchTerm)
+        var p = '/search?q='+$scope.searchTerm;console.log('go here ',p)
+        $location.path(p);
     }
     $scope.reset = function(){
         $scope.searchTerm='';

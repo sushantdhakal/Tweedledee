@@ -1,19 +1,40 @@
 angular.module('app')
-.factory('messageService',function ($http, $interval, $timeout, $route, errorService) {
+.factory('messageService',function ($http, $httpParamSerializer, $interval, $timeout, $route, errorService) {
     
     var service = {}, baseUrl = '/api';
     var alertObj = {active:false,mesg:''}
 
     service.getMessagesByUser = function(scope,id){
 
-        var accountId = (angular.isDefined(id)) ? id : 0;
+        var accountId = (angular.isDefined(id)) ? id : 0,
+            rPath = baseUrl+'/account/'+accountId+'/messages',
+            params={};
+
+        if(angular.isDefined(scope.max)&&scope.max>0) params.max=scope.max;
+        if(angular.isDefined(scope.offset)&&scope.offset>0) params.offset=scope.offset;
+        if(!_.isEmpty(params)) rPath=rPath+'?'+$httpParamSerializer(params);
 
         scope.messages=[];
 
-        $http.get(baseUrl+'/account/'+accountId+'/messages?max='+scope.max+'&offset='+scope.offset).then(function(resp){
-            console.log('get messages',resp);
-            $timeout(function(){scope.loading=false;},1000);
-            if(resp.status==200) scope.messages=angular.copy(resp.data); 
+        $http.get(rPath).then(function(resp){
+            console.log('get messages by user ',resp);
+            
+            scope.loading=false;
+            if(resp.status==200) {
+                var tmp=[];
+                _.each(resp.data,function(v){
+                    if(angular.isDefined(v)) {
+                        tmp.push({
+                            handle:id,
+                            dateCreated:v.dateCreated,
+                            text:v.text,
+                            id:v.id,
+                            account:v.account
+                        });
+                    }
+                });
+                scope.messages=angular.copy(tmp);
+            } 
 
         },function(fail){
             scope.loading=false;
@@ -27,17 +48,34 @@ angular.module('app')
 
     service.getMessagesBySearchTerm = function(scope){
         
-        var term = scope.searchTerm;
+        var rPath = baseUrl+'/messages/search',
+            params={};
 
-        var payload = (angular.isDefined(term)) ? {"searchTerm":term} : {"searchTerm":''};
+        if(angular.isDefined(scope.max)&&scope.max>0) params.max=scope.max;
+        if(angular.isDefined(scope.offset)&&scope.offset>0) params.offset=scope.offset;
+        if(!_.isEmpty(params)) rPath=rPath+'?'+$httpParamSerializer(params);
+        
+        var term = scope.searchTerm,
+            payload = (angular.isDefined(term)) ? {"searchTerm":term} : {"searchTerm":''};
 
-        $http.post(baseUrl+'/messages/search?max='+scope.max+'&offset='+scope.offset,payload).then(function(resp){
-            console.log('get messages',resp);
+        $http.post(rPath,payload).then(function(resp){
+            console.log('get messages by search ',resp);
 
             scope.loading=false;
-
             if(resp.status==200) {
-                scope.messages=angular.copy(resp.data); 
+                var tmp=[];
+                _.each(resp.data,function(v){
+                    if(angular.isDefined(v)&&angular.isDefined(v.message)) {
+                        tmp.push({
+                            handle:v.handle,
+                            dateCreated:v.message.dateCreated,
+                            text:v.message.text,
+                            id:v.message.id,
+                            account:v.message.account
+                        });
+                    }
+                });
+                scope.messages=angular.copy(tmp); 
                 scope.hasSearchResults=true;
             }
 
