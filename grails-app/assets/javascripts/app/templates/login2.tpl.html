@@ -15,8 +15,11 @@
             </nav>
         </div>
         
-        <div id="loginMainContainer" class="container">    
-            <div ng-show="!showSignup" id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+        <div id="loginMainContainer" class="container">   
+
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alerts.splice($index, 1)">{{alert.msg}}</uib-alert>
+ 
+            <div ng-show="!showSignup" id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
                 <div class="panel panel-default" >
                         <div class="panel-heading">
                             <div class="panel-title">Sign In</div>
@@ -45,12 +48,12 @@
                                     
                                 <div class="input-group">
                                           
-                                          <div class="checkbox">
+                                          <!--div class="checkbox">
                                             <label>
                                               <input id="loginRemember" ng-model="loginAttempt.rememberMe" type="checkbox" name="remember" value="1"> Remember me
                                             </label>
                                           </div>
-                                        </div>
+                                        </div-->
 
 
                                     <div style="margin-top:10px" class="form-group">
@@ -60,7 +63,7 @@
                                           
                                           <input id="submitBtn" type="submit" ng-click="doLogin()" class="btn btn-primary" value="Login">
                                           
-                                          <a id="btn-fblogin" href="#" class="btn btn-link">Login with Facebook</a>
+                                          <!--a id="btn-fblogin" href="#" class="btn btn-link">Login with Facebook</a-->
 
                                         </div>
                                     </div>
@@ -70,7 +73,7 @@
                                         <div class="col-md-12 control">
                                             <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                                                 Don't have an account! 
-                                            <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                            <a href="#" ng-click="showSignup=true">
                                                 Sign Up Here
                                             </a>
                                             </div>

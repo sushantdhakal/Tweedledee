@@ -5,6 +5,7 @@
  */
 
 body { padding-top:70px; }
+.login-box { margin-top:50px;position:fixed; }
 .color-one{ color:#b366ff; }
 .color-two{ color:#3333ff; }
 .color-three{ color:#ff3377; }

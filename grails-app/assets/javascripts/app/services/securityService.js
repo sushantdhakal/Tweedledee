@@ -34,6 +34,8 @@ angular.module('app')
   };
 
   service.logout = function() {
+    delete $rootScope.currentUser;
+    delete currentUser;
     setCurrentUser(undefined);
     $location.path('/login?logout=1');
   };
