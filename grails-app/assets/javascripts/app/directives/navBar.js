@@ -10,26 +10,13 @@ angular.module('app')
             profileService.getFollowers($scope,$scope.handle);
             profileService.getFollowing($scope,$scope.handle); 
         }
-        $scope.logout = function() { securityService.logout(); }
+        $scope.logout = function() { 
+            $interval.cancel($scope.reloader);
+            securityService.logout(); 
+        }
         $scope.reloader = $interval(function(){ $scope.reload },60000);
         $scope.reload();
 
-        // function _hidealert(){ $timeout(function(){ _resetalert() },7500); }
-        
-        // function _resetalert(){ $scope.alert={active:false,class:'',mesg:''} }
-
-        // _resetalert();
-
-        // $scope.$watch(function(){return $scope.followers},function(n,o){
-        //     if (n!=o && n) { 
-        //         if( (_.isArray(n) && _.isArray(o) && n.length > o.length) ) {
-        //             $scope.alert.active=true;
-        //             $scope.alert.class='alert-success';
-        //             $scope.alert.mesg=$sce.trustAsHtml('<strong>New Follower!</strong> You have more followers.');
-        //             _hidealert(); 
-        //         }
-        //     } 
-        // });
     }
 
     function _link(scope, iElem, iAttrs){ }

@@ -1,14 +1,13 @@
 angular.module('app')
 .factory('securityService',
-  ['$http', '$rootScope', '$location', 'webStorage', 
-  function ($http, $rootScope, $location, webStorage) {
+  function ($http, $rootScope, $window, webStorage) {
   var service = {};
 
   var currentUser;
 
   var setCurrentUser = function(user) {
     currentUser = user;
-    webStorage.set('tweedledeeUser', currentUser,false);
+    webStorage.set('tweedledeeUser',currentUser,false);
     $rootScope.currentUser = currentUser;
     console.log(' current user ',currentUser);
   };
@@ -35,14 +34,12 @@ angular.module('app')
   };
 
   service.logout = function() {
-    delete $rootScope.currentUser;
-    delete currentUser;
     setCurrentUser(undefined);
-    $location.path('/login?logout=1');
+    $window.location.assign('#/login?logout=1');
   };
 
   setCurrentUser(webStorage.get('tweedledeeUser', true));
 
   return service;
-}]);
+});
 
