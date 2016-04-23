@@ -10,6 +10,7 @@ angular.module('app')
             profileService.getFollowers($scope,$scope.handle);
             profileService.getFollowing($scope,$scope.handle); 
         }
+        $scope.logout = function() { securityService.logout(); }
         $scope.reloader = $interval(function(){ $scope.reload },60000);
         $scope.reload();
 

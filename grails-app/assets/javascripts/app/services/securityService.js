@@ -10,6 +10,7 @@ angular.module('app')
     currentUser = user;
     webStorage.set('tweedledeeUser', currentUser,false);
     $rootScope.currentUser = currentUser;
+    console.log(' current user ',currentUser);
   };
 
   var loginSuccess = function (response) {
