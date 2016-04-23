@@ -1,10 +1,22 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 50.0.2661 (Mac OS X 10.10.5)" package="" timestamp="2016-04-23T19:27:54" id="0" hostname="x-10-104-98-11.uofm-secure.wireless.umn.edu" tests="0" errors="1" failures="0" time="0">
+<testsuite name="Chrome 50.0.2661 (Mac OS X 10.10.5)" package="" timestamp="2016-04-23T23:36:11" id="0" hostname="x-10-104-98-11.uofm-secure.wireless.umn.edu" tests="4" errors="0" failures="0" time="0.069">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"/>
   </properties>
+  <testcase name="securityService login handles valid login" time="0.048" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).securityService"/>
+  <testcase name="securityService login handles invalid login" time="0.01" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).securityService"/>
+  <testcase name="securityService logout clears out the current user" time="0.005" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).securityService"/>
+  <testcase name="securityService logout routes back to login screen" time="0.006" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).securityService"/>
   <system-out>
-    <![CDATA[
+    <![CDATA[Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', null
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'earl', roles: ['root'], token: 'xyz123'}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'earl', roles: ['root'], token: 'xyz123'}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', undefined
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', null
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', undefined
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', null
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', undefined
+
 ]]>
   </system-out>
   <system-err/>

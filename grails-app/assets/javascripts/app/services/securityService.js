@@ -35,7 +35,7 @@ angular.module('app')
 
   service.logout = function() {
     setCurrentUser(undefined);
-    $window.location.assign('#/login?logout=1');
+    $window.location = '#/login?logout=1';
   };
 
   setCurrentUser(webStorage.get('tweedledeeUser', true));

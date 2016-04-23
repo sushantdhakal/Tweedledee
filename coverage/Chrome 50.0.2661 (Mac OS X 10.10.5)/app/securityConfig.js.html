@@ -20,28 +20,28 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">7.14% </span>
+        <span class="strong">85.71% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/14</span>
+        <span class='fraction'>12/14</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">83.33% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/6</span>
+        <span class='fraction'>5/6</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/4</span>
+        <span class='fraction'>4/4</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">7.14% </span>
+        <span class="strong">85.71% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/14</span>
+        <span class='fraction'>12/14</span>
       </div>
     </div>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -70,64 +70,64 @@
 25
 26
 27</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module('app').config(<span class="fstat-no" title="function not covered" >function ($provide, $httpProvider) {</span>
-<span class="cstat-no" title="statement not covered" >  $provide.factory('httpAuthTokenInterceptor', <span class="fstat-no" title="function not covered" >function ($q, $injector) {</span></span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">angular.module('app').config(function ($provide, $httpProvider) {
+  $provide.factory('httpAuthTokenInterceptor', function ($q, $injector) {
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return {</span>
-      'request': <span class="fstat-no" title="function not covered" >function (config) {</span>
-<span class="cstat-no" title="statement not covered" >        var securityService = $injector.get('securityService');</span>
-<span class="cstat-no" title="statement not covered" >        var currentUser = securityService.currentUser();</span>
-<span class="cstat-no" title="statement not covered" >        if (currentUser) {</span>
-<span class="cstat-no" title="statement not covered" >          config.headers['Content-Type'] = 'application/json';</span>
-<span class="cstat-no" title="statement not covered" >          config.headers['X-Auth-Token'] = currentUser.token;</span>
+    return {
+      'request': function (config) {
+        var securityService = $injector.get('securityService');
+        var currentUser = securityService.currentUser();
+        if (currentUser) {
+          config.headers['Content-Type'] = 'application/json';
+          config.headers['X-Auth-Token'] = currentUser.token;
         }
-<span class="cstat-no" title="statement not covered" >        return config;</span>
+        return config;
       },
 &nbsp;
-      'responseError': <span class="fstat-no" title="function not covered" >function (rejection) {</span>
-<span class="cstat-no" title="statement not covered" >        if (rejection &amp;&amp; rejection.status == 401) {</span>
+      'responseError': function (rejection) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (rejection &amp;&amp; rejection.status == 401) {
 <span class="cstat-no" title="statement not covered" >          var securityService = $injector.get('securityService');</span>
 <span class="cstat-no" title="statement not covered" >          securityService.logout();</span>
         }
-<span class="cstat-no" title="statement not covered" >        return $q.reject(rejection);</span>
+        return $q.reject(rejection);
       }
 &nbsp;
     };
   });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  $httpProvider.interceptors.push('httpAuthTokenInterceptor')</span>
+  $httpProvider.interceptors.push('httpAuthTokenInterceptor')
 });</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Apr 23 2016 14:27:54 GMT-0500 (CDT)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Apr 23 2016 18:36:12 GMT-0500 (CDT)
 </div>
 </div>
 <script src="../prettify.js"></script>
