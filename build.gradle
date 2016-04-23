@@ -16,6 +16,7 @@ buildscript {
 plugins {
   id "io.spring.dependency-management" version "0.5.4.RELEASE"
   id 'com.craigburke.bower-installer' version '2.5.1'
+  id 'com.craigburke.karma' version '1.4.3'
 }
 
 bower {
@@ -53,6 +54,29 @@ bower {
         source 'css/**' >> 'css/'
         source 'fonts/**' >> 'fonts/'
 
+    }
+}
+
+karma {
+    profile 'default'
+    colors = true
+
+    browsers = ['Chrome']
+    frameworks = ['jasmine']
+    reporters = ['junit', 'progress', 'coverage']
+    preprocessors = [
+    '**/grails-app/assets/javascripts/app/**/*.js': ['coverage']
+    ]
+
+    profile('default') {
+    libraryBases = ['**/grails-app/assets/bower/']
+    libraryFiles = ['**/jquery.js', '**/angular.js', '**/!(jquery|angular).js']
+
+    sourceBases = ['**/grails-app/assets/javascripts/']
+    sourceFiles = ['application.js', 'app/**/*.js']
+
+    testBases = ['**/src/test/javascript/']
+    testFiles = ['*.js']
     }
 }
 
