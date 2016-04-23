@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<testsuite name="Chrome 50.0.2661 (Mac OS X 10.10.5)" package="" timestamp="2016-04-23T19:27:54" id="0" hostname="x-10-104-98-11.uofm-secure.wireless.umn.edu" tests="0" errors="1" failures="0" time="0">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"/>
+  </properties>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>
