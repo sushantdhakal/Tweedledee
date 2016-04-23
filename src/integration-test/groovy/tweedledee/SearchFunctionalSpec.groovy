@@ -4,7 +4,9 @@ import geb.spock.GebSpec
 import grails.test.mixin.integration.Integration
 import spock.lang.Stepwise
 import org.openqa.selenium.JavascriptExecutor;
+import spock.lang.*
 
+@Ignore
 @Integration
 @Stepwise
 class SearchFunctionalSpec extends GebSpec {

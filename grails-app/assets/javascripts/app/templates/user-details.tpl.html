@@ -1,120 +1,121 @@
 
-<div ng-include src="'/app/nav-bar.html'" ng-controller="navController"></div>
+<div nav-bar></div>
 
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h3 class="panel-title" ng-show="isLoggedInUser">YOUR PROFILE</h3>
-        <h3 class="panel-title" ng-show="!isLoggedInUser">USER PROFILE</h3>
-    </div>
-    <div class="panel-body">
-
-<div class="row">
-        <div class="col-md-6">
-            <ul class="list-inline">
-
-                <li class="user-detail-label">
-                    Name:
-                </li>
-
-                <li ng-show="!showNameInput" class="user-detail-text" ng-class="{'user-detail-logged':isLoggedInUser}">
-                    <span id="profileName" ng-click="edit('name')">{{name}}</span>
-                </li>
-
-                <li ng-show="isLoggedInUser && !showNameInput">
-                    <input id="editNameBtn" type="button" class="btn btn-link btn-xs" value="Edit" ng-click="edit('name')">
-                </li>
-
-                <li ng-show="isLoggedInUser && showNameInput">
-                    <input id="editNameInput" ng-model="name" class="form-control input-xs">
-                </li> 
-
-                <li ng-show="isLoggedInUser && showNameInput">
-                    <input id="editNameCancelBtn" type="button" class="btn btn-warning btn-xs" ng-click="cancel('name')" value="cancel">
-                </li>
-
-                <li ng-show="isLoggedInUser && showNameInput">
-                    <input id="editNameSaveBtn" type="button" class="btn btn-warning btn-xs" ng-click="save('name')" value="save">
-                </li>
-
-            </ul>
-        </div>
-        <div id="profileEmail" class="col-md-6">
-            <ul class="list-inline">
-
-                <li class="user-detail-label">
-                    Email:
-                </li>
-
-                <li ng-show="!showEmailInput" class="user-detail-text" ng-class="{'user-detail-logged':isLoggedInUser}">
-                    <span id="profileEmail" ng-click="edit('email')">{{email}}</span>
-                </li>
-
-                <li ng-show="isLoggedInUser && !showEmailInput">
-                    <input id="editEmailBtn" type="button" class="btn btn-link btn-xs" value="Edit" ng-click="edit('email')">
-                </li>
-
-                <li ng-show="isLoggedInUser && showEmailInput">
-                    <input id="editEmailInput" ng-model="email" class="form-control input-xs">
-                </li> 
-
-                <li ng-show="isLoggedInUser && showEmailInput">
-                    <input id="editEmailCancelBtn" type="button" class="btn btn-warning btn-xs" ng-click="cancel('email')" value="cancel">
-                </li>
-
-                <li ng-show="isLoggedInUser && showEmailInput">
-                    <input id="editEmailSaveBtn" type="button" class="btn btn-warning btn-xs" ng-click="save('email')" value="save">
-                </li>
-
-            </ul>
-        </div>
- </div>       
+<div class="container">
 
 <div class="row">
 
-    <div class="col-md-6">
+<div class="col-md-4">
 
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">FOLLOWERS</h3>
+<div ng-show="profileimg!=''" class="profile-pic-container"><img src="../assets/{{profileimg}}" class="profile-pic"></div>
+
+<div ng-show="!isLoggedInUser" class="row profile-handle-container">
+    <ul class="list-inline">
+    <li class="profile-handle"><i class="fa fa-at fa-lg icon-left color-two"></i>{{handle}}</li>
+    <li follow-me viewed-user="handle"></li>
+    </ul>
+</div>
+
+<div ng-show="isLoggedInUser" class="row profile-handle-container">
+    <div class="col-sm-10 profile-handle"><i class="fa fa-at fa-lg icon-left color-two"></i>{{handle}}</div>
+</div>
+
+<ul class="list-inline">
+
+    <li ng-show="asdasdfdsa" class="user-detail-label">
+        Name:
+    </li>
+
+    <li ng-show="!showNameInput" class="user-detail-text" ng-class="{'user-detail-logged':isLoggedInUser}">
+        <span id="profileName" ng-click="edit('name')">{{name}}</span>
+    </li>
+
+    <li ng-show="isLoggedInUser && !showNameInput">
+        <input id="editNameBtn" type="button" class="btn btn-link btn-xs" value="Edit" ng-click="edit('name')">
+    </li>
+
+    <li ng-show="isLoggedInUser && showNameInput">
+        <input id="editNameInput" ng-model="name" class="form-control input-xs">
+    </li> 
+
+    <li ng-show="isLoggedInUser && showNameInput">
+        <input id="editNameCancelBtn" type="button" class="btn btn-warning btn-xs" ng-click="cancel('name')" value="cancel">
+    </li>
+
+    <li ng-show="isLoggedInUser && showNameInput">
+        <input id="editNameSaveBtn" type="button" class="btn btn-warning btn-xs" ng-click="save('name')" value="save">
+    </li>
+
+</ul>
+
+       
+<ul class="list-inline">
+
+    <li ng-show="asdasdfdsa" class="user-detail-label">
+        Email:
+    </li>
+
+    <li ng-show="!showEmailInput" class="user-detail-text" ng-class="{'user-detail-logged':isLoggedInUser}">
+        <span id="profileEmail" ng-click="edit('email')">{{email}}</span>
+    </li>
+
+    <li ng-show="isLoggedInUser && !showEmailInput">
+        <input id="editEmailBtn" type="button" class="btn btn-link btn-xs" value="Edit" ng-click="edit('email')">
+    </li>
+
+    <li ng-show="isLoggedInUser && showEmailInput">
+        <input id="editEmailInput" ng-model="email" class="form-control input-xs">
+    </li> 
+
+    <li ng-show="isLoggedInUser && showEmailInput">
+        <input id="editEmailCancelBtn" type="button" class="btn btn-warning btn-xs" ng-click="cancel('email')" value="cancel">
+    </li>
+
+    <li ng-show="isLoggedInUser && showEmailInput">
+        <input id="editEmailSaveBtn" type="button" class="btn btn-warning btn-xs" ng-click="save('email')" value="save">
+    </li>
+
+</ul>
+
+<div class="" ng-show="followers.length>0">
+<p><i class="fa fa-users icon-left color-two"></i> <strong>Followers</strong></p>
+<ul class="list-inline" ng-show="followers.length>0" id="followerList">
+    <li ng-repeat="follower in followers">
+        <a id="follower_{{follower.handle}}" ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a>
+    </li>
+</ul>
+</div>
+
+<div class="" ng-show="following.length>0">
+<p><i class="fa fa-users icon-left color-two"></i> <strong>Following</strong></p>
+<ul class="list-inline" ng-show="following.length>0" id="following">
+    <li ng-repeat="follower in following">
+        <a id="following_{{follower.handle}}" ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a>
+    </li>
+</ul>
+</div>
+
+</div>
+
+<div class="col-md-8">
+    
+    <div class="row" style="margin-bottom:7px">
+        <form class="form col-md-8" role="search">
+            <div class="input-group">
+                <input id="searchBox" type="text" ng-model="searchText" class="form-control input-sm" placeholder="What's on your mind??">
+                <div class="input-group-btn">
+                    <button id="searchBtn" class="btn btn-prmiary btn-sm" type="submit" ng-click="add()"><i class="fa fa-reply"></i></button>
+                </div>
             </div>
-
-            <!-- Table -->
-            <table ng-show="followers.length>0" class="table" id="followerList">
-                <tr ng-repeat="follower in followers" style="cursor: pointer;">
-                    <td><a id="follower_{{follower.handle}}" ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a></td>
-                </tr>
-            </table>
-
-            <div style="padding:7px" ng-show="followers.length==0">No followers.</div>
-
-        </div>
+        </form>
     </div>
-    <div class="col-md-6">
-        <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading">
-                <h3 class="panel-title">FOLLOWING</h3>
-            </div>
 
-            <!-- Table -->
-            <table ng-show="following.length>0" class="table" id="following">
-                <tr ng-repeat="follower in following" style="cursor: pointer;">
-                    <td><a id="following_{{follower.handle}}" ng-href="#/account/{{follower.handle}}">{{follower.handle}}</a></td>
-                </tr>
-            </table>
-
-            <div style="padding:7px" ng-show="following.length==0">Not following anyone right now.</div>
-        </div>
-
-    </div>
-</div>
-
-<div class="row">
-    <div ng-include="'/app/message-list.html'" ng-controller="messagesController"></div>
-</div>
-
+    <div class="row">
+        <div class="col-md-8" ng-controller="messagesController" ng-include="'/app/message-list.html'"></div>
     </div>
 
 </div>
 
+</div>
 
+</div>

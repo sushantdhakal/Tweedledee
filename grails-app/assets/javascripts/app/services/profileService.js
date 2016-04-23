@@ -1,13 +1,14 @@
 angular.module('app')
-.factory('profileService',function ($http, $interval, $timeout, $route, errorService) {
+.factory('profileService',function ($http, $interval, $timeout, $route, $httpParamSerializer, errorService) {
     
     var service = {}, baseUrl = '/api';
     var alertObj = {active:false,mesg:''}
-
-
-    function stoploading(v) {
-        $timeout(function(){ v.loading=false; },1000);
-    }
+    var imgs = {
+        "admin":"placeholderimg4.png",
+        "sushantdhakal":"placeholderimg2.png",
+        "paulM":"placeholderimg3.png",
+        "mikeCalvo":"placeholderimg2.png"
+    };
 
     service.getProfile = function(scope,id){
 
@@ -27,6 +28,7 @@ angular.module('app')
                 scope.messageCount         =resp.data.messageCount;
                 scope.followers            =angular.copy(resp.data.followers);
                 scope.following            =angular.copy(resp.data.following);
+                scope.profileimg           =(imgs[scope.handle])?imgs[scope.handle]:"placeholderimg2.png";
             }
 
         }, function errorCallback(fail) {
@@ -40,59 +42,18 @@ angular.module('app')
 
     }
 
-    service.getMessagesByUser = function(scope,id){
-
-        var accountId = (angular.isDefined(id)) ? id : 0;
-
-        scope.messages=[];
-
-        $http.get(baseUrl+'/account/'+accountId+'/messages?max='+scope.max+'&offset='+scope.offset).then(function(resp){
-            console.log('get messages',resp);
-            $timeout(function(){scope.loading=false;},1000);
-            if(resp.status==200) scope.messages=angular.copy(resp.data); 
-
-        },function(fail){
-            scope.loading=false;
-            var m='An error has occured while trying to fetch messages. '+fail.status;
-            scope.alert=alertObj;
-            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
-            errorService.showAlert(scope.alert,m);
-        });
-
-    }
-
-    service.getMessagesBySearchTerm = function(scope){
-        
-        var term = scope.searchTerm;
-
-        var payload = (angular.isDefined(term)) ? {"searchTerm":term} : {"searchTerm":''};
-
-        $http.post(baseUrl+'/messages/search?max='+scope.max+'&offset='+scope.offset,payload).then(function(resp){
-            console.log('get messages',resp);
-
-            scope.loading=false;
-
-            if(resp.status==200) {
-                scope.messages=angular.copy(resp.data); 
-                scope.hasSearchResults=true;
-            }
-
-        },function(fail){
-            scope.loading=false;
-            var m='An error has occured while trying to fetch messages. '+fail.status;
-            scope.alert=alertObj;
-            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
-            errorService.showAlert(scope.alert,m);
-        });
-
-    }
-
     service.getFollowers = function(scope,id){
 
-        var accountId = (angular.isDefined(id)) ? id : 0;
+        var accountId = (angular.isDefined(id)) ? id : 0,
+            rPath = baseUrl+'/account/'+accountId+'/followers',
+            params={};
 
+        if(angular.isDefined(scope.max)&&scope.max>0) params.max=scope.max;
+        if(angular.isDefined(scope.offset)&&scope.offset>0) params.offset=scope.offset;
+        if(!_.isEmpty(params)) rPath=rPath+'?'+$httpParamSerializer(params);
+        
         scope.messages=[];
-        $http.get(baseUrl+'/account/'+accountId+'/followers?max='+scope.max+'&offset='+scope.offset).then(function(resp){
+        $http.get(rPath).then(function(resp){
             console.log('get followers',resp);
             scope.loading=false;
             if(resp.status==200) scope.followers=angular.copy(resp.data.followers); 
@@ -110,11 +71,17 @@ angular.module('app')
     service.getFollowing = function(scope,id){
 
         var hasScope = (scope!==null) ? true : false,
-        accountId = (angular.isDefined(id)) ? id : 0;
+        accountId = (angular.isDefined(id)) ? id : 0,
+            rPath = baseUrl+'/account/'+accountId+'/following',
+            params={};
+
+        if(angular.isDefined(scope.max)&&scope.max>0) params.max=scope.max;
+        if(angular.isDefined(scope.offset)&&scope.offset>0) params.offset=scope.offset;
+        if(!_.isEmpty(params)) rPath=rPath+'?'+$httpParamSerializer(params);
 
         scope.messages=[];
 
-        $http.get(baseUrl+'/account/'+accountId+'/following?max='+scope.max+'&offset='+scope.offset).then(function(resp){
+        $http.get(rPath).then(function(resp){
             console.log('get following',resp);
             scope.loading=false;
             if(resp.status==200) scope.following=angular.copy(resp.data.following);
@@ -133,6 +100,7 @@ angular.module('app')
         var ret = true;
         $http.get(baseUrl+'/account/'+scope.viewingUserId+'/followers').then(function(resp){
             console.log('compare followers',resp.data);
+            scope.isFollowing=false;
             if(resp.status==200){
                 angular.forEach(resp.data.followers,function(follower){
                     if(follower.handle==scope.loggedInUserHandle) scope.isFollowing=true;

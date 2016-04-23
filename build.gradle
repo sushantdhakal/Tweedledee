@@ -38,6 +38,22 @@ bower {
     'angular-resource'('1.5.x'){
         source 'angular-resource.js'
     }
+    'angular-animate'('1.5.5'){
+        source 'angular-animate.js'
+    }
+    'lodash'('4.11.1'){
+        source 'dist/lodash.js'
+    }
+    'angular-strap'('2.3.8'){
+        source 'dist/modules/**' >> 'modules/'
+        source 'dist/angular-strap.js'
+        source 'dist/angular-strap.tpl.js'
+    }
+    'font-awesome'('4.6.1'){
+        source 'css/**' >> 'css/'
+        source 'fonts/**' >> 'fonts/'
+
+    }
 }
 
 version "0.1"

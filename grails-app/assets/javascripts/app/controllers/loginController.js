@@ -2,7 +2,8 @@ angular.module('app').controller('loginController', function($scope, $location, 
   
   $scope.error='';
   $scope.message='';
-
+  $scope.pageTitle='Login';
+  
   if( angular.isDefined($location.search().logout) ) {
     var lo=$location.search();
     if(lo.logout) {

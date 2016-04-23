@@ -7,10 +7,10 @@
 * You're free to add application-wide styles to this file and they'll appear at the top of the
 * compiled file, but it's generally better to create a new file per style scope.
 *
-*= require main
-*= require mobile
 *= require_self
 *= require ../bower/angular/angular-csp.css
 *= require ../bower/bootstrap/css/bootstrap.css
 *= require ../bower/bootstrap/css/bootstrap-theme.css
+*= require ../bower/font-awesome/css/font-awesome.css
+*= require tweedledee.css
 */

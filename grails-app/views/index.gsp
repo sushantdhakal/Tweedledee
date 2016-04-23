@@ -6,8 +6,7 @@
 
     <asset:javascript src="application.js"/>
     <asset:stylesheet src="application.css"/>
-    <asset:stylesheet src="tweedledee.css"/>
-    <asset:stylesheet src="simple-sidebar.css"/>
+
 </head>
 
 <body class="mainBodyDiv" ng-app="app">
