@@ -1,25 +1,25 @@
 angular.module('app').config(function ($provide, $httpProvider) {
-  $provide.factory('httpAuthTokenInterceptor', function ($rootScope) {
-
-    var token;
-
-    $rootScope.$on('userChange', function (event, user) {
-      if (user) {
-        token = user.token;
-        console.log('token: '+token);
-      } else {
-        token = undefined;
-      }
-    });
+  $provide.factory('httpAuthTokenInterceptor', function ($q, $injector) {
 
     return {
       'request': function (config) {
-        if (token) {
+        var securityService = $injector.get('securityService');
+        var currentUser = securityService.currentUser();
+        if (currentUser) {
           config.headers['Content-Type'] = 'application/json';
-          config.headers['X-Auth-Token'] = token;
+          config.headers['X-Auth-Token'] = currentUser.token;
         }
         return config;
+      },
+
+      'responseError': function (rejection) {
+        if (rejection && rejection.status == 401) {
+          var securityService = $injector.get('securityService');
+          securityService.logout();
+        }
+        return $q.reject(rejection);
       }
+
     };
   });
 

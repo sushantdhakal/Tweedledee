@@ -1,20 +1,27 @@
-angular.module('app').factory('securityService', ['$http', '$rootScope','$location', function ($http, $rootScope,$location) {
+angular.module('app')
+.factory('securityService',
+  function ($http, $rootScope, $window, webStorage) {
   var service = {};
+
   var currentUser;
 
+  var setCurrentUser = function(user) {
+    currentUser = user;
+    webStorage.set('tweedledeeUser',currentUser,false);
+    $rootScope.currentUser = currentUser;
+    console.log(' current user ',currentUser);
+  };
+
   var loginSuccess = function (response) {
-    currentUser = {
+    setCurrentUser({
       username: response.data.username,
       roles: response.data.roles,
       token: response.data['access_token']
-    };
-
-    $rootScope.$emit('userChange', currentUser)
+    });
   };
 
   var loginFailure = function () {
-    currentUser = undefined
-    delete $rootScope.currentUser;
+    setCurrentUser(undefined);
   };
 
   service.login = function (username, password) {
@@ -22,14 +29,17 @@ angular.module('app').factory('securityService', ['$http', '$rootScope','$locati
     return $http.post('/api/login', loginPayload).then(loginSuccess, loginFailure);
   };
 
-  service.logout = function (){
-    currentUser = undefined;
-    delete $rootScope.currentUser;
-    $location.path('#/login?logout=1');
-  }
-
   service.currentUser = function () {
     return currentUser;
   };
+
+  service.logout = function() {
+    setCurrentUser(undefined);
+    $window.location = '#/login?logout=1';
+  };
+
+  setCurrentUser(webStorage.get('tweedledeeUser', true));
+
   return service;
-}]);
+});
+

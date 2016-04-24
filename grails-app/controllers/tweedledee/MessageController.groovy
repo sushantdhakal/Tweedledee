@@ -52,6 +52,13 @@ class MessageController extends RestfulController<Message> {
         respond res
     }
 
+    def addMessageToAccount(){
+        def text=request.JSON.text
+        def accountID = _handleAccountId(params.accountId)
+        def p=[text:text,account:[id:accountID]]
+        new Message(p).save()
+    }
+
     @Override
     def create(){
         _respondError(404,"Not found")

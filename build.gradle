@@ -16,43 +16,80 @@ buildscript {
 plugins {
   id "io.spring.dependency-management" version "0.5.4.RELEASE"
   id 'com.craigburke.bower-installer' version '2.5.1'
+  id 'com.craigburke.karma' version '1.4.3'
 }
 
 bower {
 
-  'bootstrap'('3.3.x') {
-    source 'dist/css/bootstrap.css' >> 'css/'
-    source 'dist/css/bootstrap-theme.css' >> 'css/'
-    source 'dist/fonts/**' >> 'fonts/'
-    source 'dist/js/bootstrap.js'
-    excludes 'jquery'
-  }
+    'jquery'('2.2.x') {
+        source 'dist/jquery.js'
+    }
+
+    'bootstrap'('3.3.x') {
+        source 'dist/css/bootstrap.css' >> 'css/'
+        source 'dist/css/bootstrap-theme.css' >> 'css/'
+        source 'dist/fonts/**' >> 'fonts/'
+        source 'dist/js/bootstrap.js'
+    }
 
     'angular'('1.5.x') {
         source 'angular.js'
         source 'angular-csp.css'
     }
+
+    'angular-mocks'('1.5.x') {
+        source 'angular-mocks.js'
+    }
+
     'angular-route'('1.5.x') {
         source 'angular-route.js'
     }
-    'angular-resource'('1.5.x'){
+
+    'angular-resource'('1.5.x') {
         source 'angular-resource.js'
     }
-    'angular-animate'('1.5.5'){
-        source 'angular-animate.js'
+
+    'angular-bootstrap'('1.3.x') {
+        source 'ui-bootstrap.js'
+        source 'ui-bootstrap-tpls.js'
+        source 'ui-bootstrap-csp.css' >> 'css/'
     }
+
+    'angular-webstorage'() {
+        source 'angular-webstorage.js'
+    }
+
     'lodash'('4.11.1'){
         source 'dist/lodash.js'
     }
-    'angular-strap'('2.3.8'){
-        source 'dist/modules/**' >> 'modules/'
-        source 'dist/angular-strap.js'
-        source 'dist/angular-strap.tpl.js'
-    }
+    
     'font-awesome'('4.6.1'){
         source 'css/**' >> 'css/'
         source 'fonts/**' >> 'fonts/'
 
+    }
+}
+
+karma {
+    profile 'default'
+    colors = true
+
+    browsers = ['Chrome']
+    frameworks = ['jasmine']
+    reporters = ['junit', 'progress', 'coverage']
+    preprocessors = [
+    '**/grails-app/assets/javascripts/app/**/*.js': ['coverage']
+    ]
+
+    profile('default') {
+        libraryBases = ['**/grails-app/assets/bower/']
+        libraryFiles = ['**/jquery.js', '**/angular.js', '**/!(jquery|angular).js']
+
+        sourceBases = ['**/grails-app/assets/javascripts/']
+        sourceFiles = ['application.js', 'app/**/*.js']
+
+        testBases = ['**/src/test/javascript/']
+        testFiles = ['*.js']
     }
 }
 

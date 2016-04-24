@@ -97,21 +97,24 @@
 
 </div>
 
-<div class="col-md-8">
+<div ng-controller="messagesController" class="col-md-8">
+    <div ng-show="messagePostedAlert">
+        jsdfksjdfksdj
+    </div>
     
-    <div class="row" style="margin-bottom:7px">
+    <div ng-show="isLoggedInUser" class="row" style="margin-bottom:7px">
         <form class="form col-md-8" role="search">
             <div class="input-group">
-                <input id="searchBox" type="text" ng-model="searchText" class="form-control input-sm" placeholder="What's on your mind??">
+                <input id="searchBox" type="text" ng-model="messageText" class="form-control input-sm" placeholder="What's on your mind??">
                 <div class="input-group-btn">
-                    <button id="searchBtn" class="btn btn-prmiary btn-sm" type="submit" ng-click="add()"><i class="fa fa-reply"></i></button>
+                    <button id="addMessage" class="btn btn-prmiary btn-sm" type="submit" ng-click="addMessage(messageText)"><i class="fa fa-reply"></i></button>
                 </div>
             </div>
         </form>
     </div>
 
     <div class="row">
-        <div class="col-md-8" ng-controller="messagesController" ng-include="'/app/message-list.html'"></div>
+        <div class="col-md-8" ng-include="'/app/message-list.html'"></div>
     </div>
 
 </div>

@@ -51,6 +51,11 @@ angular.module('app')
         }
     }
 
+    $scope.addMessage = function(message){
+        messageService.addMessage($scope, message);
+        $scope.messagePostedAlert = messageService.messagePostedAlert;
+    }
+
 });
 
 
