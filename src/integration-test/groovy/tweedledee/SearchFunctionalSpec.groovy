@@ -23,10 +23,7 @@ class SearchFunctionalSpec extends GebSpec {
         when: 'n'
         login()
         then:
-        sleep(2000)
-        waitFor("quick") {
-            $('#searchBox').isDisplayed()
-        }
+        waitFor 2, { $('#searchBox').isDisplayed() }
     }
 
     // S2.1
@@ -35,18 +32,15 @@ class SearchFunctionalSpec extends GebSpec {
         login()
 
         then:
-        sleep(1500)
-        $('#searchBox').value("message")
-        sleep(1500)
-        $("#searchBtn").click()
+        waitFor 1.5, { $('#searchBox').value("message") }
+        waitFor 1.5, { $("#searchBtn").click() }
 
         $('#userMessagesList').displayed
         def scrollProof = 	"var style = window.getComputedStyle(document.getElementById('userMessagesList'), null);"+
                 "var vHeight = parseInt(style.getPropertyValue('height'));"+
                 "var sHeight = document.getElementById('userMessagesList').scrollHeight;"+
                 "return (sHeight > vHeight) ? true : false;"
-        sleep(5000)
-        browser.driver.executeScript(scrollProof)
+        waitFor 5, { browser.driver.executeScript(scrollProof) }
     }
 
     // S2.2
@@ -56,10 +50,8 @@ class SearchFunctionalSpec extends GebSpec {
         login()
 
         then:
-        sleep(1500)
-        $("#searchBox").value("Hello There")
-        sleep(1500)
-        $("#searchBtn").click()
+        waitFor 1.5, { $("#searchBox").value("Hello There") }
+        waitFor 1.5, { $("#searchBtn").click() }
         waitFor() {
             $('#searchResultsNotFound').displayed
             $("#searchResultsNotFound").text().contains("No Messages Found.")
@@ -71,10 +63,8 @@ class SearchFunctionalSpec extends GebSpec {
         when:
           login()
         then:
-        sleep(1500)
-        $('#searchBox').value("message")
-        sleep(1500)
-        $("#searchBtn").click()
+        waitFor 1.5, { $('#searchBox').value("message") }
+        waitFor 1.5, { $("#searchBtn").click() }
         waitFor() {
             $('#userMessagesList').displayed
             $("div.message-list ul.list-unstyled li.ng-scope span.message-text").text().contains("This is Mike's message")
@@ -87,16 +77,13 @@ class SearchFunctionalSpec extends GebSpec {
         when:
         login()
         then:
-        sleep(1500)
-        $('#searchBox').value("message")
-        sleep(1500)
-        $("#searchBtn").click()
+        waitFor 1.5, { $('#searchBox').value("message") }
+        waitFor 1.5, { $("#searchBtn").click() }
         waitFor() {
             $('#userMessagesList').displayed
             $("div.message-list").find('a').click()
         }
-        sleep(1500);
-        $("div.row div.col-md-6 ul.list-inline li.view-handle").text().contains("mikeCalvo")
+        waitFor 1.5, { $("div.row div.col-md-6 ul.list-inline li.view-handle").text().contains("mikeCalvo") }
         $("div.row div.col-md-6 ul.list-inline li.user-detail-text span.ng-binding").text().contains("Mike Calvo")
     }
 }
