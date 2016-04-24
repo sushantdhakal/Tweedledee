@@ -1,8 +1,9 @@
 angular.module('app')
-.factory('messageService',function ($http, $httpParamSerializer, $interval, $timeout, $route, errorService) {
+.factory('messageService',function ($http, $httpParamSerializer, $location, $interval, $timeout, $route, errorService) {
     
     var service = {}, baseUrl = '/api';
     var alertObj = {active:false,mesg:''}
+    var messagePostedAlert = false;
 
     service.getMessagesByUser = function(scope,id){
 
@@ -105,6 +106,28 @@ angular.module('app')
             errorService.showAlert(scope.alert,m);
         });
 
+    }
+
+    service.addMessage = function(scope, message){
+        var id = scope.loggedInUserHandle;
+        var payload = {text: message};
+        $http.put(baseUrl+'/message/addMessage?accountId='+id,payload).then(function(resp){
+            console.log('message posting  ',resp);
+            if(resp.status==200){
+                $route.reload();
+                messagePostedAlert = true;
+            }
+        },function(fail){
+            scope.loading=false;
+            var m='An error has occured while trying post the message. '+fail.status;
+            scope.alert=alertObj;
+            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
+            errorService.showAlert(scope.alert,m);
+        });
+    }
+
+    service.messagePostedAlert = function(){
+        return messagePostedAlert;
     }
 
     return service;

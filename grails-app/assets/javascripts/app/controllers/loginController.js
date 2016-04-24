@@ -6,7 +6,7 @@ angular.module('app')
 
   if(angular.isDefined($routeParams.logout) && $routeParams.logout==1){
       $scope.alerts = [{msg:'You\'ve been logged out of Tweedeldee, sorry to see you go! :-(', type:'info'}];
-      $timeout(function(){ $window.location.assign('#/login'); },10000);
+      $timeout(function(){ $window.location.assign('#/login'); },100000);
   }
 
   $scope.doLogin = function() {
