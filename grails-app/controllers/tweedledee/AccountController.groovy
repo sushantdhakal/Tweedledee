@@ -175,4 +175,23 @@ class AccountController extends RestfulController<Account> {
         respond error:code,message:"$mesg"
     }
 
+    def createNewAccount(){
+        def fullName = request.JSON.fullName
+        def userName=request.JSON.username
+        def password=request.JSON.password
+        def email=request.JSON.email
+
+        def acct=Account.findByHandle(userName)
+
+        if(!acct){
+            def newAcc = new Account(handle:userName,name:fullName,password:password,email:email).save(flush: true, failOnError: true)
+            def role = new Role(authority: 'ROLE_READ').save(flush: true, failOnError: true)
+            new AccountRole(account: newAcc, role: role).save(flush: true, failOnError: true)
+        }
+        else{
+            respond error:123,message:"Account already exist"
+        }
+
+    }
+
 }
