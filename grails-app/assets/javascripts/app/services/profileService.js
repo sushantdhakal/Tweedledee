@@ -9,6 +9,7 @@ angular.module('app')
             "paulM":"placeholderimg3.png",
             "mikeCalvo":"placeholderimg2.png"
         };
+        var signupMsgErr = false;
 
         service.getProfile = function(scope,id){
 
@@ -42,10 +43,6 @@ angular.module('app')
                 scope.alert=alertObj;
                 errorService.showAlert(scope.alert,m);
             });
-
-            //  }
-
-
         }
 
         service.getFollowers = function(scope,id){
@@ -155,5 +152,29 @@ angular.module('app')
             });
 
         }
+
+        service.createNewAccount = function(scope){
+            var fullName = scope.c_fullName;
+            var username = scope.c_username;
+            var password = scope.c_password;
+            var email = scope.c_email;
+
+            var payload = {fullName:fullName,username:username,password:password,email:email};
+
+            $http.put('/createNewAccount',payload).then(function(resp){
+                console.log('create new account  ',resp);
+                if(resp.data.error==123){
+                    signupMsgErr = true;
+                }
+                else{
+                    $location.path('/login')
+                }
+            });
+        }
+
+        service.signupMsgErr = function(){
+            return signupMsgErr;
+        }
+
         return service;
     });

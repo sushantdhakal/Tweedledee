@@ -43,20 +43,28 @@ angular.module('app')
 	  .when('/contact',{
             templateUrl: '/app/contact.html'
         })
+        .when('/signup',{
+            templateUrl: '/app/signup1.html',
+            controller: 'createAccountController'
+        })
     .otherwise({
       redirectTo: '/profile'
     })
   })
     
   // Protect all routes other than login
-  .run(function ($rootScope, $location, securityService) {
-    $rootScope.$on('$routeChangeStart', function (event, next) {
-      if (typeof next.$$route!=='undefined' && typeof next.$$route.originalPath!=='undefined' && next.$$route.originalPath!='/login') {
-        if (!securityService.currentUser()) {
-          $location.path('/login');
-        }
-      }
+
+    .run(function ($rootScope, $location, securityService) {
+        $rootScope.$on('$routeChangeStart', function (event, next) {
+            if(next.$$route.originalPath=='/signup'){
+                $location.path('/signup');
+            }
+            else if (typeof next.$$route!=='undefined' && typeof next.$$route.originalPath!=='undefined' && next.$$route.originalPath!='/login') {
+                if (!securityService.currentUser()) {
+                    $location.path('/login');
+                }
+            }
+        });
     });
-  });
 
 

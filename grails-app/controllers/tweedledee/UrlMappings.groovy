@@ -15,6 +15,7 @@ class UrlMappings {
         "/init"(controller:'account',action:'initMe')
         "/login"(controller:'account',action:'auth')
         "/punk"(controller:'account',action:'initAdmin')
+        "/createNewAccount"(controller:'account',action:'createNewAccount')
 
         // Errors
         //"500"(controller:'Error',action: 'internalServerError')

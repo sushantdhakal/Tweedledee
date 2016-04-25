@@ -1,0 +1,35 @@
+<div id="createNewAccount" class="col-xs-4" ng-controller="createAccountController">
+    <div style="font-weight: bold; color: red;" ng-show="signupMsgErr">Error while creating a new account</div>
+    <form name="createForm" role="form" autocomplete="off">
+        <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input ng-model="c_fullName" id="c_fullName" class="form-control" type="text"/>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input ng-model="c_username" id="c_username" class="form-control" type="text"/>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input ng-model="c_password" id="c_password" class="form-control" type="password"/>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Confirm Password</label>
+            <input ng-model="c_confirm_password" id="confirm_password" class="form-control" type="password"/>
+        </div>
+
+        <div class="form-group">
+            <label for="emailAddress">Email</label>
+            <input ng-model="c_email" id="c_email" class="form-control" type="email"/>
+        </div>
+        <br>
+        <div>
+
+        <input type="submit" class="btn btn-primary" ng-click="signupOne()" value="Create New Account"/>
+
+            </div>
+    </form>
+</div>
