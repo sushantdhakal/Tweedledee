@@ -41,11 +41,10 @@ class UserDetailFunctionalSpec extends GebSpec {
 	def 'User detail page will display the current user name (U1)'()
 	{
 		when:
-			user
-			sleep(5000)
+		user
 
 		then:
-			$("#profileName").text().contains(user.name)
+		waitFor 5, { $("#profileName").text().contains(user.name) }
 		
 
 	}
@@ -62,10 +61,9 @@ class UserDetailFunctionalSpec extends GebSpec {
 								"var vHeight = parseInt(style.getPropertyValue('height'));"+
 								"var sHeight = document.getElementById('userMessagesList').scrollHeight;"+
 								"return (sHeight > vHeight) ? true : false;"
-			sleep(5000)
-   
+
 		then:
-			browser.driver.executeScript(scrollProof)
+			waitFor 5, { browser.driver.executeScript(scrollProof) }
 			mesgs.each(){
 				$("messageId${it.id}_text").text() == it.text
 			}
@@ -79,10 +77,9 @@ class UserDetailFunctionalSpec extends GebSpec {
 		when:
 			user
 			go '/#/account/mikeCalvo'
-			sleep(5000)
 
 		then:
-			$("input",id:"followMeBtn").value()=="Follow!"
+		waitFor 5, { $("input",id:"followMeBtn").value()=="Follow!" }
 	
 	}
 
@@ -93,15 +90,12 @@ class UserDetailFunctionalSpec extends GebSpec {
 		when:
 			user
 			go '/#/account/paulM'
-			sleep(5000)
 
 		then:
-		waitFor(5,0.1){
+		waitFor 5, {
 			$("li",id:"followingMessage")
 			$("li",id:"followingMessage").text().contains("Following")
 		}
-			
-
 	}
 
 	// Requirment: U4.1
@@ -110,14 +104,11 @@ class UserDetailFunctionalSpec extends GebSpec {
 
 		when:
 			user
-			sleep(5000)
 
 		then:
-			$("input",id:"editNameBtn").click()
-			sleep(1000)
-			$("input",id:"editNameInput").value("AdminsNewName")
-			sleep(1000)
-			$("input",id:"editNameSaveBtn").click()
+			waitFor 5, { $("input",id:"editNameBtn").click() }
+			waitFor { $("input",id:"editNameInput").value("AdminsNewName") }
+		  waitFor { $("input",id:"editNameSaveBtn").click() }
 			waitFor(5,0.1){
 				$("span",id:"profileName").text() == "AdminsNewName"
 			}
@@ -130,14 +121,11 @@ class UserDetailFunctionalSpec extends GebSpec {
 
 		when:
 			user
-			sleep(5000)
 
 		then:
-			$("input",id:"editEmailBtn").click()
-			sleep(1000)
-			$("input",id:"editEmailInput").value("newadmineamil@me.net")
-			sleep(1000)
-			$("input",id:"editEmailSaveBtn").click()
+			waitFor 5, { $("input",id:"editEmailBtn").click() }
+			waitFor { $("input",id:"editEmailInput").value("newadmineamil@me.net") }
+			waitFor { $("input",id:"editEmailSaveBtn").click() }
 			waitFor(5,0.1){
 				$("span",id:"profileEmail").text() == "newadmineamil@me.net"
 			}
