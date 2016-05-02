@@ -101,17 +101,23 @@
     <div ng-show="messagePostedAlert">
         jsdfksjdfksdj
     </div>
-    
+
+    <form name="myForm">
     <div ng-show="isLoggedInUser" class="row" style="margin-bottom:7px">
         <form class="form col-md-8" role="search">
             <div class="input-group">
-                <input id="searchBox" type="text" ng-model="messageText" class="form-control input-sm" placeholder="What's on your mind??">
+                <input name="messageBox" id="messageBox" type="text" ng-minlength="1" ng-maxlength="45" ng-model="messageText" class="form-control input-sm" placeholder="What's on your mind??">
                 <div class="input-group-btn">
-                    <button id="addMessage" class="btn btn-prmiary btn-sm" type="submit" ng-click="addMessage(messageText)"><i class="fa fa-reply"></i></button>
+                    <button id="addMessage" class="btn btn-prmiary btn-sm" ng-disabled="myForm.messageBox.$error.maxlength" type="submit" ng-click="addMessage(messageText)"><i class="fa fa-reply"></i></button>
                 </div>
             </div>
         </form>
     </div>
+
+    <div>
+        <span class="error" style="font-weight: bold; color: red" ng-show="myForm.messageBox.$error.maxlength">Message is limited to only 40 characters</span>
+    </div>
+    </form>
 
     <div class="row">
         <div class="col-md-8" ng-include="'/app/message-list.html'"></div>
