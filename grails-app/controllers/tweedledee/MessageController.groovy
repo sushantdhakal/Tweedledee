@@ -59,6 +59,18 @@ class MessageController extends RestfulController<Message> {
         new Message(p).save()
     }
 
+    def deleteMessage(){
+        def text=request.JSON.text
+        def accountID = _handleAccountId(params.accountId)
+        def messageId = params.messageId
+       // def p=[message:[id:messageId],account:[id:accountID]]
+        def tempMsg = Message.where { id == messageId && account.id == accountID }.find()
+        //new Message(tempMsg).delete()
+        tempMsg.delete()
+        def test = 123
+
+    }
+
     @Override
     def create(){
         _respondError(404,"Not found")

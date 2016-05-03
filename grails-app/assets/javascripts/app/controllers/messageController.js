@@ -56,6 +56,11 @@ angular.module('app')
         $scope.messagePostedAlert = messageService.messagePostedAlert;
     }
 
+    $scope.deleteMessage = function(messageId, messageText){
+        messageService.deleteMessage($scope, messageId, messageText);
+
+    }
+
 });
 
 

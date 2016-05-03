@@ -30,7 +30,9 @@
             <a href="#/account/{{message.handle}}"><i class="fa fa-at fa-lg icon-left"></i>{{message.handle}}</a>
         </p>
         
-        <i class="fa fa-retweet fa-lg"></i>
+        <i class="fa fa-retweet fa-lg"></i>&nbsp;&nbsp;&nbsp;
+        <i class="fa fa-trash fa-lg" title="Delete Message" ng-click="deleteMessage(message.id, message.text)"></i>
+
     </div>
 
 </div>
