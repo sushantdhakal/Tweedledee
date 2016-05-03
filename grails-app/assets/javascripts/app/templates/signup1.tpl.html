@@ -7,48 +7,41 @@
     </div>
 </nav>
 <div id="createNewAccount" class="col-xs-4" ng-controller="createAccountController">
-    <div class="signup-wrapper">
+    <div class="signup-wrapper" style="margin-left:100%;">
         <h1 class="signuph1">Join TweedleDee today.</h1>
     <div style="font-weight: bold; color: red;" ng-show="signupMsgErr">Error while creating a new account</div>
     <form name="createForm" role="form" autocomplete="off">
         <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input ng-model="c_fullName" id="c_fullName" class="form-control" type="text"/>
+            <input placeholder="Full Name" ng-model="c_fullName" id="c_fullName" class="form-control" type="text"/>
         </div>
 
         <div class="form-group">
-            <label for="username">Username</label>
-            <input ng-model="c_username" id="c_username" class="form-control" type="text"/>
+            <input placeholder="Username" ng-model="c_username" id="c_username" class="form-control" type="text"/>
         </div>
 
         <div class="form-group">
-            <label for="password">Password</label>
-            <input ng-model="c_password" id="c_password" class="form-control" type="password"/>
+            <input placeholder="Password" ng-model="c_password" id="c_password" class="form-control" type="password"/>
         </div>
 
         <div class="form-group">
-            <label for="password">Confirm Password</label>
-            <input ng-model="c_confirm_password" id="confirm_password" class="form-control" type="password"/>
+            <input placeholder="Confirm Password" ng-model="c_confirm_password" id="confirm_password" class="form-control" type="password"/>
         </div>
 
         <div class="form-group">
-            <label for="emailAddress">Email</label>
-            <input ng-model="c_email" id="c_email" class="form-control" type="email"/>
+            <input placeholder="E-mail Address" ng-model="c_email" id="c_email" class="form-control" type="email"/>
         </div>
         <br>
 
-        <div>
-
-        <input type="submit" class="btn btn-primary" ng-click="signupOne()" value="Create New Account"/>
-            <p class="termsAndConditionP">Already have account? <a href="#/login">Sign In</a></p>
+        <div style="width: 100%; overflow: hidden;">
+            <div style="float: left;"><input type="submit" class="btn btn-primary" ng-click="signupOne()" value="Create New Account"/></div>
+            <div style="float: right;"><span class="signinP"> Already have account? <a href="#/login">Sign In</a></span></div>
 
 
         </div>
 
     </form>
         <br>
-        <p class="termsAndConditionP">By signing up, you agree to the Terms of Service and Privacy Policy of TweedleDee. Others will be able to find you by your user handle.</p>
-        <br>
+        <p class="termsAndConditionP">By signing up, you agree to the Terms of Service and Privacy Policy of TweedleDee, including cookie use.</p>
 
         <br><br>
     </div>
