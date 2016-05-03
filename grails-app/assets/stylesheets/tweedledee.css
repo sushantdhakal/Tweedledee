@@ -90,6 +90,12 @@ body { padding-top:70px; }
   padding: 0;
   margin-bottom: 24px;
 }
+.signinP {
+  line-height: 12px;
+  font-size: 14px;
+  color: #8899a6;
+}
+
 .termsAndConditionP {
   line-height: 18px;
   font-size: 12px;
