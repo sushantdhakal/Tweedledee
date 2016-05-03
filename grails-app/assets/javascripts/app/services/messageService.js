@@ -130,9 +130,6 @@ angular.module('app')
         return messagePostedAlert;
     }
 
-    //        "/api/message/deleteMessage/$accountId/$messageId"(controller: 'message', action: 'deleteMessage')
-
-
     service.deleteMessage = function(scope, messageId, messageText){
         var accountId = scope.loggedInUserHandle;
         $http.put(baseUrl+'/message/deleteMessage/'+accountId+'/'+messageId).then(function(resp){
