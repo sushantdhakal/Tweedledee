@@ -1,4 +1,14 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="row">
+
+        <div class="col-sm-2 navbar-text">
+            <i class="fa fa-braille fa-2x logo-icon color-one pull-left"></i> <span class="logo-title">Tweedledee</span>
+        </div>
+    </div>
+</nav>
 <div id="createNewAccount" class="col-xs-4" ng-controller="createAccountController">
+    <div class="signup-wrapper">
+        <h1 class="signuph1">Join TweedleDee today.</h1>
     <div style="font-weight: bold; color: red;" ng-show="signupMsgErr">Error while creating a new account</div>
     <form name="createForm" role="form" autocomplete="off">
         <div class="form-group">
@@ -26,10 +36,20 @@
             <input ng-model="c_email" id="c_email" class="form-control" type="email"/>
         </div>
         <br>
+
         <div>
 
         <input type="submit" class="btn btn-primary" ng-click="signupOne()" value="Create New Account"/>
+            <p class="termsAndConditionP">Already have account? <a href="#/login">Sign In</a></p>
 
-            </div>
+
+        </div>
+
     </form>
-</div>
+        <br>
+        <p class="termsAndConditionP">By signing up, you agree to the Terms of Service and Privacy Policy of TweedleDee. Others will be able to find you by your user handle.</p>
+        <br>
+
+        <br><br>
+    </div>
+    </div>
