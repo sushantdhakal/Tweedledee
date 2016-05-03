@@ -67,8 +67,6 @@ class MessageController extends RestfulController<Message> {
         def tempMsg = Message.where { id == messageId && account.id == accountID }.find()
         //new Message(tempMsg).delete()
         tempMsg.delete()
-        def test = 123
-
     }
 
     @Override

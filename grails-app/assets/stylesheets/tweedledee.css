@@ -107,3 +107,6 @@ body { padding-top:70px; }
 .fa-trash:hover {
   color: #ed6b75;
 }
+.fa-retweet:hover{
+  color: #F1C40F;
+}
