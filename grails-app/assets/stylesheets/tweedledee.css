@@ -95,3 +95,15 @@ body { padding-top:70px; }
   font-size: 12px;
   color: #8899a6;
 }
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+  -webkit-border-radius: 50%!important;
+  -moz-border-radius: 50%!important;
+  border-radius: 50%!important;
+}
+.fa-trash:hover {
+  color: #ed6b75;
+}
