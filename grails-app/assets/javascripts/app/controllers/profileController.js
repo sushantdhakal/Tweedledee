@@ -1,6 +1,6 @@
 angular.module('app')
 .controller('profileController',function (
-    $scope, $http, $route, $routeParams, $interval, securityService, profileService) {
+    $scope, $http, $route, $routeParams, $timeout, $interval, $window, securityService, profileService) {
 
     var userCreds = securityService.currentUser();
     $scope.loggedInUserHandle = userCreds.username;
@@ -9,6 +9,11 @@ angular.module('app')
     $scope.showNameInput=false;
     $scope.showEmailInput=false;
     $scope.currentToken = userCreds.token;
+
+    if(angular.isDefined($routeParams.messagePost) && $routeParams.messagePost==1){
+        $scope.alerts = [{msg:'You\'ve posted a new message.', type:'info'}];
+        $timeout(function(){ $window.location.assign('#/profile'); },5000);
+    }
 
     if($routeParams.id) $scope.viewingUserId=$routeParams.id;
     else $scope.viewingUserId=$scope.loggedInUserHandle;
