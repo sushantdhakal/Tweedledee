@@ -108,8 +108,8 @@ angular.module('app')
 
     }
 
-    service.addMessage = function(scope, message){
-        var id = scope.loggedInUserHandle;
+    service.addMessage = function(loggedInUserHandle, message){
+        var id = loggedInUserHandle;
         var payload = {text: message};
         $http.put(baseUrl+'/message/addMessage?accountId='+id,payload).then(function(resp){
             console.log('message posting  ',resp);

@@ -1,6 +1,6 @@
 angular.module('app')
 .controller('messagesController',function (
-    $scope, $http, $routeParams, $location, $interval, securityService, profileService, messageService) {
+    $scope, $http, $routeParams, $location, $uibModal, $interval, securityService, profileService, messageService) {
 
     var search=false;
     var userCreds = securityService.currentUser();
@@ -8,7 +8,11 @@ angular.module('app')
     $scope.loading=true;
     $scope.isLoggedInUser=true;
     $scope.searchTerm='';
-    
+    $scope.animationsEnabled = true;
+    $scope.currentMessage = '';
+    $scope.sourceData = {};
+
+
     if( angular.isDefined($location.search().q) ) {
         search=true;
         $scope.searchTerm=$location.search().q;
@@ -52,7 +56,7 @@ angular.module('app')
     }
 
     $scope.addMessage = function(message){
-        messageService.addMessage($scope, message);
+        messageService.addMessage($scope.loggedInUserHandle, message);
         $scope.messagePostedAlert = messageService.messagePostedAlert;
     }
 
@@ -61,6 +65,50 @@ angular.module('app')
 
     }
 
+    $scope.animationsEnabled = true;
+
+    $scope.open = function (size) {
+
+        $scope.items = {handle:$scope.loggedInUserHandle, message:size};
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: '/app/confirmation.html',
+            controller: 'ModalInstanceCtrl',
+            size: size,
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+        });
+    };
+
+    $scope.toggleAnimation = function () {
+        $scope.animationsEnabled = !$scope.animationsEnabled;
+    };
+});
+
+angular.module('app').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items, messageService) {
+
+    $scope.items = items;
+    $scope.selected = {
+        item: $scope.items[0]
+    };
+
+    $scope.ok = function (handle, message) {
+        messageService.addMessage(handle, message);
+        $uibModalInstance.close($scope.selected.item);
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
 });
 
 
