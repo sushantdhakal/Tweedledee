@@ -108,8 +108,8 @@ angular.module('app')
 
     }
 
-    service.addMessage = function(scope, message){
-        var id = scope.loggedInUserHandle;
+    service.addMessage = function(loggedInUserHandle, message){
+        var id = loggedInUserHandle;
         var payload = {text: message};
         $http.put(baseUrl+'/message/addMessage?accountId='+id,payload).then(function(resp){
             console.log('message posting  ',resp);
@@ -133,7 +133,6 @@ angular.module('app')
     service.deleteMessage = function(scope, messageId, messageText){
         var accountId = scope.loggedInUserHandle;
         $http.put(baseUrl+'/message/deleteMessage/'+accountId+'/'+messageId).then(function(resp){
-            console.log('message posting  ',resp);
             if(resp.status==200){
                 $route.reload();
             }
