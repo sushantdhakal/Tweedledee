@@ -57,7 +57,7 @@ angular.module('app')
 
     $scope.addMessage = function(message){
         messageService.addMessage($scope.loggedInUserHandle, message);
-        $scope.messagePostedAlert = messageService.messagePostedAlert;
+       // $scope.messagePostedAlert = messageService.messagePostedAlert;
     }
 
     $scope.deleteMessage = function(messageId, messageText){

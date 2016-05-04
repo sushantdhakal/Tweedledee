@@ -1,9 +1,8 @@
 angular.module('app')
-.factory('messageService',function ($http, $httpParamSerializer, $location, $interval, $timeout, $route, errorService) {
+.factory('messageService',function ($http, $httpParamSerializer, $location, $window, $interval, $timeout, $route, errorService) {
     
     var service = {}, baseUrl = '/api';
     var alertObj = {active:false,mesg:''}
-    var messagePostedAlert = false;
 
     service.getMessagesByUser = function(scope,id){
 
@@ -114,8 +113,9 @@ angular.module('app')
         $http.put(baseUrl+'/message/addMessage?accountId='+id,payload).then(function(resp){
             console.log('message posting  ',resp);
             if(resp.status==200){
-                $route.reload();
-                messagePostedAlert = true;
+               // $route.reload();
+                $window.location = '#/profile?messagePost=1';
+                //messagePostedAlert = true;
             }
         },function(fail){
             scope.loading=false;
@@ -126,9 +126,6 @@ angular.module('app')
         });
     }
 
-    service.messagePostedAlert = function(){
-        return messagePostedAlert;
-    }
 
     service.deleteMessage = function(loggedInUserHandle, messageId){
         var accountId = loggedInUserHandle;
