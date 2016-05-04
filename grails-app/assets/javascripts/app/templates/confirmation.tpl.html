@@ -1,10 +1,10 @@
 <div ng-controller="messagesController">
     <div class="modal-header">
-        <h3 class="modal-title">Repost Message</h3></div>
+        <h3 class="modal-title" style="text-transform: capitalize">Repost Message</h3></div>
     <div class="modal-body" style="font-weight: bold">Are you sure you want to repost the following message?</div>
     <div class="modal-body" style="font-style: italic">{{items.message}}</div>
     <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok(items.handle, items.message)">OK</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" type="button" ng-click="ok(items.handle, items.message)">OK</button>
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
     </div>
 </div>

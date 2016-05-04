@@ -69,11 +69,33 @@ angular.module('app')
 
     $scope.open = function (size) {
 
-        $scope.items = {handle:$scope.loggedInUserHandle, message:size};
+        $scope.items = {handle:$scope.loggedInUserHandle, message:size, opType:'repost'};
 
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
             templateUrl: '/app/confirmation.html',
+            controller: 'ModalInstanceCtrl',
+            size: size,
+            resolve: {
+                items: function () {
+                    return $scope.items;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+        });
+    };
+
+    $scope.deleteConf = function (messageId, size) {
+
+        $scope.items = {handle:$scope.loggedInUserHandle, messageId:messageId, message:size, opType:'delete'};
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: '/app/confirmationDelete.html',
             controller: 'ModalInstanceCtrl',
             size: size,
             resolve: {
@@ -103,6 +125,13 @@ angular.module('app').controller('ModalInstanceCtrl', function ($scope, $uibModa
 
     $scope.ok = function (handle, message) {
         messageService.addMessage(handle, message);
+        $uibModalInstance.close($scope.selected.item);
+    };
+
+    //    service.deleteMessage = function(loggedInUserHandle, messageId){
+
+    $scope.deleteOk = function (handle, messageId) {
+        messageService.deleteMessage(handle, messageId);
         $uibModalInstance.close($scope.selected.item);
     };
 

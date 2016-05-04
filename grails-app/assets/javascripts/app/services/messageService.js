@@ -130,8 +130,8 @@ angular.module('app')
         return messagePostedAlert;
     }
 
-    service.deleteMessage = function(scope, messageId, messageText){
-        var accountId = scope.loggedInUserHandle;
+    service.deleteMessage = function(loggedInUserHandle, messageId){
+        var accountId = loggedInUserHandle;
         $http.put(baseUrl+'/message/deleteMessage/'+accountId+'/'+messageId).then(function(resp){
             if(resp.status==200){
                 $route.reload();
