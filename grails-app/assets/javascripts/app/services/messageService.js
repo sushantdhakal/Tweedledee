@@ -133,7 +133,6 @@ angular.module('app')
     service.deleteMessage = function(scope, messageId, messageText){
         var accountId = scope.loggedInUserHandle;
         $http.put(baseUrl+'/message/deleteMessage/'+accountId+'/'+messageId).then(function(resp){
-            console.log('message posting  ',resp);
             if(resp.status==200){
                 $route.reload();
             }
