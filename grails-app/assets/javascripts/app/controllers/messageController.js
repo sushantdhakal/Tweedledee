@@ -61,26 +61,8 @@ angular.module('app')
         $scope.add = function(){ 
             
             if( $scope.messageText.length>45 ) $scope.alerts.push({msg:$scope.mesgLengthError,type:'danger'});
-            else {
-                
-                var res = messageService.add($scope.loggedInUserHandle,$scope.messageText)
-                
-                if(!res) $scope.alerts.push({msg:'Add message failed, sorry dude!',type:'danger'});
-                else{
-                    res.then(function(resp){
-                        console.log('message posting resp',resp);
-                        if(resp.status==201){
-                           $scope.messages.unshift(resp.data);
-                           $scope.alerts.push({msg:'New messages successfully added!',type:'success'});
-                           $scope.messageText='';
-                        }
-                    },function(fail){
-                        $scope.loading=false;
-                        $scope.alerts.push({msg:'An error has occured while trying add the message. '+fail.status,type:'danger'});
-                    });
-                }
-            }
-
+            else messageService.add($scope);
+            
         }
 
     /**

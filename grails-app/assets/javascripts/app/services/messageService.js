@@ -83,13 +83,25 @@ angular.module('app')
 
     }
 
-    service.add = function(id,text){
+    service.add = function(scope){
         
-        var accountId = (!angular.isUndefined(id)) ? id : -1;
-        var payload = {text:text};
+        var accountId = (!angular.isUndefined(scope.loggedInUserHandle)) ? scope.loggedInUserHandle : -1;
+        var payload = {text:scope.messageText};
 
-        if(accountId==-1) return false;
-        else return $http.post( baseUrl+'/account/'+accountId+'/messages',payload);
+        if(accountId==-1) scope.alerts.push({msg:'Add message failed, sorry dude!',type:'danger'});
+        else { 
+            $http.post( baseUrl+'/account/'+accountId+'/messages',payload).then(function(resp){
+                console.log('message posting resp',resp);
+                if(resp.status==201){
+                   scope.messages.unshift(resp.data);
+                   scope.alerts.push({msg:'New messages successfully added!',type:'success'});
+                   scope.messageText='';
+                }
+            },function(fail){
+                scope.loading=false;
+                scope.alerts.push({msg:'An error has occured while trying add the message. '+fail.status,type:'danger'});
+            });
+        }
 
     }
 
@@ -100,9 +112,8 @@ angular.module('app')
         if(accountId==-1) scope.alerts.push({msg:'No user defined thus I can not delete this message, sorry guy.',type:'danger'});
         else{
             $http.delete(baseUrl+'/account/'+accountId+'/messages/'+scope.messageId).then(function(resp){
-                if(resp.status==200){
-                    $route.reload();
-                }
+                scope.alerts.push({msg:'New messages successfully added!',type:'success'});
+                scope.refresh();
             },function(fail){
                 scope.loading=false;
                 scope.alerts.push({msg:'An error has occured while trying delete the message. '+fail.status,type:'danger'});
