@@ -11,7 +11,7 @@ angular.module('app')
     $scope.animationsEnabled = true;
     $scope.currentMessage = '';
     $scope.sourceData = {};
-
+    console.log(' handle',$scope.loggedInUserHandle);
 
     if( angular.isDefined($location.search().q) ) {
         search=true;
@@ -29,6 +29,7 @@ angular.module('app')
         $scope.max=max;
         $scope.offset=0;
         getMessages();
+        console.log('messages ',$scope.messages);
     }
 
     function getMessages(id){ 

@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 50.0.2661 (Mac OS X 10.10.5)" package="" timestamp="2016-04-23T23:36:11" id="0" hostname="x-10-104-98-11.uofm-secure.wireless.umn.edu" tests="4" errors="0" failures="0" time="0.069">
+<testsuite name="Chrome 50.0.2661 (Mac OS X 10.10.5)" package="" timestamp="2016-05-05T06:32:41" id="0" hostname="Pauls-MacBook-Pro.local" tests="2" errors="0" failures="0" time="0.075">
   <properties>
-    <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"/>
+    <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36"/>
   </properties>
-  <testcase name="securityService login handles valid login" time="0.048" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).securityService"/>
-  <testcase name="securityService login handles invalid login" time="0.01" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).securityService"/>
-  <testcase name="securityService logout clears out the current user" time="0.005" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).securityService"/>
-  <testcase name="securityService logout routes back to login screen" time="0.006" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).securityService"/>
+  <testcase name="messagesController The messages controller  should have a logged in user handle" time="0.059" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messagesController"/>
+  <testcase name="messagesController The messages controller  should add a message and reload the profile page with message posted flag" time="0.016" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messagesController"/>
   <system-out>
-    <![CDATA[Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', null
+    <![CDATA[Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'earl', roles: ['root'], token: 'xyz123'}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' handle', 'earl'
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'messages ', []
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'get messages by user ', Object{data: Object{}, status: 200, headers: function (name) { ... }, config: Object{method: 'GET', transformRequest: [...], transformResponse: [...], paramSerializer: function ngParamSerializer(params) { ... }, url: '/api/account/earl/messages?max=10', headers: Object{Accept: ..., X-Auth-Token: ...}}, statusText: ''}
 ,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'earl', roles: ['root'], token: 'xyz123'}
-,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'earl', roles: ['root'], token: 'xyz123'}
-,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', undefined
-,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', null
-,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', undefined
-,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', null
-,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', undefined
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' handle', 'earl'
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'messages ', []
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'get messages by user ', Object{data: Object{}, status: 200, headers: function (name) { ... }, config: Object{method: 'GET', transformRequest: [...], transformResponse: [...], paramSerializer: function ngParamSerializer(params) { ... }, url: '/api/account/earl/messages?max=10', headers: Object{Accept: ..., X-Auth-Token: ...}}, statusText: ''}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'message posting  ', Object{data: Object{}, status: 200, headers: function (name) { ... }, config: Object{method: 'PUT', transformRequest: [...], transformResponse: [...], paramSerializer: function ngParamSerializer(params) { ... }, url: '/api/message/addMessage?accountId=earl', data: Object{text: ...}, headers: Object{Accept: ..., Content-Type: ..., X-Auth-Token: ...}}, statusText: ''}
 
 ]]>
   </system-out>

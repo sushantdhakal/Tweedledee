@@ -113,7 +113,7 @@ angular.module('app')
         $http.put(baseUrl+'/message/addMessage?accountId='+id,payload).then(function(resp){
             console.log('message posting  ',resp);
             if(resp.status==200){
-               // $route.reload();
+               //$route.reload();
                 $window.location = '#/profile?messagePost=1';
                 //messagePostedAlert = true;
             }
@@ -124,8 +124,8 @@ angular.module('app')
             if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
             errorService.showAlert(scope.alert,m);
         });
+    
     }
-
 
     service.deleteMessage = function(loggedInUserHandle, messageId){
         var accountId = loggedInUserHandle;
