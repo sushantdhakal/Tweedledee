@@ -31,10 +31,16 @@ class MessagePostFunctionalSpec extends GebSpec {
 		}
 	}
 
-	//TODO: R1
+	//R1
+	def 'AngularUI alert control to display confirmation for message posting'(){
+		when:
+		waitFor 1, {$("div.message-list-container div.message-box h3.ng-binding").text().equals("Jonny loves politics...")}
+		then:
+		waitFor 1, {$("div.alert div span.ng-binding").text().equals("You've posted a new message.")}
+	}
 
 	//R2
-	def 'Post a message that is more than 45 characters'() {
+	def 'Do not a message that is more than 45 characters'() {
 		when:
 		waitFor 1.5, { $('#messageBox').value("12345678901234567890123456789012345678901234567") }
 		then:

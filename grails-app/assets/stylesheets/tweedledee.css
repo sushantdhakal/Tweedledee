@@ -116,3 +116,13 @@ body { padding-top:70px; }
 .fa-retweet:hover{
   color: #F1C40F;
 }
+.modal-header{
+  background: #c5ccd5;
+}
+
+.fa-envira{
+  color: #6f9a37;
+}
+.logo-title{
+  color: white;
+}
