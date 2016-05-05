@@ -9,12 +9,7 @@ angular.module('app')
     $scope.showNameInput=false;
     $scope.showEmailInput=false;
     $scope.currentToken = userCreds.token;
-
-    if(angular.isDefined($routeParams.messagePost) && $routeParams.messagePost==1){
-        $scope.alerts = [{msg:'You\'ve posted a new message.', type:'info'}];
-        $timeout(function(){ $window.location.assign('#/profile'); },5000);
-    }
-
+    
     if($routeParams.id) $scope.viewingUserId=$routeParams.id;
     else $scope.viewingUserId=$scope.loggedInUserHandle;
 
@@ -23,9 +18,17 @@ angular.module('app')
         $scope.isFollowing=profileService.isFollowing($scope,$scope.viewingUserId);
     }
 
-    getProfile();
+    getUserProfile();
 
-    //$interval(function(){ getProfile(); },25000);
+    // Private static function to get user profile; use $scope.refresh to call from the scope
+    function getUserProfile(id){ 
+        if(!angular.isDefined(id)) id = $scope.viewingUserId;
+        profileService.getProfile($scope,id);
+    }
+
+    $scope.refresh = function(){
+        getUserProfile();
+    }
 
     $scope.edit = function(field){
         if($scope.isLoggedInUser){
@@ -44,11 +47,6 @@ angular.module('app')
         if($scope.isLoggedInUser){
             $route.reload();
         }
-    }
-    
-    function getProfile(id){ 
-        if(!angular.isDefined(id)) id = $scope.viewingUserId;
-        profileService.getProfile($scope,id);
     }
 
 });

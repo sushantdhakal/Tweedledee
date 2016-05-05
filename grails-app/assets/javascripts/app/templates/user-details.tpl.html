@@ -105,14 +105,14 @@
             <div class="input-group">
                 <input name="messageBox" id="messageBox" type="text" ng-minlength="1" ng-maxlength="45" ng-model="messageText" class="form-control input-sm" placeholder="What's on your mind??">
                 <div class="input-group-btn">
-                    <button id="addMessage" class="btn btn-prmiary btn-sm" ng-disabled="myForm.messageBox.$error.maxlength" type="submit" ng-click="addMessage(messageText)"><i class="fa fa-reply"></i></button>
+                    <button id="addMessage" class="btn btn-prmiary btn-sm" ng-disabled="myForm.messageBox.$error.maxlength" type="submit" ng-click="add()"><i class="fa fa-reply"></i></button>
                 </div>
             </div>
         </form>
     </div>
 
     <div class="moreCharErr">
-        <span class="error" style="font-weight: bold; color: red" ng-show="myForm.messageBox.$error.maxlength">Messages are limited to only 45 characters</span>
+        <span class="error" style="font-weight: bold; color: red" ng-show="myForm.messageBox.$error.maxlength">{{mesgLengthError}}</span>
     </div>
     </form>
 

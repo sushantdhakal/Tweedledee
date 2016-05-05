@@ -1,17 +1,18 @@
 describe('messagesController', function () {
 	beforeEach(module('app'));
 
-	var $controller;
-	var $httpBackend;
-	var $window;
-	var ss;
-	var createController;
+	var $controller, $httpBackend, $window, createController;
 
+	var mockAuth = {
+        setCredentials: function(){ currentUser = 'JohnnyBravo' },
+        getUsername:function(){ return currentUser; },
+        setToken:function(){ token = "xyz123" },
+        getToken: function(){ return token; }
+    };
 
-	beforeEach(inject(function (_$controller_,_$httpBackend_,_$window_,_securityService_) {
+	beforeEach(inject(function (_$controller_,_$httpBackend_,_$window_) {
 		$controller = _$controller_;
 		$httpBackend = _$httpBackend_;
-		ss = _securityService_;
 		$window = _$window_;
 		
 		// Controller creator
@@ -19,7 +20,7 @@ describe('messagesController', function () {
 		
 		// Whitelist all template calls
 		$httpBackend.whenGET(/app\/.*/).respond(200,'');
-
+		mockAuth.setCredentials();
 	}));
 
 	describe('The messages controller ',function(){
@@ -34,9 +35,9 @@ describe('messagesController', function () {
 			$httpBackend.flush();
 			
 			// Grab the current user and confirm our logged in user handle matches the currrent username
-			var user = ss.currentUser();
+			var handle = mockAuth.getUsername();
 			expect($scope.loggedInUserHandle).toBeDefined();
-			expect($scope.loggedInUserHandle).toEqual(user.username);
+			expect($scope.loggedInUserHandle).toEqual(handle);
 
 		});
 
