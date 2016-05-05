@@ -5,6 +5,8 @@ import grails.test.mixin.integration.Integration
 import spock.lang.Stepwise
 import org.openqa.selenium.JavascriptExecutor;
 import spock.lang.*
+import java.text.SimpleDateFormat
+import java.text.ParseException
 
 @Integration
 @Stepwise
@@ -47,6 +49,23 @@ class MessagePostFunctionalSpec extends GebSpec {
 		waitFor 1.5, { $("#addMessage").isDisabled() }
 		waitFor() {
 			$("div.moreCharErr span.error").text().equals("Messages are limited to only 45 characters")
+		}
+	}
+
+	//R5
+	def 'Validate date format for message post'(){
+		when:
+		waitFor() {
+			$("div.message-list-container div.message-box p.ng-binding").displayed
+		}
+		then:
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMM-dd");
+		dateFormat.setLenient(false);
+		try {
+			dateFormat.parse($("div.message-list-container div.message-box p.ng-binding").text().trim());
+			true
+		} catch (ParseException pe) {
+			false
 		}
 	}
 

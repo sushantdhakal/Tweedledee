@@ -110,7 +110,7 @@ angular.module('app')
     service.addMessage = function(loggedInUserHandle, message){
         var id = loggedInUserHandle;
         var payload = {text: message};
-        $http.put(baseUrl+'/message/addMessage?accountId='+id,payload).then(function(resp){
+        $http.post(baseUrl+'/message/addMessage?accountId='+id,payload).then(function(resp){
             console.log('message posting  ',resp);
             if(resp.status==200){
                //$route.reload();
@@ -134,11 +134,12 @@ angular.module('app')
                 $route.reload();
             }
         },function(fail){
-            scope.loading=false;
-            var m='An error has occured while trying post the message. '+fail.status;
-            scope.alert=alertObj;
-            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
-            errorService.showAlert(scope.alert,m);
+            //scope.loading=false;
+            var m='An error has occured while trying delete the message. '+fail.status;
+            //scope.alert=alertObj;
+            //if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
+            //errorService.showAlert(scope.alert,m);
+            $route.reload();
         });
 
     }
