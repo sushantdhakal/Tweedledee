@@ -60,7 +60,6 @@ class MessageController extends RestfulController<Message> {
     }
 
     def deleteMessage(){
-        def text=request.JSON.text
         def accountID = _handleAccountId(params.accountId)
         def messageId = params.messageId
        // def p=[message:[id:messageId],account:[id:accountID]]

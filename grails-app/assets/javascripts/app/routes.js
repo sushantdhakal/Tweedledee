@@ -56,10 +56,10 @@ angular.module('app')
 
     .run(function ($rootScope, $location, securityService) {
         $rootScope.$on('$routeChangeStart', function (event, next) {
-            if(next.$$route.originalPath=='/signup'){
+            if(typeof next!=='undefined' && typeof next.$$route!=='undefined' && next.$$route.originalPath=='/signup'){
                 $location.path('/signup');
             }
-            else if (typeof next.$$route!=='undefined' && typeof next.$$route.originalPath!=='undefined' && next.$$route.originalPath!='/login') {
+            else if (typeof next!=='undefined' && typeof next.$$route!=='undefined' && typeof next.$$route.originalPath!=='undefined' && next.$$route.originalPath!='/login') {
                 if (!securityService.currentUser()) {
                     $location.path('/login');
                 }
