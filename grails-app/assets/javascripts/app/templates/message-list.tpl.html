@@ -30,8 +30,8 @@
             <a href="#/account/{{message.handle}}"><i class="fa fa-at fa-lg icon-left"></i>{{message.handle}}</a>
         </p>
         
-        <i ng-show="!isLoggedInUser" class="fa fa-retweet fa-lg" title="Re-post Message" ng-click="repost(message)"></i>
-        <i ng-show="isLoggedInUser" class="fa fa-trash fa-lg" title="Delete Message" ng-click="delete(message)"></i>
+        <i class="fa fa-retweet fa-lg clickable" title="Re-post Message" ng-click="repost(message)"></i>
+        <i ng-show="isLoggedInUser" class="fa fa-trash fa-lg clickable" title="Delete Message" ng-click="delete(message)"></i>
 
     </div>
 
