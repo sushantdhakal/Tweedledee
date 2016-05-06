@@ -10,6 +10,7 @@ import java.text.ParseException
 
 @Integration
 @Stepwise
+@Ignore
 class MessagePostFunctionalSpec extends GebSpec {
 
 	def login() {
@@ -38,17 +39,29 @@ class MessagePostFunctionalSpec extends GebSpec {
 		when:
 		waitFor 1, {$("div.message-list-container div.message-box h3.ng-binding").text().equals("Jonny loves politics...")}
 		then:
-		waitFor 1, {$("div.alert div span.ng-binding").text().equals("You've posted a new message.")}
+		waitFor 1, {$("div.alert div span.ng-binding").text().equals("New messages successfully added!")}
 	}
 
 	//R2
-	def 'Do not a message that is more than 45 characters'() {
+	def 'Do not post a message that is more than 45 characters'() {
 		when:
 		waitFor 1.5, { $('#messageBox').value("12345678901234567890123456789012345678901234567") }
 		then:
 		waitFor 1.5, { $("#addMessage").isDisabled() }
 		waitFor() {
 			$("div.moreCharErr span.error").text().equals("Messages are limited to only 45 characters")
+		}
+	}
+
+	//R4
+	def 'Display follow button'(){
+		when:
+		waitFor 1.5, { $("div.followers p i.fa strong").displayed }
+		then:
+		waitFor() {
+			$("div.followers ul.list-inline li.ng-scope a.ng-binding").click()
+			sleep(1500)
+			$("div.profile-handle-container ul.line-inline li.ng-isolate-scope div button").displayed
 		}
 	}
 
