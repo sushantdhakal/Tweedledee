@@ -62,7 +62,7 @@ angular.module('app')
             
             if( $scope.messageText.length>45 ) $scope.alerts.push({msg:$scope.mesgLengthError,type:'danger'});
             else messageService.add($scope);
-            
+
         }
 
     /**
@@ -93,7 +93,7 @@ angular.module('app')
 
         var modal = getNewModal(message,'/app/repost-modal.html');
         
-        if(!angular.isDefined(modal)){
+        if(angular.isDefined(modal)){
             modal.result.then(function(message){ console.log('repost modal close mesg ',message);
                 $scope.messageText =message.text;
                 messageService.add($scope); 
@@ -105,7 +105,7 @@ angular.module('app')
 
         var modal = getNewModal(message,'/app/delete-modal.html');
 
-        if(!angular.isDefined(modal)){
+        if(angular.isDefined(modal)){
             modal.result.then(function(message){console.log('delete modal close mesg ',message); 
                 $scope.messageId =message.id;
                 messageService.delete($scope); 

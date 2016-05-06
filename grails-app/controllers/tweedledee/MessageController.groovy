@@ -60,12 +60,11 @@ class MessageController extends RestfulController<Message> {
     }
 
     def deleteMessage(){
-        def accountID = _handleAccountId(params.accountId)
         def messageId = params.messageId
-       // def p=[message:[id:messageId],account:[id:accountID]]
-        def tempMsg = Message.where { id == messageId && account.id == accountID }.find()
-        //new Message(tempMsg).delete()
-        tempMsg.delete()
+        def msg = Message.get(messageId)
+        msg.delete()
+        response.status=200
+        respond success:true
     }
 
     @Override

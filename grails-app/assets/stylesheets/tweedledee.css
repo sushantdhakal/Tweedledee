@@ -126,3 +126,5 @@ body { padding-top:70px; }
 .logo-title{
   color: white;
 }
+.border-red{ border:1px solid red; }
+.border-green{ border:1px solid green; }

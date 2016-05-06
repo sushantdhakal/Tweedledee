@@ -15,7 +15,11 @@
         </nav>
     </div>
 
-    <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alerts.splice($index, 1)">{{alert.msg}}</uib-alert>
+<div class="row">
+    <div class="col-md-6 text-center" style="float:none;margin:0 auto;">
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alerts.splice($index, 1)"><i class="fa fa-hand-peace-o fa-lg color-two" style="margin-right:5px;"></i>{{alert.msg}}</uib-alert>
+    </div>
+</div>
 
     <div ng-show="!showSignup" id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
         

@@ -37,8 +37,7 @@ class UrlMappings {
         "/api/account/$accountId"(controller:'account',action:'showFeed')
         "/api/account/$accountId/feed"(controller:'account',action:'showFeed')
         "/api/account/$accountId/follow"(controller:'account',action:'addFollower')
-        "/api/message/addMessage"(controller: 'message', action: 'addMessageToAccount')
-        "/api/message/deleteMessage/$accountId/$messageId"(controller: 'message', action: 'deleteMessage')
+        "/api/message/delete/$messageId"(controller: 'message', action: 'deleteMessage')
     }
 }
 

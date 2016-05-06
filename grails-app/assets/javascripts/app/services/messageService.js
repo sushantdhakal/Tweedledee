@@ -85,6 +85,7 @@ angular.module('app')
 
     service.add = function(scope){
         
+        scope.loading=true;
         var accountId = (!angular.isUndefined(scope.loggedInUserHandle)) ? scope.loggedInUserHandle : -1;
         var payload = {text:scope.messageText};
 
@@ -96,6 +97,7 @@ angular.module('app')
                    scope.messages.unshift(resp.data);
                    scope.alerts.push({msg:'New messages successfully added!',type:'success'});
                    scope.messageText='';
+                   scope.loading=false;
                 }
             },function(fail){
                 scope.loading=false;
@@ -107,12 +109,14 @@ angular.module('app')
 
     service.delete = function(scope){
         
+        scope.loading=true;
         var accountId = (!angular.isUndefined(scope.loggedInUserHandle)) ? scope.loggedInUserHandle : -1;
         
         if(accountId==-1) scope.alerts.push({msg:'No user defined thus I can not delete this message, sorry guy.',type:'danger'});
         else{
-            $http.delete(baseUrl+'/account/'+accountId+'/messages/'+scope.messageId).then(function(resp){
-                scope.alerts.push({msg:'New messages successfully added!',type:'success'});
+            $http.delete(baseUrl+'/message/delete/'+scope.messageId).then(function(resp){
+                scope.alerts.push({msg:'Message successfully deleted.',type:'success'});
+                scope.loading=false;
                 scope.refresh();
             },function(fail){
                 scope.loading=false;
