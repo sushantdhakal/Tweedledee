@@ -5,7 +5,7 @@ angular.module('app')
   $scope.error=''; $scope.message=''; $scope.pageTitle='Login'; $scope.loginAttempt = {}; $scope.currentUserLoggedIn = "";
 
   if(angular.isDefined($routeParams.logout) && $routeParams.logout==1){
-      $scope.alerts = [{msg:'You\'ve been logged out of Tweedeldee, sorry to see you go! :-(', type:'info'}];
+      $scope.alerts = [{msg:"", type:'warning'}];
       $timeout(function(){ $window.location.assign('#/login'); },100000);
   }
 

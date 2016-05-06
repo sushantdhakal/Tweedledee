@@ -17,7 +17,9 @@
 
 <div class="row">
     <div class="col-md-6 text-center" style="float:none;margin:0 auto;">
-        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alerts.splice($index, 1)"><i class="fa fa-hand-peace-o fa-lg color-two" style="margin-right:5px;"></i>{{alert.msg}}</uib-alert>
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alerts.splice($index, 1)">
+            <strong>Ok player you're logged out!</strong> We'll see ya again real soon buddy. <i class="fa fa-thumbs-up fa-2x" style="margin-left:5px;"></i>
+        </uib-alert>
     </div>
 </div>
 
