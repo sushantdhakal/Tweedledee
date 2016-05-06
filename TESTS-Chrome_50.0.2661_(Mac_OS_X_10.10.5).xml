@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 50.0.2661 (Mac OS X 10.10.5)" package="" timestamp="2016-05-06T02:57:09" id="0" hostname="asc-paulm.ad.ascendlearning.com" tests="2" errors="0" failures="0" time="0.078">
+<testsuite name="Chrome 50.0.2661 (Mac OS X 10.10.5)" package="" timestamp="2016-05-06T04:13:51" id="0" hostname="Pauls-MacBook-Pro.local" tests="4" errors="0" failures="0" time="0.054">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36"/>
   </properties>
-  <testcase name="messagesController The messages controller  should get messages for the user" time="0.063" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messagesController"/>
-  <testcase name="messagesController The messages controller  should add a new message and create an alert" time="0.015" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messagesController"/>
+  <testcase name="messageController The message controller  should get messages for the user" time="0.021" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messageController"/>
+  <testcase name="messageController The message controller  should add a new message and create an alert" time="0.013" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messageController"/>
+  <testcase name="messageController The message controller  should set an alert if getting messages fails" time="0.01" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messageController"/>
+  <testcase name="messageController The message controller  should set an alert if post a message fails" time="0.01" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messageController"/>
   <system-out>
     <![CDATA[Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'JohnnyBravo', roles: ['root'], token: 'xyz123'}
 ,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'JohnnyBravo', roles: ['root'], token: 'xyz123'}
@@ -17,6 +19,15 @@
 ,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'messages ', undefined
 ,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'get messages by user ', Object{data: Object{}, status: 200, headers: function (name) { ... }, config: Object{method: 'GET', transformRequest: [...], transformResponse: [...], paramSerializer: function ngParamSerializer(params) { ... }, url: '/api/account/JohnnyBravo/messages?max=10', headers: Object{Accept: ..., X-Auth-Token: ...}}, statusText: ''}
 ,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'message posting resp', Object{data: Object{id: 329, account: Object{id: ...}, dateCreated: '2016-05-06T01:18:32Z', text: 'This is a new message!!!!'}, status: 201, headers: function (name) { ... }, config: Object{method: 'POST', transformRequest: [...], transformResponse: [...], paramSerializer: function ngParamSerializer(params) { ... }, url: '/api/account/JohnnyBravo/messages', data: Object{text: ...}, headers: Object{Accept: ..., Content-Type: ..., X-Auth-Token: ...}}, statusText: ''}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'JohnnyBravo', roles: ['root'], token: 'xyz123'}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'JohnnyBravo', roles: ['root'], token: 'xyz123'}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'CTLR handle', 'JohnnyBravo'
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'messages ', undefined
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'JohnnyBravo', roles: ['root'], token: 'xyz123'}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'JohnnyBravo', roles: ['root'], token: 'xyz123'}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'CTLR handle', 'JohnnyBravo'
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'messages ', undefined
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'get messages by user ', Object{data: Object{}, status: 200, headers: function (name) { ... }, config: Object{method: 'GET', transformRequest: [...], transformResponse: [...], paramSerializer: function ngParamSerializer(params) { ... }, url: '/api/account/JohnnyBravo/messages?max=10', headers: Object{Accept: ..., X-Auth-Token: ...}}, statusText: ''}
 
 ]]>
   </system-out>

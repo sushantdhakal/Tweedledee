@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('messagesController',function (
+.controller('messageController',function (
     $scope, $http, $routeParams, $location, $uibModal, $interval, securityService, profileService, messageService) {
 
     var search=false;
@@ -97,7 +97,7 @@ angular.module('app')
         var modal = getNewModal(message,'/app/repost-modal.html');
         
         if(angular.isDefined(modal)){
-            modal.result.then(function(message){ console.log('repost modal close mesg ',message);
+            modal.result.then(function(message){ 
                 $scope.messageText =message.text;
                 messageService.add($scope); 
             },function(){ console.log('delete modal canceled '); });
@@ -109,7 +109,7 @@ angular.module('app')
         var modal = getNewModal(message,'/app/delete-modal.html');
 
         if(angular.isDefined(modal)){
-            modal.result.then(function(message){console.log('delete modal close mesg ',message); 
+            modal.result.then(function(message){
                 $scope.messageId =message.id;
                 messageService.delete($scope); 
             },function(){ console.log('delete modal canceled '); });
@@ -119,7 +119,6 @@ angular.module('app')
 
     $scope.more = function(){
 
-        console.log('$scope.messageCount ',$scope.messageCount);
         var newoffset=$scope.offset+($scope.max+1);
         var newend=newoffset+$scope.max;
         if( newend<$scope.messageCount) { $scope.offset=newoffset; getMessages(); }

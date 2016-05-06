@@ -1,4 +1,4 @@
-describe('messagesController', function () {
+describe('messageController', function () {
 	beforeEach(module('app'));
 
 	var $controller, $httpBackend, $window, ss, createController;
@@ -27,12 +27,12 @@ describe('messagesController', function () {
 
 	}));
 
-	describe('The messages controller ',function(){
+	describe('The message controller ',function(){
 
 		it('should get messages for the user',function(){
 			
 			var $scope={};
-			var controller=createController('messagesController',$scope);
+			var controller=createController('messageController',$scope);
 			
 			// Confirm it's making a call to fetch messages
 			$httpBackend.expectGET('/api/account/'+$scope.loggedInUserHandle+'/messages?max='+$scope.max).respond(200,respGet);
@@ -54,7 +54,7 @@ describe('messagesController', function () {
 			
 			var $scope={};
 			var mesg="This is a new message!";
-			var controller=createController('messagesController',$scope);
+			var controller=createController('messageController',$scope);
 
 			// Add a new message
 			var addMesgUrl = '/api/account/'+$scope.loggedInUserHandle+'/messages';
@@ -81,23 +81,44 @@ describe('messagesController', function () {
 
 		});
 
-		// it('should refresh the message list',function(){
-		
-		// 	var $scope={};
-		// 	var controller=createController('messagesController',$scope);
-			
-		// 	// Confirm it's making a call to fetch messages
-		// 	$httpBackend.expectGET('/api/account/'+$scope.loggedInUserHandle+'/messages?max='+$scope.max).respond(200,respMesg);
-		// 	$httpBackend.flush();
-			
-		// 	expect($scope.messages).toBeDefined();
-		// 	expect($scope.messages[0].handle).toBe(mesgObj.handle);
-		// 	expect($scope.messages[0].dateCreated).toBe(mesgObj.dateCreated);
-		// 	expect($scope.messages[0].text).toBe(mesgObj.text);
-		// 	expect($scope.messages[0].id).toBe(mesgObj.id);
-		// 	expect($scope.messages[0].account.id).toBe(mesgObj.account.id);
+		it('should set an alert if getting messages fails',function(){
 
-		// });
+			var $scope={};
+			var controller=createController('messageController',$scope);
+			
+			expect($scope.alerts[0]).not.toBeDefined();
+
+			// Confirm it's making a call to fetch messages
+			$httpBackend.expectGET('/api/account/'+$scope.loggedInUserHandle+'/messages?max='+$scope.max).respond(500,{status:500});
+			$httpBackend.flush();
+
+			expect($scope.alerts[0].msg).toBeDefined();
+			expect($scope.alerts[0].msg).toContain(500);
+			expect($scope.alerts[0].msg).toContain('error');
+
+		});
+
+		it('should set an alert if post a message fails',function(){
+
+			$httpBackend.whenGET(/api\/account\/.*\/messages\?.*/).respond(200,{});
+			
+			var $scope={};
+			var controller=createController('messageController',$scope);
+			
+			expect($scope.alerts[0]).not.toBeDefined();
+
+			$scope.messageText="asdfasdf";
+			$scope.add();
+
+			// Confirm it's making a call to post the message
+			$httpBackend.expectPOST('/api/account/'+$scope.loggedInUserHandle+'/messages',{text:$scope.messageText}).respond(403,{status:403});
+			$httpBackend.flush();
+
+			expect($scope.alerts[0].msg).toBeDefined();
+			expect($scope.alerts[0].msg).toContain(403);
+			expect($scope.alerts[0].msg).toContain('error');
+			
+		});
 
 	});
 
