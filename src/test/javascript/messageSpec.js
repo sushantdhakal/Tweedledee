@@ -1,4 +1,4 @@
-describe('messageController', function () {
+describe('messagesController', function () {
 	beforeEach(module('app'));
 
 	var $controller, $httpBackend, $window, ss, createController;
@@ -32,7 +32,7 @@ describe('messageController', function () {
 		it('should get messages for the user',function(){
 			
 			var $scope={};
-			var controller=createController('messageController',$scope);
+			var controller=createController('messagesController',$scope);
 			
 			// Confirm it's making a call to fetch messages
 			$httpBackend.expectGET('/api/account/'+$scope.loggedInUserHandle+'/messages?max='+$scope.max).respond(200,respGet);
@@ -54,7 +54,7 @@ describe('messageController', function () {
 			
 			var $scope={};
 			var mesg="This is a new message!";
-			var controller=createController('messageController',$scope);
+			var controller=createController('messagesController',$scope);
 
 			// Add a new message
 			var addMesgUrl = '/api/account/'+$scope.loggedInUserHandle+'/messages';
@@ -84,7 +84,7 @@ describe('messageController', function () {
 		it('should set an alert if getting messages fails',function(){
 
 			var $scope={};
-			var controller=createController('messageController',$scope);
+			var controller=createController('messagesController',$scope);
 			
 			expect($scope.alerts[0]).not.toBeDefined();
 
@@ -103,7 +103,7 @@ describe('messageController', function () {
 			$httpBackend.whenGET(/api\/account\/.*\/messages\?.*/).respond(200,{});
 			
 			var $scope={};
-			var controller=createController('messageController',$scope);
+			var controller=createController('messagesController',$scope);
 			
 			expect($scope.alerts[0]).not.toBeDefined();
 

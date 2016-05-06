@@ -1,5 +1,5 @@
 angular.module('app')
-.controller('messageController',function (
+.controller('messagesController',function (
     $scope, $http, $routeParams, $location, $uibModal, $interval, securityService, profileService, messageService) {
 
     var search=false;
