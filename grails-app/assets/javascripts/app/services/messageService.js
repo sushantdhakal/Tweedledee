@@ -32,7 +32,7 @@ angular.module('app')
                     }
                 });
                 scope.messages=angular.copy(tmp);
-                $timeout(function(){scope.loading=false;},500);
+                $timeout(function(){ scope.loading=false; },500);
             } 
 
         },function(fail){
@@ -93,8 +93,15 @@ angular.module('app')
             $http.post( baseUrl+'/account/'+accountId+'/messages',payload).then(function(resp){
                 console.log('message posting resp',resp);
                 if(resp.status==201){
-                   scope.messages.unshift(resp.data);
-                   scope.alerts.push({msg:'New messages successfully added!',type:'success'});
+                    var tmp = {
+                        handle:accountId,
+                        dateCreated:resp.data.dateCreated,
+                        text:resp.data.text,
+                        id:resp.data.id,
+                        account:resp.data.account
+                    };
+                   scope.messages.unshift(tmp);
+                   scope.alerts.push({msg:scope.newMesgAlert,type:'success'});
                    scope.messageText='';
                    scope.loading=false;
                 }

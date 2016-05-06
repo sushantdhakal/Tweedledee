@@ -11,7 +11,10 @@ angular.module('app')
     $scope.animationsEnabled = true;
     $scope.currentMessage = '';
     $scope.alerts = [];
+    
+    // Set alert messages
     $scope.mesgLengthError = 'Messages are limited to only 45 characters';
+    $scope.newMesgAlert = 'New message successfully added!';
 
     console.log('CTLR handle',$scope.loggedInUserHandle);
 

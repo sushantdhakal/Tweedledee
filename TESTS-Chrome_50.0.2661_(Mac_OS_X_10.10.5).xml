@@ -1,39 +1,22 @@
 <?xml version="1.0"?>
-<testsuite name="Chrome 50.0.2661 (Mac OS X 10.10.5)" package="" timestamp="2016-05-05T22:35:57" id="0" hostname="asc-paulm.ad.ascendlearning.com" tests="2" errors="1" failures="2" time="0.077">
+<testsuite name="Chrome 50.0.2661 (Mac OS X 10.10.5)" package="" timestamp="2016-05-06T02:57:09" id="0" hostname="asc-paulm.ad.ascendlearning.com" tests="2" errors="0" failures="0" time="0.078">
   <properties>
     <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.94 Safari/537.36"/>
   </properties>
-  <testcase name="messagesController The messages controller  should have a logged in user handle" time="0.067" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messagesController">
-    <failure type="">TypeError: Cannot read property 'username' of null
-    at new &lt;anonymous&gt; (/Users/paul.michalek/source-git/hw4/Tweedledee_App/grails-app/assets/javascripts/app/controllers/messageController.js:9:453)
-    at Object.instantiate (/Users/paul.michalek/source-git/hw4/Tweedledee_App/grails-app/assets/bower/angular/angular.js:4680:14)
-    at $controller (/Users/paul.michalek/source-git/hw4/Tweedledee_App/grails-app/assets/bower/angular/angular.js:10130:28)
-    at /Users/paul.michalek/source-git/hw4/Tweedledee_App/grails-app/assets/bower/angular-mocks/angular-mocks.js:2194:12
-    at createController (/Users/paul.michalek/source-git/hw4/Tweedledee_App/src/test/javascript/messageSpec.js:19:52)
-    at Object.&lt;anonymous&gt; (/Users/paul.michalek/source-git/hw4/Tweedledee_App/src/test/javascript/messageSpec.js:34:19)
-</failure>
-    <failure type="">Error: Unsatisfied requests: GET /api\/account\/.*\/messages\?.*/
-    at Function.$httpBackend.verifyNoOutstandingExpectation (/Users/paul.michalek/source-git/hw4/Tweedledee_App/grails-app/assets/bower/angular-mocks/angular-mocks.js:1820:13)
-    at Object.&lt;anonymous&gt; (/Users/paul.michalek/source-git/hw4/Tweedledee_App/src/test/javascript/messageSpec.js:70:16)
-</failure>
-  </testcase>
-  <testcase name="messagesController The messages controller  should add a message and reload the profile page with message posted flag" time="0.01" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messagesController">
-    <failure type="">TypeError: Cannot read property 'username' of null
-    at new &lt;anonymous&gt; (/Users/paul.michalek/source-git/hw4/Tweedledee_App/grails-app/assets/javascripts/app/controllers/messageController.js:9:453)
-    at Object.instantiate (/Users/paul.michalek/source-git/hw4/Tweedledee_App/grails-app/assets/bower/angular/angular.js:4680:14)
-    at $controller (/Users/paul.michalek/source-git/hw4/Tweedledee_App/grails-app/assets/bower/angular/angular.js:10130:28)
-    at /Users/paul.michalek/source-git/hw4/Tweedledee_App/grails-app/assets/bower/angular-mocks/angular-mocks.js:2194:12
-    at createController (/Users/paul.michalek/source-git/hw4/Tweedledee_App/src/test/javascript/messageSpec.js:19:52)
-    at Object.&lt;anonymous&gt; (/Users/paul.michalek/source-git/hw4/Tweedledee_App/src/test/javascript/messageSpec.js:51:19)
-</failure>
-    <failure type="">Error: Unflushed requests: 1
-    at Function.$httpBackend.verifyNoOutstandingRequest (/Users/paul.michalek/source-git/hw4/Tweedledee_App/grails-app/assets/bower/angular-mocks/angular-mocks.js:1840:13)
-    at Object.&lt;anonymous&gt; (/Users/paul.michalek/source-git/hw4/Tweedledee_App/src/test/javascript/messageSpec.js:71:16)
-</failure>
-  </testcase>
+  <testcase name="messagesController The messages controller  should get messages for the user" time="0.063" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messagesController"/>
+  <testcase name="messagesController The messages controller  should add a new message and create an alert" time="0.015" classname="Chrome_50_0_2661_(Mac_OS_X_10_10_5).messagesController"/>
   <system-out>
-    <![CDATA[Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', null
-,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', null
+    <![CDATA[Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'JohnnyBravo', roles: ['root'], token: 'xyz123'}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'JohnnyBravo', roles: ['root'], token: 'xyz123'}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'CTLR handle', 'JohnnyBravo'
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'messages ', undefined
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'get messages by user ', Object{data: [Object{id: ..., account: ..., dateCreated: ..., text: ...}], status: 200, headers: function (name) { ... }, config: Object{method: 'GET', transformRequest: [...], transformResponse: [...], paramSerializer: function ngParamSerializer(params) { ... }, url: '/api/account/JohnnyBravo/messages?max=10', headers: Object{Accept: ..., X-Auth-Token: ...}}, statusText: ''}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'JohnnyBravo', roles: ['root'], token: 'xyz123'}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: ' current user ', Object{username: 'JohnnyBravo', roles: ['root'], token: 'xyz123'}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'CTLR handle', 'JohnnyBravo'
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'messages ', undefined
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'get messages by user ', Object{data: Object{}, status: 200, headers: function (name) { ... }, config: Object{method: 'GET', transformRequest: [...], transformResponse: [...], paramSerializer: function ngParamSerializer(params) { ... }, url: '/api/account/JohnnyBravo/messages?max=10', headers: Object{Accept: ..., X-Auth-Token: ...}}, statusText: ''}
+,Chrome 50.0.2661 (Mac OS X 10.10.5) LOG: 'message posting resp', Object{data: Object{id: 329, account: Object{id: ...}, dateCreated: '2016-05-06T01:18:32Z', text: 'This is a new message!!!!'}, status: 201, headers: function (name) { ... }, config: Object{method: 'POST', transformRequest: [...], transformResponse: [...], paramSerializer: function ngParamSerializer(params) { ... }, url: '/api/account/JohnnyBravo/messages', data: Object{text: ...}, headers: Object{Accept: ..., Content-Type: ..., X-Auth-Token: ...}}, statusText: ''}
 
 ]]>
   </system-out>
