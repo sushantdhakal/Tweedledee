@@ -18,6 +18,13 @@
 
 </ul>
 
+<div id="pageload" class="page-loading-shadow fadein fadeout" ng-show="loading"></div>
+<div id="pageload-text" class="page-loading-container fadein fadeout" ng-show="loading">
+    <div class="page-loading-text"><i class="fa fa-spinner fa-spin fa-3" style="margin-right:5px;">
+        </i>Loading...</i>
+    </div>
+</div>
+
 <div id="userMessagesList" class="message-list-container">
     
     <div id="messageId{{message.id}}" class="message-box" ng-repeat="message in messages | orderBy:'message.dateCreated'">
@@ -31,7 +38,7 @@
         </p>
         
         <i class="fa fa-retweet fa-lg clickable" title="Re-post Message" ng-click="repost(message)"></i>
-        <i ng-show="isLoggedInUser" class="fa fa-trash fa-lg clickable" title="Delete Message" ng-click="delete(message)"></i>
+        <i ng-show="loggedInUserHandle==message.handle" class="fa fa-trash fa-lg clickable" title="Delete Message" ng-click="delete(message)"></i>
 
     </div>
 

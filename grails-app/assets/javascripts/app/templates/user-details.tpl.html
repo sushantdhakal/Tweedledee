@@ -100,7 +100,7 @@
 <div ng-controller="messagesController" class="col-md-4">
     <form name="myForm">
     <div ng-show="isLoggedInUser" class="row" style="margin-bottom:7px">
-        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alerts.splice($index, 1)" class="text-center">{{alert.msg}}</uib-alert>
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout="5000" close="alerts.splice($index, 1)" class="text-center">{{alert.msg}}</uib-alert>
         <form class="form col-md-8" role="search">
             <div class="input-group">
                 <input name="messageBox" id="messageBox" type="text" ng-minlength="1" ng-maxlength="45" ng-model="messageText" class="form-control input-sm" placeholder="What's on your mind??">

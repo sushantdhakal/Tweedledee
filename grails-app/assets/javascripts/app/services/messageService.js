@@ -14,12 +14,10 @@ angular.module('app')
         if(angular.isDefined(scope.offset)&&scope.offset>0) params.offset=scope.offset;
         if(!_.isEmpty(params)) rPath=rPath+'?'+$httpParamSerializer(params);
 
-        scope.messages=[];
+        //scope.messages=[];
 
         $http.get(rPath).then(function(resp){
             console.log('get messages by user ',resp);
-            
-            scope.loading=false;
             if(resp.status==200) {
                 var tmp=[];
                 _.each(resp.data,function(v){
@@ -34,6 +32,7 @@ angular.module('app')
                     }
                 });
                 scope.messages=angular.copy(tmp);
+                $timeout(function(){scope.loading=false;},500);
             } 
 
         },function(fail){
