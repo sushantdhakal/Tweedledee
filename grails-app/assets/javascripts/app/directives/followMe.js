@@ -23,7 +23,7 @@ angular.module('app')
 
     function _gettemplate(){
         var tpl = ''
-            +'<div ng-show="!isLoggedInUser && !isFollowing"><input type="button" name="followMeNow" id="followMeNow" class="btn btn-danger btn-sm" ng-click="follow()" value="Follow!"></div>'
+            +'<div ng-show="!isLoggedInUser && !isFollowing"><input type="button" id="followMeNow" class="btn btn-danger btn-sm" ng-click="follow()" value="Follow!"></div>'
             +'<div ng-show="!isLoggedInUser && isFollowing"><i class="fa fa-heart fa-lg icon-left color-three"></i><span id="alreadyFollowing"> Following</span></div>';
         return tpl;
     }
