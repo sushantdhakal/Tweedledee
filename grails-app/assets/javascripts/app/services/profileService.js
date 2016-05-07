@@ -5,7 +5,7 @@ angular.module('app')
         var alertObj = {active:false,mesg:''}
         var imgs = {
             "admin":"placeholderimg4.png",
-            "sushantdhakal":"sushant.jpg",
+            "sushantdhakal":"placeholderimg2.png",
             "paulM":"placeholderimg3.png",
             "mikeCalvo":"placeholderimg2.png"
         };

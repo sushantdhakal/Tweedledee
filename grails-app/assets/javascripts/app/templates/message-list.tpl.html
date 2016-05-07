@@ -5,7 +5,7 @@
     </li>
 
     <li ng-show="searchTerm==''">
-        <i class="fa clickable" ng-class="{'fa-spinner fa-spin':loading,'fa-refresh':!loading}" ng-click="refresh()"></i> Showing {{max}} of your most recent messages <span ng-show="offset<messageCount">(<a class="clickable" ng-click="more()">show more</a>)</span> <span ng-show="offset==messageCount">(<a ng-click="refresh()">refresh list</a>)</span>
+        <i class="fa clickable" ng-class="{'fa-spinner fa-spin':loading,'fa-refresh':!loading}" ng-click="refresh()"></i> Showing {{max}} of <span ng-show="isLoggedInUser">your</span> <span ng-show="!isLoggedInUser">{{viewingUserId}}'s</span> most recent messages <span ng-show="offset<messageCount">(<a class="clickable" ng-click="more()">show more</a>)</span> <span ng-show="offset==messageCount">(<a ng-click="refresh()">refresh list</a>)</span>
     </li>
 
     <li ng-show="searchTerm!=''">

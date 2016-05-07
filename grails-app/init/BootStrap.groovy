@@ -55,6 +55,7 @@ class BootStrap {
         new AccountRole(account: admin10, role: role10).save(flush: true, failOnError: true)
 
         admin.addToFollowing(admin1).save(flush: true, failOnError: true);
+        admin1.addToFollowers(admin).save(flush: true, failOnError: true);
 
         admin2.addToFollowers(admin).save(flush: true, failOnError: true);
         admin1.addToFollowers(admin2).save(flush: true, failOnError: true);

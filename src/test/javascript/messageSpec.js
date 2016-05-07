@@ -134,7 +134,26 @@ describe('messagesController', function () {
 			expect($scope.alerts[0].msg).toBeDefined();
 			expect($scope.alerts[0].msg).toBe($scope.mesgLengthError);
 			$httpBackend.flush();
-		})
+		
+		});
+
+		it('should refresh messages',function(){
+			$httpBackend.whenGET(/api\/account\/.*\/messages\?.*/).respond(200,{});
+			
+			var $scope={};
+			var controller=createController('messagesController',$scope);
+			
+			expect($scope.alerts[0]).not.toBeDefined();
+
+			$scope.messageText="1234567890123456789012345678901234567890123456";
+			$scope.add();
+
+			expect($scope.alerts[0].msg).toBeDefined();
+			expect($scope.alerts[0].msg).toBe($scope.mesgLengthError);
+			$httpBackend.flush();
+		
+		});
+
 
 	});
 
