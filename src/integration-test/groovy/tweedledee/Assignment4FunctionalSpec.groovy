@@ -10,8 +10,7 @@ import java.text.ParseException
 
 @Integration
 @Stepwise
-@Ignore
-class MessagePostFunctionalSpec extends GebSpec {
+class Assignment4FunctionalSpec extends GebSpec {
 
 	def login() {
 		go '/'
@@ -27,8 +26,8 @@ class MessagePostFunctionalSpec extends GebSpec {
 		when:
 		login()
 		then:
-		waitFor 1.5, { $('#messageBox').value("Jonny loves politics...") }
-		waitFor 1.5, { $("#addMessage").click() }
+		waitFor 5, { $('#messageBox').value("Jonny loves politics...") }
+		waitFor 5, { $("#addMessage").click() }
 		waitFor() {
 			$("div.message-list-container div.message-box h3.ng-binding").text().equals("Jonny loves politics...")
 		}
@@ -37,32 +36,31 @@ class MessagePostFunctionalSpec extends GebSpec {
 	//R1
 	def 'AngularUI alert control to display confirmation for message posting'(){
 		when:
-		waitFor 1, {$("div.message-list-container div.message-box h3.ng-binding").text().equals("Jonny loves politics...")}
+		waitFor 5, {$("div.message-list-container div.message-box h3.ng-binding").text().equals("Jonny loves politics...")}
 		then:
-		waitFor 1, {$("div.alert div span.ng-binding").text().equals("New messages successfully added!")}
+		waitFor 5, {$("div.alert div span.ng-binding").text().equals("New message successfully added!")}
 	}
 
 	//R2
 	def 'Do not post a message that is more than 45 characters'() {
 		when:
-		waitFor 1.5, { $('#messageBox').value("12345678901234567890123456789012345678901234567") }
+		waitFor 5, { $('#messageBox').value("12345678901234567890123456789012345678901234567") }
 		then:
-		waitFor 1.5, { $("#addMessage").isDisabled() }
+		waitFor 5, { $("#addMessage").isDisabled() }
 		waitFor() {
 			$("div.moreCharErr span.error").text().equals("Messages are limited to only 45 characters")
 		}
 	}
 
 	//R4
-	def 'Display follow button'(){
+	def 'Display follow button using directive'(){
 		when:
-		waitFor 1.5, { $("div.followers p i.fa strong").displayed }
+		waitFor 5, { $("#following_sushantdhakal").displayed }
 		then:
-		waitFor() {
-			$("div.followers ul.list-inline li.ng-scope a.ng-binding").click()
-			sleep(1500)
-			$("div.profile-handle-container ul.line-inline li.ng-isolate-scope div button").displayed
-		}
+		waitFor 5, { $("#following_sushantdhakal").click() }
+		waitFor 5, { $("#follower_mikeCalvo").click() }
+		waitFor 5, { $("#followMeNow").isDisplayed() }
+		sleep(1500)
 	}
 
 	//R5
@@ -72,13 +70,13 @@ class MessagePostFunctionalSpec extends GebSpec {
 			$("div.message-list-container div.message-box p.ng-binding").displayed
 		}
 		then:
-		SimpleDateFormat dateFormat = new SimpleDateFormat("MMM-dd");
+		def todaysDate = new Date()
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d");
 		dateFormat.setLenient(false);
 		try {
-			dateFormat.parse($("div.message-list-container div.message-box p.ng-binding").text().trim());
-			true
+			waitFor 5, { $("div.message-list-container div.message-box p.ng-binding").text().trim().equalsIgnoreCase(dateFormat.format(todaysDate).toString().trim()) }
 		} catch (ParseException pe) {
-			false
+			throw pe
 		}
 	}
 

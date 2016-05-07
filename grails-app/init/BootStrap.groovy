@@ -26,14 +26,50 @@ class BootStrap {
         def role3 = new Role(authority: 'ROLE_READ').save(flush: true, failOnError: true)
         new AccountRole(account: admin3, role: role3).save(flush: true, failOnError: true)
 
-        admin1.addToFollowers(admin).save(flush: true, failOnError: true);
+        def admin4 = new Account(handle:'RealRoyFielding',name:'Roy Fielding',password:'12345678pP',email:'roy@tweedledee.com').save(flush: true, failOnError: true)
+        def role4 = new Role(authority: 'ROLE_READ').save(flush: true, failOnError: true)
+        new AccountRole(account: admin4, role: role4).save(flush: true, failOnError: true)
+
+        def admin5 = new Account(handle:'FeelTheBern',name:'Bernie Sanders',password:'12345678pP',email:'bernie@tweedledee.com').save(flush: true, failOnError: true)
+        def role5 = new Role(authority: 'ROLE_READ').save(flush: true, failOnError: true)
+        new AccountRole(account: admin5, role: role5).save(flush: true, failOnError: true)
+
+        def admin6 = new Account(handle:'costco',name:'Costco Corp',password:'12345678pP',email:'costco@tweedledee.com').save(flush: true, failOnError: true)
+        def role6 = new Role(authority: 'ROLE_READ').save(flush: true, failOnError: true)
+        new AccountRole(account: admin6, role: role6).save(flush: true, failOnError: true)
+
+        def admin7 = new Account(handle:'daredevil',name:'Dare Devil',password:'12345678pP',email:'devil@tweedledee.com').save(flush: true, failOnError: true)
+        def role7 = new Role(authority: 'ROLE_READ').save(flush: true, failOnError: true)
+        new AccountRole(account: admin7, role: role7).save(flush: true, failOnError: true)
+
+        def admin8 = new Account(handle:'ShakespeareAndCompany',name:'William Shakespeare',password:'12345678pP',email:'sco@tweedledee.com').save(flush: true, failOnError: true)
+        def role8 = new Role(authority: 'ROLE_READ').save(flush: true, failOnError: true)
+        new AccountRole(account: admin8, role: role8).save(flush: true, failOnError: true)
+
+        def admin9 = new Account(handle:'maserati',name:'Maserati Co.',password:'12345678pP',email:'maserati@tweedledee.com').save(flush: true, failOnError: true)
+        def role9 = new Role(authority: 'ROLE_READ').save(flush: true, failOnError: true)
+        new AccountRole(account: admin9, role: role9).save(flush: true, failOnError: true)
+
+        def admin10 = new Account(handle:'BMW',name:'BMW Motors',password:'12345678pP',email:'bmw@tweedledee.com').save(flush: true, failOnError: true)
+        def role10 = new Role(authority: 'ROLE_READ').save(flush: true, failOnError: true)
+        new AccountRole(account: admin10, role: role10).save(flush: true, failOnError: true)
+
         admin.addToFollowing(admin1).save(flush: true, failOnError: true);
 
         admin2.addToFollowers(admin).save(flush: true, failOnError: true);
+        admin1.addToFollowers(admin2).save(flush: true, failOnError: true);
         admin.addToFollowing(admin2).save(flush: true, failOnError: true);
 
         admin2.addToFollowers(admin3).save(flush: true, failOnError: true);
         admin3.addToFollowing(admin2).save(flush: true, failOnError: true);
+
+        admin1.addToFollowing(admin4).save(flush: true, failOnError: true);
+        admin1.addToFollowing(admin5).save(flush: true, failOnError: true);
+        admin1.addToFollowing(admin6).save(flush: true, failOnError: true);
+        admin1.addToFollowing(admin7).save(flush: true, failOnError: true);
+        admin1.addToFollowing(admin8).save(flush: true, failOnError: true);
+        admin1.addToFollowing(admin9).save(flush: true, failOnError: true);
+        admin1.addToFollowing(admin10).save(flush: true, failOnError: true);
 
         (1..128).each {
             msgNumber -> admin.addToMessages(text: "This is admin's message# $msgNumber").save(flush: true, failOnError: true)
