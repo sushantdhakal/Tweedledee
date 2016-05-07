@@ -64,12 +64,26 @@ class BootStrap {
         admin3.addToFollowing(admin2).save(flush: true, failOnError: true);
 
         admin1.addToFollowing(admin4).save(flush: true, failOnError: true);
+        admin4.addToFollowers(admin1).save(flush: true, failOnError: true);
+
         admin1.addToFollowing(admin5).save(flush: true, failOnError: true);
+        admin5.addToFollowers(admin1).save(flush: true, failOnError: true);
+
         admin1.addToFollowing(admin6).save(flush: true, failOnError: true);
+        admin6.addToFollowers(admin1).save(flush: true, failOnError: true);
+
         admin1.addToFollowing(admin7).save(flush: true, failOnError: true);
+        admin7.addToFollowers(admin1).save(flush: true, failOnError: true);
+
         admin1.addToFollowing(admin8).save(flush: true, failOnError: true);
+        admin8.addToFollowers(admin1).save(flush: true, failOnError: true);
+
         admin1.addToFollowing(admin9).save(flush: true, failOnError: true);
+        admin9.addToFollowers(admin1).save(flush: true, failOnError: true);
+
         admin1.addToFollowing(admin10).save(flush: true, failOnError: true);
+        admin10.addToFollowers(admin1).save(flush: true, failOnError: true);
+
 
         (1..128).each {
             msgNumber -> admin.addToMessages(text: "This is admin's message# $msgNumber").save(flush: true, failOnError: true)
