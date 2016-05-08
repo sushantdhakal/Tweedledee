@@ -2,7 +2,7 @@
 This repository contains development code for TweedleDee, a social media platform, similar to Twitter. This project was implemented to fulfill the graduate degree requirements for Master's in Computer Software Engineering at the University of Minnesota.
 
 The primary contributors to this project are: Paul Michalek and Sushant Dhakal
- <h1>Phase IV<h1>
+ <h1>Phase IV</h1>
  This release is primarily pertinent to implementing the following requirements
   * Allow for the logged in user to post a new message.
   * Use a alert control from the Angular UI library to display an info message saying ‘Message Posted!’
