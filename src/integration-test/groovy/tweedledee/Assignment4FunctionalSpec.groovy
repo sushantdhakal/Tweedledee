@@ -57,10 +57,14 @@ class Assignment4FunctionalSpec extends GebSpec {
 		when:
 		waitFor 5, { $("#following_sushantdhakal").displayed }
 		then:
-		waitFor 5, { $("#following_sushantdhakal").click() }
-		waitFor 5, { $("#follower_mikeCalvo").click() }
-		waitFor 5, { $("#followMeNow").isDisplayed() }
-		sleep(1500)
+		sleep(2000)
+		$("#following_sushantdhakal").click()
+		sleep(2000)
+		$("#follower_paulM").click()
+		sleep(2000)
+		$("#follower_mikeCalvo").click()
+		sleep(2000)
+		$("#followMeNow").isDisplayed()
 	}
 
 	//R5
