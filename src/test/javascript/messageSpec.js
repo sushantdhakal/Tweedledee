@@ -1,12 +1,12 @@
 describe('messagesController', function () {
 	beforeEach(module('app'));
 
-	var $controller;
-	var $httpBackend;
-	var $window;
-	var ss;
-	var createController;
-
+	var $controller, $httpBackend, $window, ss, createController;
+	var un ='JohnnyBravo';
+	var pw ='123456';
+	var respGet 	=[{"id":329,"account":{"id":3},"dateCreated":"2016-05-06T01:18:32Z","text":"This is a new message!!!!"}];
+	var respPost 	={"id":329,"account":{"id":3},"dateCreated":"2016-05-06T01:18:32Z","text":"This is a new message!!!!"};
+	var mesgObj 	={handle:un, dateCreated:respGet[0].dateCreated, text:respGet[0].text, id:respGet[0].id, account:respGet[0].account};
 
 	beforeEach(inject(function (_$controller_,_$httpBackend_,_$window_,_securityService_) {
 		$controller = _$controller_;
@@ -20,27 +20,34 @@ describe('messagesController', function () {
 		// Whitelist all template calls
 		$httpBackend.whenGET(/app\/.*/).respond(200,'');
 
+		// Let's get logged in
+		$httpBackend.expectPOST('/api/login', {username:un,password:pw}).respond(200,{username:un,roles:['root'],'access_token':'xyz123'});
+		ss.login(un,pw);
+		$httpBackend.flush();
+
 	}));
 
-	describe('The messages controller ',function(){
+	describe('The message controller ',function(){
 
-		it('should have a logged in user handle',function(){
-			
-			// Confirm it's making a call to fetch messages
-			$httpBackend.expectGET(/api\/account\/.*\/messages\?.*/).respond(200,{});
+		it('should get messages for the user',function(){
 			
 			var $scope={};
 			var controller=createController('messagesController',$scope);
+			
+			// Confirm it's making a call to fetch messages
+			$httpBackend.expectGET('/api/account/'+$scope.loggedInUserHandle+'/messages?max='+$scope.max).respond(200,respGet);
 			$httpBackend.flush();
 			
-			// Grab the current user and confirm our logged in user handle matches the currrent username
-			var user = ss.currentUser();
-			expect($scope.loggedInUserHandle).toBeDefined();
-			expect($scope.loggedInUserHandle).toEqual(user.username);
+			expect($scope.messages).toBeDefined();
+			expect($scope.messages[0].handle).toBe(mesgObj.handle);
+			expect($scope.messages[0].dateCreated).toBe(mesgObj.dateCreated);
+			expect($scope.messages[0].text).toBe(mesgObj.text);
+			expect($scope.messages[0].id).toBe(mesgObj.id);
+			expect($scope.messages[0].account.id).toBe(mesgObj.account.id);
 
 		});
 
-		it('should add a message and reload the profile page with message posted flag',function(){
+		it('should add a new message and create an alert',function(){
 			
 			// Whitelist the inital get messages since we tested it above
 			$httpBackend.whenGET(/api\/account\/.*\/messages\?.*/).respond(200,{});
@@ -48,20 +55,105 @@ describe('messagesController', function () {
 			var $scope={};
 			var mesg="This is a new message!";
 			var controller=createController('messagesController',$scope);
-			expect($scope.messages).toBeDefined();
-			expect($scope.messages).toEqual([]);
 
 			// Add a new message
-			var addMesgUrl = '/api/message/addMessage?accountId='+$scope.loggedInUserHandle;
+			var addMesgUrl = '/api/account/'+$scope.loggedInUserHandle+'/messages';
 			var payload = {text:mesg};
 			
-			$scope.addMessage(mesg);
-			$httpBackend.expectPOST(addMesgUrl,payload).respond(200,{});
+			expect($scope.newMesgAlert).toBeDefined();
+
+			$scope.messageText=mesg;
+			$scope.add();
+			$httpBackend.expectPOST(addMesgUrl,payload).respond(201,respPost);
 			$httpBackend.flush();
 
-			// Confirm it reloaded the profile page with the message posted flag set
-			expect($window.location).toMatch(/profile\?messagePost=1/);
+			// Make sure there is a message
+			expect($scope.messages).toBeDefined();
+			expect($scope.messages[0].handle).toBe(mesgObj.handle);
+			expect($scope.messages[0].dateCreated).toBe(mesgObj.dateCreated);
+			expect($scope.messages[0].text).toBe(mesgObj.text);
+			expect($scope.messages[0].id).toBe(mesgObj.id);
+			expect($scope.messages[0].account.id).toBe(mesgObj.account.id);
+
+			// Make sure the alert is there
+			expect($scope.alerts[0].msg).toBeDefined();
+			expect($scope.alerts[0].msg).toBe($scope.newMesgAlert);
+
 		});
+
+		it('should set an alert if getting messages fails',function(){
+
+			var $scope={};
+			var controller=createController('messagesController',$scope);
+			
+			expect($scope.alerts[0]).not.toBeDefined();
+
+			// Confirm it's making a call to fetch messages
+			$httpBackend.expectGET('/api/account/'+$scope.loggedInUserHandle+'/messages?max='+$scope.max).respond(500,{status:500});
+			$httpBackend.flush();
+
+			expect($scope.alerts[0].msg).toBeDefined();
+			expect($scope.alerts[0].msg).toContain(500);
+			expect($scope.alerts[0].msg).toContain('error');
+
+		});
+
+		it('should set an alert if post a message fails',function(){
+
+			$httpBackend.whenGET(/api\/account\/.*\/messages\?.*/).respond(200,{});
+			
+			var $scope={};
+			var controller=createController('messagesController',$scope);
+			
+			expect($scope.alerts[0]).not.toBeDefined();
+
+			$scope.messageText="asdfasdf";
+			$scope.add();
+
+			// Confirm it's making a call to post the message
+			$httpBackend.expectPOST('/api/account/'+$scope.loggedInUserHandle+'/messages',{text:$scope.messageText}).respond(403,{status:403});
+			$httpBackend.flush();
+
+			expect($scope.alerts[0].msg).toBeDefined();
+			expect($scope.alerts[0].msg).toContain(403);
+			expect($scope.alerts[0].msg).toContain('error');
+			
+		});
+
+		it('should set an alert if message is over 45 chars',function(){
+			$httpBackend.whenGET(/api\/account\/.*\/messages\?.*/).respond(200,{});
+			
+			var $scope={};
+			var controller=createController('messagesController',$scope);
+			
+			expect($scope.alerts[0]).not.toBeDefined();
+
+			$scope.messageText="1234567890123456789012345678901234567890123456";
+			$scope.add();
+
+			expect($scope.alerts[0].msg).toBeDefined();
+			expect($scope.alerts[0].msg).toBe($scope.mesgLengthError);
+			$httpBackend.flush();
+		
+		});
+
+		it('should refresh messages',function(){
+			$httpBackend.whenGET(/api\/account\/.*\/messages\?.*/).respond(200,{});
+			
+			var $scope={};
+			var controller=createController('messagesController',$scope);
+			
+			expect($scope.alerts[0]).not.toBeDefined();
+
+			$scope.messageText="1234567890123456789012345678901234567890123456";
+			$scope.add();
+
+			expect($scope.alerts[0].msg).toBeDefined();
+			expect($scope.alerts[0].msg).toBe($scope.mesgLengthError);
+			$httpBackend.flush();
+		
+		});
+
 
 	});
 

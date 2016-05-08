@@ -77,7 +77,7 @@
 
 </ul>
 
-<div class="" ng-show="followers.length>0">
+<div class="followers" ng-show="followers.length>0">
 <p><i class="fa fa-users icon-left color-two"></i> <strong>Followers</strong></p>
 <ul class="list-inline" ng-show="followers.length>0" id="followerList">
     <li ng-repeat="follower in followers">
@@ -86,7 +86,7 @@
 </ul>
 </div>
 
-<div class="" ng-show="following.length>0">
+<div class="followingUsers" ng-show="following.length>0">
 <p><i class="fa fa-users icon-left color-two"></i> <strong>Following</strong></p>
 <ul class="list-inline" ng-show="following.length>0" id="following">
     <li ng-repeat="follower in following">
@@ -97,27 +97,27 @@
 
 </div>
 
-<div ng-controller="messagesController" class="col-md-8">
+<div ng-controller="messagesController" class="col-md-4">
     <form name="myForm">
     <div ng-show="isLoggedInUser" class="row" style="margin-bottom:7px">
-        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="alerts.splice($index, 1)">{{alert.msg}}</uib-alert>
+        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout="5000" close="alerts.splice($index, 1)" class="text-center">{{alert.msg}}</uib-alert>
         <form class="form col-md-8" role="search">
             <div class="input-group">
                 <input name="messageBox" id="messageBox" type="text" ng-minlength="1" ng-maxlength="45" ng-model="messageText" class="form-control input-sm" placeholder="What's on your mind??">
                 <div class="input-group-btn">
-                    <button id="addMessage" class="btn btn-prmiary btn-sm" ng-disabled="myForm.messageBox.$error.maxlength" type="submit" ng-click="addMessage(messageText)"><i class="fa fa-reply"></i></button>
+                    <button id="addMessage" class="btn btn-prmiary btn-sm" ng-disabled="myForm.messageBox.$error.maxlength" type="submit" ng-click="add()"><i class="fa fa-reply"></i></button>
                 </div>
             </div>
         </form>
     </div>
 
     <div class="moreCharErr">
-        <span class="error" style="font-weight: bold; color: red" ng-show="myForm.messageBox.$error.maxlength">Messages are limited to only 45 characters</span>
+        <span class="error" style="font-weight: bold; color: red" ng-show="myForm.messageBox.$error.maxlength">{{mesgLengthError}}</span>
     </div>
     </form>
 
     <div class="row">
-        <div class="col-md-8" ng-include="'/app/message-list.html'"></div>
+        <div ng-include="'/app/message-list.html'"></div>
     </div>
 
 </div>

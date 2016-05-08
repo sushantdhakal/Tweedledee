@@ -14,12 +14,10 @@ angular.module('app')
         if(angular.isDefined(scope.offset)&&scope.offset>0) params.offset=scope.offset;
         if(!_.isEmpty(params)) rPath=rPath+'?'+$httpParamSerializer(params);
 
-        scope.messages=[];
+        //scope.messages=[];
 
         $http.get(rPath).then(function(resp){
             console.log('get messages by user ',resp);
-            
-            scope.loading=false;
             if(resp.status==200) {
                 var tmp=[];
                 _.each(resp.data,function(v){
@@ -34,14 +32,12 @@ angular.module('app')
                     }
                 });
                 scope.messages=angular.copy(tmp);
+                $timeout(function(){ scope.loading=false; },500);
             } 
 
         },function(fail){
             scope.loading=false;
-            var m='An error has occured while trying to fetch messages. '+fail.status;
-            scope.alert=alertObj;
-            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
-            errorService.showAlert(scope.alert,m);
+            scope.alerts.push({msg:'An error has occured while trying to fetch messages. '+fail.status,type:'danger'});
         });
 
     }
@@ -81,66 +77,58 @@ angular.module('app')
 
         },function(fail){
             scope.loading=false;
-            var m='An error has occured while trying to fetch messages. '+fail.status;
-            scope.alert=alertObj;
-            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
-            errorService.showAlert(scope.alert,m);
+            scope.alerts.push({msg:'An error has occured while trying to fetch messages for the search term'+term+'. '+fail.status,type:'danger'});
         });
 
     }
 
-    service.save = function(scope,id){
+    service.add = function(scope){
+        
+        scope.loading=true;
+        var accountId = (!angular.isUndefined(scope.loggedInUserHandle)) ? scope.loggedInUserHandle : -1;
+        var payload = {text:scope.messageText};
 
-        var accountId = (angular.isDefined(id)) ? id : 0;
-        var payload = {name:scope.name,email:scope.email};
-
-        $http.put(baseUrl+'/account/'+accountId,payload).then(function(resp){
-            console.log('update account  ',resp);
-            if(resp.status==200) $route.reload();
-        },function(fail){
-            scope.loading=false;
-            var m='An error has occured while trying edit you profile. '+fail.status;
-            scope.alert=alertObj;
-            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
-            errorService.showAlert(scope.alert,m);
-        });
+        if(accountId==-1) scope.alerts.push({msg:'Add message failed, sorry dude!',type:'danger'});
+        else { 
+            $http.post( baseUrl+'/account/'+accountId+'/messages',payload).then(function(resp){
+                console.log('message posting resp',resp);
+                if(resp.status==201){
+                    var tmp = {
+                        handle:accountId,
+                        dateCreated:resp.data.dateCreated,
+                        text:resp.data.text,
+                        id:resp.data.id,
+                        account:resp.data.account
+                    };
+                   scope.messages.unshift(tmp);
+                   scope.alerts.push({msg:scope.newMesgAlert,type:'success'});
+                   scope.messageText='';
+                   scope.loading=false;
+                }
+            },function(fail){
+                scope.loading=false;
+                scope.alerts.push({msg:'An error has occured while trying add the message. '+fail.status,type:'danger'});
+            });
+        }
 
     }
 
-    service.addMessage = function(loggedInUserHandle, message){
-        var id = loggedInUserHandle;
-        var payload = {text: message};
-        $http.post(baseUrl+'/message/addMessage?accountId='+id,payload).then(function(resp){
-            console.log('message posting  ',resp);
-            if(resp.status==200){
-               //$route.reload();
-                $window.location = '#/profile?messagePost=1';
-                //messagePostedAlert = true;
-            }
-        },function(fail){
-            scope.loading=false;
-            var m='An error has occured while trying post the message. '+fail.status;
-            scope.alert=alertObj;
-            if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
-            errorService.showAlert(scope.alert,m);
-        });
-    
-    }
-
-    service.deleteMessage = function(loggedInUserHandle, messageId){
-        var accountId = loggedInUserHandle;
-        $http.put(baseUrl+'/message/deleteMessage/'+accountId+'/'+messageId).then(function(resp){
-            if(resp.status==200){
-                $route.reload();
-            }
-        },function(fail){
-            //scope.loading=false;
-            var m='An error has occured while trying delete the message. '+fail.status;
-            //scope.alert=alertObj;
-            //if(angular.isDefined(scope.reloader)) $interval.cancel(scope.reloader);
-            //errorService.showAlert(scope.alert,m);
-            $route.reload();
-        });
+    service.delete = function(scope){
+        
+        scope.loading=true;
+        var accountId = (!angular.isUndefined(scope.loggedInUserHandle)) ? scope.loggedInUserHandle : -1;
+        
+        if(accountId==-1) scope.alerts.push({msg:'No user defined thus I can not delete this message, sorry guy.',type:'danger'});
+        else{
+            $http.delete(baseUrl+'/message/delete/'+scope.messageId).then(function(resp){
+                scope.alerts.push({msg:'Message successfully deleted.',type:'success'});
+                scope.loading=false;
+                scope.refresh();
+            },function(fail){
+                scope.loading=false;
+                scope.alerts.push({msg:'An error has occured while trying delete the message. '+fail.status,type:'danger'});
+            });
+        }
 
     }
 

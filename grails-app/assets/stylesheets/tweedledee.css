@@ -56,7 +56,7 @@ body { padding-top:70px; }
  * Annimations 
  */
 
- .fadein,
+.fadein,
 .fadeout {
   -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.2s;
   -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.2s;
@@ -77,6 +77,33 @@ body { padding-top:70px; }
 .fadein.ng-hide-remove.ng-hide-remove-active,
 .fadein.not-visible-remove.not-visible-remove-active {
   opacity: 1;
+}
+.page-loading-shadow {
+    position: absolute;
+    z-index:9998;
+    top: 0;
+    left: 0;
+    height:100%;
+    width:100%;
+    cursor: not-allowed;
+    filter: alpha(opacity=60);
+    opacity: 0.6;
+    background: #000000;
+  }
+
+.page-loading-container {
+    position: absolute;
+    z-index:9999;
+    top:13%;
+    left:58%;
+    -webkit-transform: translate(-58%, -13%);  
+    transform: translate(-58%, -13%);
+}
+
+.page-loading-text {
+    font-size: 1.75em;
+    color:white;
+    text-shadow: 2px 2px 2px #021124;
 }
 .signup-wrapper {
   width: 392px;
@@ -126,3 +153,5 @@ body { padding-top:70px; }
 .logo-title{
   color: white;
 }
+.border-red{ border:1px solid red; }
+.border-green{ border:1px solid green; }
